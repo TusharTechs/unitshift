@@ -17,7 +17,7 @@ Built for **Open Agent Hackathon 2026**, Track 1: **Solving Fragmented Intellige
 | What it is for | Link |
 |---|---|
 | Use the deployed product | [Live UnitShift workspace](https://ds59bjv2cezd6.cloudfront.net/) |
-| Watch the narrated demo, 3 minutes 46 seconds | [Watch on YouTube](https://youtu.be/8uJpq6tlIoI) |
+| Watch the narrated demo, 3 minutes 7 seconds | [Watch on YouTube](https://youtu.be/Hg4j1Xeox9w) |
 | View the pitch materials | [Presentation, deck and captions](https://ds59bjv2cezd6.cloudfront.net/submission/) |
 | Read the eight-slide pitch | [PDF deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pdf) |
 | Edit or download the presentation | [PowerPoint deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pptx) |
@@ -287,10 +287,10 @@ Original UnitShift code and logo are available under the **[MIT license](LICENSE
 | Research and product development | **OpenAI Codex** assisted research, problem selection, architecture, implementation, debugging, test creation, deployment setup and documentation. Source facts were checked against primary data, actual API responses and visible product behavior. |
 | Core product inference | **NVIDIA Nemotron 3 Super through Nebius Token Factory** performs bounded tool selection and cited investigation decisions. **Nightshift** supplies a separate NVIDIA-backed structured review. Application code validates proposals and adds mandatory policy requirements separately. |
 | Pitch deck | **Codex with Artifact Session** assisted narrative, editable slide authoring, evidence tables and visual QA. The product screenshots are actual captures. |
-| Demo narration | **Kokoro-82M**, generic `af_heart` voice, supplied synthetic narration. No real person's voice was cloned or impersonated. |
-| Captions | **Whisper tiny English through faster-whisper** supplied speech timestamps. Caption text was corrected against the authored narration. |
-| Video and audio production | **Codex-assisted Python and FFmpeg editing** combined actual deployed browser captures with editorial motion graphics. The ambient score and chapter sounds were composed procedurally for the film. |
+| Demo narration | **Microsoft Edge neural text-to-speech**, generic `en-US-AndrewMultilingualNeural` voice through the open-source `edge-tts` client, supplied synthetic narration. No real person's voice was cloned or impersonated. |
+| Captions | Word timings come from the speech engine's word-boundary events. Caption text is the authored narration. |
+| Video and audio production | **Claude Code** assisted the script, storyboard and editing. Motion graphics were built with **Remotion**. Product footage is actual Playwright capture of the deployed app, including a live investigation shown at 1× speed; agent-trace values are taken from the committed run receipts. The score and sound effects were synthesized procedurally in Python for the film, and FFmpeg handled loudness mastering. |
 | Visual identity | The original **SVG logo and wordmark were authored with Codex assistance**, using the project's U/arrow motif. They are vector assets, not a third-party logo or fabricated product screenshot. |
-| YouTube thumbnail | **Built-in ImageGen** generated the editorial thumbnail using the actual UnitShift interface as a reference. The demo video itself uses actual product captures. |
+| YouTube thumbnail | Composed in **Remotion** from an actual capture of the live investigation result. No generated imagery. |
 
 Cursor was not used. AI-generated explanations are not treated as source truth or authorisation. Historical data, model inferences, policy additions, recorded runs and business hypotheses are labelled separately throughout the project.
