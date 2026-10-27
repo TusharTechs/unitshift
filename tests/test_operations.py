@@ -87,7 +87,7 @@ class OperationsTests(unittest.TestCase):
         data=apply_scenario(OPERATIONS,{})
         result=frontier(data)['choices'][0]
         plan={'id':'a'*32,'created_at':'2026-10-27T00:00:00Z','scenario_overrides':{},'context_hash':data['context_hash'],
-              'simulation':result,'frontier':{'choices':[result]},'memory_scope':'test-scope','proposal':{'headline':'Test'}}
+              'simulation':result,'frontier':{'choices':[result]},'memory_scope':'test-scope','operator_brief':'All necessary prerequisites are complete for the next stage.','proposal':{'headline':'Test'}}
         with tempfile.TemporaryDirectory() as folder,patch('app.operations.ROOT',Path(folder)),patch('app.operations.load_operations',return_value=deepcopy(OPERATIONS)),patch('app.operations.memory_call',return_value={'id':'mem-test'}),patch('app.operations.receipt'):
             with database() as db: db.execute('INSERT INTO plans VALUES (?,?,?,?)',(plan['id'],plan['created_at'],json.dumps(plan),'proposed'))
             approve_plan(plan['id']);first=history()
@@ -95,13 +95,14 @@ class OperationsTests(unittest.TestCase):
             self.assertEqual(len(first['actions']),6)
             self.assertEqual(len(second['actions']),6)
             self.assertEqual(second['plans'][0]['status'],'drafted')
+            self.assertIsNone(second['plans'][0]['operator_brief'])
 
     def test_partial_recovery_drafts_a_residual_risk_escalation(self):
         import json
         controls={'disabled_suppliers':['Harbor Supply']}
         data=apply_scenario(OPERATIONS,controls);result=frontier(data)['choices'][0]
         plan={'id':'b'*32,'created_at':'2026-10-27T00:00:00Z','scenario_overrides':controls,'context_hash':data['context_hash'],
-              'simulation':result,'frontier':{'choices':[result]},'memory_scope':'test-scope','proposal':{'headline':'Test'}}
+              'simulation':result,'frontier':{'choices':[result]},'memory_scope':'test-scope','operator_brief':'All necessary prerequisites are complete for the next stage.','proposal':{'headline':'Test'}}
         with tempfile.TemporaryDirectory() as folder,patch('app.operations.ROOT',Path(folder)),patch('app.operations.load_operations',return_value=deepcopy(OPERATIONS)),patch('app.operations.memory_call',return_value={'id':'mem-test'}),patch('app.operations.receipt'):
             with database() as db: db.execute('INSERT INTO plans VALUES (?,?,?,?)',(plan['id'],plan['created_at'],json.dumps(plan),'proposed'))
             approve_plan(plan['id']);actions=history()['actions']

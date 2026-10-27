@@ -162,7 +162,7 @@ def history():
     with database() as db:
         rows=db.execute('SELECT id,created_at,payload,status FROM plans ORDER BY created_at DESC LIMIT 12').fetchall()
         actions=db.execute('SELECT id,plan_id,title,detail,done FROM actions ORDER BY rowid DESC LIMIT 40').fetchall()
-    return {'plans':[{**json.loads(r[2]),'id':r[0],'created_at':r[1],'status':r[3]} for r in rows],
+    return {'plans':[present_plan({**json.loads(r[2]),'id':r[0],'created_at':r[1],'status':r[3]}) for r in rows],
             'actions':[dict(zip(('id','plan_id','title','detail','done'),r)) for r in actions]}
 
 def workspace(refresh=False):
@@ -242,12 +242,19 @@ def checked_operator_brief(summary,status):
     if status != "ready" and re.search(r"\b(all|every|fully)\b",summary,re.I): return None
     return summary
 
+def present_plan(plan):
+    simulation=plan.get('selected_simulation') or plan['simulation']
+    plan['operator_brief']=checked_operator_brief(plan.get('operator_brief'),simulation['status'])
+    if simulation.get('valid'):
+        plan['display_headline']=(f"{simulation['protected_orders']} promises protected. A recovery you can inspect." if simulation['revenue_at_risk_minor']==0 else f"{simulation['protected_orders']} promises protected. The rest need escalation.")
+    else: plan['display_headline']='This proposal failed a checked constraint.'
+    return plan
+
 def get_plan(plan_id):
     with database() as db: row=db.execute('SELECT payload,status FROM plans WHERE id=?',(plan_id,)).fetchone()
     if not row: raise ValueError('Plan not found.')
     plan={**json.loads(row[0]),'status':row[1]}
-    plan['operator_brief']=checked_operator_brief(plan.get('operator_brief'),plan['simulation']['status'])
-    return plan
+    return present_plan(plan)
 
 def approve_plan(plan_id,candidate_id=None):
     plan=get_plan(plan_id)
