@@ -23,3 +23,7 @@ Changes: source workbook dates are converted to calendar timestamps rounded to t
 Source: ECB statistics, series EXR.D.GBP.EUR.SP00.A. Original observations are unchanged and remain freely available from the ECB. Reuse terms: https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html and https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html.
 
 UnitShift's reporting-currency joins and EUR equivalents are derived calculations, explicitly labelled separately from ECB-published data. No endorsement is implied.
+
+## UnitShift original code and submission media
+
+Original UnitShift code and SVG identity assets are MIT licensed; see LICENSE. This does not change any dataset, dependency, vendor service or model license. The published demo uses Kokoro-82M (Apache-2.0 model) through kokoro-onnx (MIT runtime), a generic af_heart voice, and faster-whisper (MIT) with a converted Whisper tiny English model for caption alignment. Model weights and these media-generation runtimes are not bundled in this application repository. The ambient score and chapter sounds are original procedural compositions. See the public media provenance JSON for source links and details.

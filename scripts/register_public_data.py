@@ -1,5 +1,5 @@
 """Register licensed public exports and an actual cross-publisher semantic view."""
-import argparse,json,sys,subprocess,uuid
+import argparse,json,sys,subprocess,uuid,os,re
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
 from app.config import ROOT
@@ -21,8 +21,9 @@ LEFT JOIN UNITSHIFT_RETAIL.product_catalog p ON l.stock_code=p.stock_code
 LEFT JOIN UNITSHIFT_RETAIL.invoice_summary i ON l.invoice_no=i.invoice_no
 LEFT JOIN UNITSHIFT_ECB.gbp_eur f ON l.fx_date=f.rate_date"""
 def main():
- p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');args=p.parse_args()
- manifest=json.loads((ROOT/'data/public/manifest.json').read_text());bucket=json.loads((ROOT/'data/zetaris-manifest.json').read_text())['bucket']
+ p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');p.add_argument('--bucket',default=os.environ.get('UNITSHIFT_S3_BUCKET'));p.add_argument('--region',default=os.environ.get('UNITSHIFT_S3_REGION','us-west-1'));p.add_argument('--profile');p.add_argument('--credentials-file',type=Path);p.add_argument('--create-container',action='store_true');args=p.parse_args()
+ if not args.bucket or not re.fullmatch(r'[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]',args.bucket):p.error('Set --bucket to your own S3 bucket, or configure UNITSHIFT_S3_BUCKET.')
+ manifest=json.loads((ROOT/'data/public/manifest.json').read_text());bucket=args.bucket
  sources={k:dict(v) for k,v in SOURCES.items()};sources['fx']['count']=manifest['publishers'][1]['rows']
  plan=[]
  for source in sources.values():
@@ -32,13 +33,17 @@ def main():
  (ROOT/'data/public/semantic-view.sql').write_text(VIEW+';\n')
  (ROOT/'data/public/register-sources.sql').write_text(';\n'.join(plan)+';\n')
  if not args.apply:print('Prepared four public source registrations and the semantic join.');return
- credentials=json.loads((ROOT/'.state/zetaris-s3-session.json').read_text())
+ aws=['aws']+(['--profile',args.profile] if args.profile else [])
+ credentials=json.loads(args.credentials_file.read_text()) if args.credentials_file else json.loads(subprocess.run(aws+['configure','export-credentials','--format','process'],check=True,capture_output=True,text=True).stdout)
+ credentials['SessionToken']=credentials.get('SessionToken') or credentials.get('Token')
+ if not credentials.get('SessionToken') or not credentials.get('Expiration'):raise RuntimeError('Use temporary, read-only source credentials from a scoped AWS role. Long-lived IAM user credentials are not registered.')
  from datetime import datetime,timezone
  if datetime.fromisoformat(credentials['Expiration'].replace('Z','+00:00'))<=datetime.now(timezone.utc):raise RuntimeError('Refresh scoped source session first.')
+ if args.create_container:zetaris_query('CREATE SCHEMASTORE CONTAINER unitshift_control')
  auth=', '+', '.join(f'{key} "{credentials[value]}"' for key,value in [('awsAccessKeyId','AccessKeyId'),('awsSecretAccessKey','SecretAccessKey'),('awsSessionToken','SessionToken')])
  rid=uuid.uuid4().hex;dbs={str(r[0]).upper() for r in zetaris_query('SHOW LIGHTNING DATABASES')['data']}
  for key,source in sources.items():
-  subprocess.run(['aws','s3','cp',str(ROOT/'.state/public'/source['filename']),f"s3://{bucket}/unitshift/v1/public/{source['filename']}",'--region','us-west-1','--only-show-errors'],check=True)
+  subprocess.run(aws+['s3','cp',str(ROOT/'.state/public'/source['filename']),f"s3://{bucket}/unitshift/v1/public/{source['filename']}",'--region',args.region,'--only-show-errors'],check=True)
   if source['database'] not in dbs:
    zetaris_query(f"CREATE LIGHTNING DATABASE {source['database']} DESCRIBE BY \"UnitShift attributed public data\"");dbs.add(source['database'])
   tables={str(r[0]).lower() for r in zetaris_query('SHOW LIGHTNING TABLES '+source['database'])['data']}

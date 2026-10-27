@@ -39,7 +39,7 @@ def xlsx_rows(archive):
 def pennies(value):return int((Decimal(str(value))*100).quantize(Decimal('1'),rounding=ROUND_HALF_UP))
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write_csv(path,rows,fields):
-    with path.open('w',newline='') as f:
+    with path.open('w',newline='',encoding='utf-8') as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--retail-zip',type=Path,required=True);ap.add_argument('--ecb-csv',type=Path,required=True);args=ap.parse_args()
@@ -47,14 +47,14 @@ def main():
     db=sqlite3.connect(folder/'retail.sqlite3');db.row_factory=sqlite3.Row
     db.executescript('DROP TABLE IF EXISTS lines; DROP TABLE IF EXISTS fx; CREATE TABLE lines(source_row INTEGER PRIMARY KEY,invoice_no TEXT,stock_code TEXT,description TEXT,quantity INTEGER,invoice_date TEXT,unit_price TEXT,customer_id TEXT,country TEXT,line_amount TEXT,credit_flag INTEGER,exact_duplicate_of INTEGER,fx_date TEXT);CREATE TABLE fx(rate_date TEXT PRIMARY KEY,gbp_per_eur TEXT);')
     fx=[]
-    with args.ecb_csv.open() as f:
+    with args.ecb_csv.open(encoding='utf-8') as f:
         for r in csv.DictReader(f):fx.append({'rate_date':r['TIME_PERIOD'],'gbp_per_eur':r['OBS_VALUE']})
     fx.sort(key=lambda r:r['rate_date']);dates=[r['rate_date'] for r in fx]
     db.executemany('INSERT INTO fx VALUES (:rate_date,:gbp_per_eur)',fx)
     seen={};batch=[];count=0;positive=Decimal(0);negative=Decimal(0);signed=Decimal(0)
     monthly={};countries={};headers=None
     fields=['source_row','invoice_no','stock_code','description','quantity','invoice_date','unit_price','customer_id','country','line_amount','credit_flag','exact_duplicate_of','fx_date']
-    with (folder/'retail_lines.csv').open('w',newline='') as output:
+    with (folder/'retail_lines.csv').open('w',newline='',encoding='utf-8') as output:
         writer=csv.DictWriter(output,fieldnames=fields);writer.writeheader()
         for rowno,v in xlsx_rows(args.retail_zip):
             if rowno==1:headers=v;continue

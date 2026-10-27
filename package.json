@@ -4,18 +4,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "python3 -m app.server",
-    "test": "python3 -m unittest discover -s tests -v",
-    "seed:zetaris": "python3 scripts/seed_zetaris.py --apply",
-    "evaluate": "python3 scripts/evaluate.py --backend zetaris",
+    "start": "node scripts/python.mjs -m app.server",
+    "test": "node scripts/python.mjs -m unittest discover -s tests -v",
+    "seed:zetaris": "node scripts/python.mjs scripts/seed_zetaris.py --apply",
+    "evaluate": "node scripts/python.mjs scripts/evaluate.py --backend zetaris",
     "setup:memory": "npx --yes degit Meterless/Meterless/engines/hmem/reference#1742dec56a66e58eef9dda2d2b865823758ca8cd vendor/hmem",
     "memory": "tsx scripts/memory.ts",
-    "setup:semantic-view": "python3 scripts/register_ops_view.py --apply",
-    "import:public": "python3 scripts/import_public_retail.py",
-    "register:public": "python3 scripts/register_public_data.py --apply"
+    "setup:semantic-view": "node scripts/python.mjs scripts/register_ops_view.py --apply",
+    "import:public": "node scripts/python.mjs scripts/import_public_retail.py",
+    "register:public": "node scripts/python.mjs scripts/register_public_data.py --apply",
+    "setup:public": "node scripts/python.mjs scripts/download_public_data.py",
+    "check:platform": "node scripts/python.mjs scripts/check_portability.py",
+    "setup:env": "node scripts/setup_env.mjs"
   },
   "devDependencies": {
     "tsx": "^4.19.0",
     "degit": "^2.8.4"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   }
 }

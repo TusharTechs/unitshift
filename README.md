@@ -1,87 +1,295 @@
-# UnitShift — evidence before action
+<p align="center">
+  <img src="assets/unitshift-wordmark.svg" alt="UnitShift — evidence before action" width="100%">
+</p>
 
-A finance operations workspace that investigates invoice and cancellation signals across source records, product context and independent currency reference data. NVIDIA Nemotron chooses bounded source tools and proposes cited decisions; code checks the references, accounting arithmetic, quote direction and missing authorisations before a result is shown.
+<p align="center">
+  <a href="https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml"><img alt="Cross-platform checks" src="https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-20392d.svg"></a>
+  <a href="https://ds59bjv2cezd6.cloudfront.net/"><img alt="Live on AWS" src="https://img.shields.io/badge/Live-AWS-20392d.svg"></a>
+</p>
 
-**Track:** Solving Fragmented Intelligence. **Live judge deployment:** https://ds59bjv2cezd6.cloudfront.net (public release is verified separately in deployment evidence). No prize outcome, customer savings or production accuracy is guaranteed.
+**A finance operations workspace that investigates invoice exceptions across original records and produces a cited review packet before anyone changes the books.**
 
-## Real data, explicitly attributed
+Built for **Open Agent Hackathon 2026**, Track 1: **Solving Fragmented Intelligence**, with NVIDIA Nemotron as the core investigation model.
 
-The default workspace uses **all 541,909 original lines** from [Online Retail](https://archive.ics.uci.edu/dataset/352/online+retail), Daqing Chen, UCI Machine Learning Repository (2015), DOI [10.24432/C5BW33](https://doi.org/10.24432/C5BW33), under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). It contains 25,900 invoice identifiers, 4,372 non-empty anonymised customer IDs and 4,070 stock codes. Observed missing fields and duplicate-looking rows remain intact.
+## Links for judges
 
-The independent reference source is [ECB statistics](https://data-api.ecb.europa.eu/service/data/EXR/D.GBP.EUR.SP00.A?startPeriod=2010-11-25&endPeriod=2011-12-09&format=csvdata): 272 dated observations of GBP per EUR, used under the [ECB statistics reuse policy](https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html). Raw observations are unchanged; transaction EUR equivalents are separately labelled UnitShift calculations. They are retrospective reporting values, not settlement or point-in-time trading quotes.
+| What it is for | Link |
+|---|---|
+| Use the deployed product | [Live UnitShift workspace](https://ds59bjv2cezd6.cloudfront.net/) |
+| Watch the narrated demo, 3 minutes 46 seconds | [Play the demo and view the pitch materials](https://ds59bjv2cezd6.cloudfront.net/submission/) |
+| Direct demo video file | [1080p MP4](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-demo.mp4) |
+| Read the eight-slide pitch | [PDF deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pdf) |
+| Edit or download the presentation | [PowerPoint deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pptx) |
+| Demo accessibility | [English captions](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-captions.srt) |
+| Inspect the exact filmed investigation | [Recorded result](data/evidence/public-deployed-investigation.json) |
+| Inspect actual source and model calls | [Eleven linked receipts](data/evidence/public-deployed-receipts.json) |
+| Reproduce source registration and join | [Semantic SQL](data/public/semantic-view.sql) and [registration script](scripts/register_public_data.py) |
+| Check data attribution, source hashes and transformations | [Data manifest](data/public/manifest.json) |
+| Review test and deployment evidence | [Verification record](data/evidence/deployment-verification.json) and [cross-platform CI](https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml) |
+| See the current hosting boundaries | [Judge deployment notes](docs/judge-deployment.md) |
+| Review media generation and licenses | [Media provenance](https://ds59bjv2cezd6.cloudfront.net/submission/media-provenance.json) |
+| Check project and upstream licensing | [MIT license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md) |
 
-These are **historical 2010–2011 records**, not live customer operations. No retailer or customer is re-identified. Retail entity tables are derived from one UCI export; they are not described as independent commercial systems. UCI and the ECB do not endorse UnitShift. See [data provenance](data/public/manifest.json) for source hashes, transformations, row counts and limitations.
+## The problem
+
+An invoice exception rarely contains its own explanation. A reviewer may have to reconstruct the customer context, inspect other transaction lines, compare product identifiers and check reporting-currency references. A convincing model explanation is not enough when the original invoice relationship or payment authorisation is missing.
+
+UnitShift keeps that investigation in one workspace. It separates **what the source records**, **what the model infers**, **what code verifies** and **what evidence the reviewer still needs**.
+
+### A real example
+
+In the published UCI dataset, customer `16446` has two records for stock code `23843` on 9 December 2011:
+
+| Source workbook row | Invoice | Quantity | Unit price, GBP | Calculated line value, GBP | Recorded time |
+|---|---|---:|---:|---:|---|
+| 540423 | 581483 | 80,995 | 2.08 | 168,469.60 | 09:15 |
+| 540424 | C581484 | −80,995 | 2.08 | −168,469.60 | 09:27 |
+
+The lines add to zero. Their matching attributes support a **candidate relationship**. They do not establish the commercial reason, original-invoice reference, payment settlement or refund approval. UnitShift identifies the candidate and requests those missing documents instead of treating arithmetic as permission to act.
+
+![Actual deployed investigation with a cited candidate and an evidence gate](docs/images/investigation.png)
 
 ## What works
 
-- A complete searchable source ledger, preserving original workbook row numbers.
-- A review queue with cancellation context, duplicate-looking lines, missing customer IDs and zero-price signals.
-- Customer summaries using original anonymised IDs, without invented business names or credit scores.
-- Product-description variants, without inferring unsupported stock or pack-size facts.
-- An asynchronous investigation lab with actual Zetaris reads, Nemotron tool selection, typed conclusions and verification feedback. Its animated progress steps are driven by actual source, memory, model and policy receipts.
-- A separate Nightshift-backed review contract and scoped Meterless H-MEM approved-check storage and recall.
-- Readable review-packet and JSON exports, actual call receipts and source SQL.
-- An editable business-value calculator whose inputs and outputs are explicitly hypotheses, not measured ROI.
+| Workspace | Working capability |
+|---|---|
+| Overview | Source coverage, historical context and direct investigation entry |
+| Review queue | Real cancellation, duplicate-looking, missing-identity and zero-price signals |
+| Invoice ledger | All 541,909 original lines, exact invoice/customer/SKU search, original workbook row numbers |
+| Customer records | Published anonymised identifiers and transaction context |
+| Product signals | Source descriptions and description variants without invented inventory facts |
+| Investigation lab | Live source reads, bounded model tools, typed decisions, verification feedback and a visible evidence gate |
+| Sources & evidence | Publisher credits, reuse terms, source hashes, registered tables and semantic SQL |
+| Business model | An editable pilot-value calculator with explicit assumptions |
 
-The main demonstration traces source rows 540423 and 540424: invoice 581483 records GBP 168,469.60; cancellation C581484 records the opposite quantity and amount twelve minutes later. A matching customer, SKU, price and quantity make the former an **attribute-match candidate**, not a source-proven original invoice or authorised refund. The two rows sum to zero, but no commercial reason, settlement, refund authorisation or business saving is claimed.
+A reviewer can inspect actual agent steps and query/model receipts, export JSON or a readable review packet, and save an approved evidence check in scoped memory. Progress indicators follow actual receipts. A failed live request is shown as a failure; a saved result is labelled as a recorded run.
 
-## Sponsor contributions
+The earlier stock-recovery experiment remains separately labelled at [`/sandbox`](https://ds59bjv2cezd6.cloudfront.net/sandbox). Its commercial records are synthetic. It is read-only on the public deployment and documented in [sandbox notes](docs/recovery-sandbox.md).
 
-| Technology | Actual responsibility | Evidence |
-|---|---|---|
-| Zetaris | Four registered source tables and a cross-publisher semantic view joining transaction, invoice grain, product variants and dated ECB observations | Source registrations, readback counts, query hashes and complete 541,909-row join-grain check |
-| NVIDIA Nemotron 3 Super on Nebius | Bounded source-tool selection, evidence interpretation and source-cited typed decisions; reasoning repair when a constraint fails | Actual effective model IDs, token usage, selected tools, attempts and verification receipts |
-| Meterless Nightshift | A real NVIDIA-backed provider reviews the structured request-for-evidence disposition | Routing mode, effective model, receipt and accepted structured review |
-| Meterless H-MEM | Stores operator-approved evidence checks and recalls them only for the matching dataset/contract scope | Pinned upstream engine add/query calls, ledger IDs and recalled memory references |
+## Architecture
 
-The code does not render private model reasoning. Generated text cannot authorise a refund, delete a row, invent a customer ID, reverse the FX quote or cite an unknown source row. Unknown references, wrong relationship fields or FX direction fail verification; no fixture answer replaces a failed live read. Mandatory missing-evidence requirements are imposed by application policy even when the model omits them. The accepted decision records policy-added checks separately from the raw model proposal, and the interface discloses that addition.
+```mermaid
+flowchart TB
+    subgraph Sources["Attributed historical sources"]
+        UCI["UCI Online Retail • 541,909 original lines"]
+        ECB["ECB statistics • 272 dated observations"]
+    end
+    UCI --> Import["Python source-preserving importer"]
+    ECB --> Import
+    Import --> Index["Read-only SQLite navigation index"]
+    Import --> CSV["CSV source exports"]
+    CSV --> S3["Project-owned S3 prefix"]
+    S3 --> Zetaris["Zetaris • four registered tables"]
+    Zetaris --> View["Semantic view • retailer context + dated ECB reference"]
 
-## Reproduce locally
+    Browser["Browser • unified evidence workspace"] --> API["Python HTTP API • asynchronous investigation jobs"]
+    Index --> API
+    API --> Tools["Allowlisted read tools and source verification"]
+    View --> Tools
+    Tools <--> Nemotron["NVIDIA Nemotron 3 Super • Nebius Token Factory"]
+    API <--> Memory["Meterless H-MEM • approved checks scoped to dataset and contract"]
+    Nemotron --> Gate["Code checks • references, relationship, chronology, FX direction"]
+    Tools --> Gate
+    Gate --> Requirements["Policy adds mandatory missing-evidence requirements"]
+    Requirements --> Nightshift["Nightshift • structured secondary NVIDIA review"]
+    Requirements --> Packet["Cited review packet • no financial execution"]
+    Nightshift --> Packet
+    Packet --> API
+    API --> Browser
+    Browser -->|"Operator-approved reusable check"| Memory
 
-Python 3.11+, Node.js 18+ and npm are required. Python uses its standard library. H-MEM is pinned to upstream commit `1742dec56a66e58eef9dda2d2b865823758ca8cd`.
-
-```sh
-npm ci
-npm run setup:memory
-cp .env.example .env.local  # new checkout only; never overwrite configured secrets
+    subgraph Hosting["Judge hosting"]
+        CF["CloudFront HTTPS"] --> Host["AWS EC2 • persistent state • systemd"]
+        Host --> API
+        Mac["Mac Nightshift runtime"] -->|"Private loopback SSH bridge"| Nightshift
+    end
 ```
 
-Download the two primary source files from the links above. Then:
+### Technical implementation
+
+- **Source grain stays intact.** The importer preserves original workbook row numbers, missing identifiers and duplicate-looking records. It derives invoice/product summaries without presenting them as separate publishers.
+- **Zetaris performs the actual join.** `unitshift_control.retail_evidence` joins the transaction grain, invoice summary, product catalogue and dated ECB observation. The recorded full join count is 541,909, so the view does not multiply the source grain.
+- **Nemotron uses a bounded tool contract.** It selects from permitted read tools and returns a typed, source-cited proposal. The application checks cited IDs, relationship fields, chronology, arithmetic and FX direction. Invalid proposals can receive verification feedback for repair.
+- **Policy requirements remain independent.** Mandatory missing evidence is imposed even if the model omits it. The raw proposal and `policy_added_missing_evidence` remain distinguishable in the result and receipts.
+- **Memory requires operator approval.** H-MEM stores reusable checks with a dataset/contract scope. A stale scope cannot silently become the current check.
+- **The audit trail is inspectable.** Receipts contain query/model identities, token use, input/output hashes and linked record hashes. This detects changes within the supplied chain; it is not external notarisation.
+- **Live reads fail closed.** An unavailable or changed source does not trigger a fixture answer. Jobs persist in SQLite; interrupted jobs are marked explicitly. Public calls are queued and rate-limited.
+
+## Sponsor technology
+
+| Technology | Actual role | Proof to inspect |
+|---|---|---|
+| **NVIDIA Nemotron 3 Super** on **Nebius Token Factory** | Source-tool selection and cited investigation decisions | Effective model `nvidia/nemotron-3-super-120b-a12b`, actual call usage and verified proposals |
+| **Zetaris** | Source verification and the semantic join across retailer context and independent currency reference | Registered source counts, [SQL](data/public/semantic-view.sql), full-grain readback and query receipts |
+| **Meterless Nightshift** | A separate structured request-for-evidence review through a working NVIDIA provider | Filmed effective model `nvidia/nemotron-3.5-bolt-e4b`, route evidence and accepted review |
+| **Meterless H-MEM** | Approved evidence-check storage and scope-bound recall | Pinned upstream reference engine, ledger IDs, `mem-1` recall in the filmed run and portability integration checks |
+
+The filmed public run completed in **10.89 seconds** and includes all four integrations. That is one observed run, not a latency guarantee or broad accuracy result. Model names are recorded effective identities; availability depends on the provider account.
+
+## Real data and permitted reuse
+
+| Publisher | Data used | Attribution and reuse |
+|---|---|---|
+| UCI Machine Learning Repository | All 541,909 Online Retail transaction lines, 2010–2011 | Daqing Chen (2015), [DOI 10.24432/C5BW33](https://doi.org/10.24432/C5BW33), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| European Central Bank | 272 daily GBP-per-EUR reference observations | [ECB data API](https://data-api.ecb.europa.eu/service/data/EXR/D.GBP.EUR.SP00.A?startPeriod=2010-11-25&endPeriod=2011-12-09&format=csvdata), [statistics reuse policy](https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html) |
+
+Raw ECB observations are unchanged. Reporting equivalents are UnitShift calculations using GBP **divided by** GBP per EUR, with the same or preceding source calendar date. They are retrospective reference conversions, not settlement or point-in-time trading rates. The source does not specify a timezone, so source calendar timestamps are preserved.
+
+The review queue is a disclosed selection of 40 value-ranked source signals, not a balanced evaluation sample. Identities remain anonymised as published. The source manifest records hashes, transformations and selection rules. Neither publisher endorses UnitShift.
+
+## Run locally on Windows, macOS or Linux
+
+### Requirements
+
+- **Python 3.11+**, installed and available through `python3`, `python` or the Windows `py` launcher.
+- **Node.js 18+** and npm. CI uses Node.js 22 and Python 3.12.
+- **Git** and an internet connection for the initial dependency and public-data downloads.
+- Enough free disk space for the original archive, CSV exports and SQLite index. No local GPU or model download is needed.
+
+Python application code uses the standard library. Node runs the pinned H-MEM TypeScript reference engine. AWS CLI is only needed if you choose to register your own S3 source deployment.
+
+### Quick start: same commands on all three operating systems
+
+Run these in Terminal, a Linux shell, or Windows PowerShell:
 
 ```sh
-python3 scripts/import_public_retail.py --retail-zip /path/to/online-retail.zip --ecb-csv /path/to/ecb-gbp-eur.csv
-python3 scripts/register_public_data.py --apply
+git clone https://github.com/TusharTechs/unitshift.git
+cd unitshift
+npm ci
+npm run setup:memory
+npm run setup:env
+npm run setup:public
 npm start
 ```
 
-The importer preserves every source line, writes an ignored read-only SQLite navigation index and CSV exports, and records hashes and the selection method. Registering sources requires the configured AWS account, the existing scoped S3 session and Zetaris access. On a new environment, configure the bucket, source session and semantic container explicitly; these setup scripts currently reference the original user's hackathon infrastructure.
+Open **http://127.0.0.1:8787**.
 
-Set `ZETARIS_BASE_URL`, `ZETARIS_API_KEY`, numeric `ZETARIS_ORG_ID`, `NEBIUS_BASE_URL`, `NEBIUS_API_KEY`, `NEMOTRON_MODEL`, and the discovered Nightshift endpoint, runtime key and route in `.env.local`. Use `DATA_BACKEND=zetaris` for live investigations. Browsing an indexed public source is labelled as such and does not imply a fresh live query.
+`setup:env` creates `.env.local` only when it does not already exist. `setup:public` downloads the two primary public sources, checks the UCI archive hash and builds the complete local browsing index. The initial import can take a little time. Downloaded data, generated indexes, credentials and memory state stay in ignored `.state/` or `.env.local` paths.
 
-Open http://127.0.0.1:8787. The earlier synthetic stock-recovery scenario remains separately labelled at `/sandbox`; the original invoice engineering workbench remains at `/review`. Its architecture, synthetic recovery outcomes and earlier small evaluation are documented in [the sandbox notes](docs/recovery-sandbox.md), not represented as real customer impact.
+**Local browsing needs no paid API account.** A new checkout can inspect the ledger and recorded evidence. A fresh live investigation requires the provider configuration below. The app does not substitute a recorded result for an unconfigured live run.
 
-## Deployment and operating boundaries
+If Python is installed outside your PATH, set its executable explicitly:
 
-The judge deployment uses one AWS EC2 `t3.small` instance, encrypted persistent storage, a CloudFront HTTPS endpoint and an origin restriction. No workstation AWS user key is installed. A dedicated instance role can read only the project's S3 source prefix; source access renews from that role without storing temporary keys in the repository. The Linux service runs as an unprivileged user with a read-only application tree and a writable state directory.
+```powershell
+# Windows PowerShell: replace the example path with your actual Python executable.
+$env:UNITSHIFT_PYTHON = "C:\path\to\python.exe"
+npm start
+```
 
-The initial compute window ends **November 10, 2026 at 00:00 UTC**, when the instance is configured to stop. Normal base infrastructure for that initial period is estimated below the user's USD 20 allowance; API usage and exceptional traffic are separate. Stopped-instance storage and distribution resources still exist and should be reviewed after judging. No costly autoscaling fleet or GPU is provisioned.
+```sh
+# macOS or Linux: use your actual Python executable path.
+UNITSHIFT_PYTHON=/path/to/python3 npm start
+```
 
-**Nightshift boundary:** the main app, source reads, H-MEM and primary Nemotron inference run in the cloud. The installed Nightshift desktop runtime is on the user's Mac, connected by a loopback-only encrypted SSH channel. If that machine or channel is unavailable, the site and primary investigation remain available and the secondary review is explicitly marked unavailable. A fully autonomous production install needs an authorised supported Nightshift host/endpoint. This is not disguised as a cloud-native Nightshift installation.
+If you already downloaded the source files, import them without downloading again:
 
-Public model calls are queued and rate-limited. The public recovery sandbox is read-only. Historical investigation and reusable-check controls create no external orders, messages, refunds or payments. Public source data is intentionally readable; this release is not a multi-tenant service for private customer data. Production requires tenant authentication, restricted runtime source credentials, fully private/TLS origin transport, external transaction controls, independent evaluation and authorised business integrations.
+```sh
+npm run import:public -- --retail-zip "/path/to/online-retail.zip" --ecb-csv "/path/to/ecb-gbp-eur.csv"
+```
 
-## Verification
+### Enable live investigations
+
+Edit your local `.env.local`, using your own credentials:
+
+| Variable | What to set |
+|---|---|
+| `ZETARIS_BASE_URL` | Origin of your working Zetaris AI Data Gateway |
+| `ZETARIS_API_KEY` | Gateway API bearer token |
+| `ZETARIS_ORG_ID` | Numeric organisation ID, not the cluster hostname |
+| `NEBIUS_BASE_URL` | Your Token Factory OpenAI-compatible API base, such as `https://api.tokenfactory.nebius.com/v1` |
+| `NEBIUS_API_KEY` | Your server-side Nebius key |
+| `NEMOTRON_MODEL` | An available NVIDIA Nemotron model from your account catalogue |
+| `NIGHTSHIFT_BASE_URL` | The OpenAI-compatible runtime endpoint shown in Nightshift AI Hotspot |
+| `NIGHTSHIFT_API_KEY` | The runtime connection key shown by Nightshift |
+| `NIGHTSHIFT_MODEL` | An available runtime model or route, such as `meterless/deep` |
+| `DATA_BACKEND` | `zetaris` for live source-backed investigations |
+
+API keys stay server-side and are never needed in the browser. The route label `deep` does not itself guarantee a larger model; inspect the effective model in the receipt.
+
+Register the generated CSVs in **your own** S3 bucket and Zetaris organisation. The registration script supports an uploader AWS CLI profile and a separate, temporary, read-only source session:
+
+```sh
+npm run register:public -- --bucket YOUR_BUCKET --region YOUR_BUCKET_REGION --profile YOUR_UPLOAD_PROFILE --credentials-file ".state/source-session.json" --create-container
+```
+
+The source-session JSON must contain temporary `AccessKeyId`, `SecretAccessKey`, `SessionToken` and `Expiration` values for a role allowed to read only your source prefix. Never commit it. The uploader profile needs permission to put the four generated files under `unitshift/v1/public/` in your bucket. Omit `--create-container` if `unitshift_control` already exists. Source credentials expire and must be renewed; the judge host's renewal script is deliberately tied to its dedicated deployment role.
+
+Alternatively, omitting `--credentials-file` uses temporary credentials exported by AWS CLI v2 from the selected profile. Long-lived IAM user credentials are rejected. Use a least-privilege source role; the script never writes credential-bearing SQL into receipts.
+
+The script creates/updates the four source tables, registers the semantic view and verifies the full 541,909-row count. It does not reuse the original author's bucket by default.
+
+### Verify your checkout
 
 ```sh
 npm test
+npm run check:platform
 node --check static/replay.js
 node --check static/workspace.js
 ```
 
-48 regression checks cover legacy reconciliation and recovery plus real-data evidence references, source changes, join fan-out, chronology, missing identity, unsupported refund approvals, quote direction and public model allowances. They also pass on the Linux deployment runtime. Actual public-data investigations and their receipts are saved under `data/evidence/`; these are recorded checks, not a balanced accuracy benchmark.
+`npm test` runs **48 regression checks**. The separate platform integration check exercises the actual Node/H-MEM bridge, approved-check recall, stale-scope rejection and read-only SQLite paths containing spaces. With imported data, it also verifies the complete source count and exact invoice navigation. The [CI matrix](https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml) runs on Windows, macOS and Linux, including the complete public-data setup.
 
-Source signals are **not confirmed errors, fraud, losses or savings**. The 40 review examples are a disclosed value-ranked selection. Customer validation, paid usage, measured review-time savings and production ROI have not been established. The business calculator is a pilot hypothesis that a real customer study must test.
+## Project structure
 
-## Provenance
+```text
+unitshift/
+├── app/
+│   ├── server.py                 HTTP API, static routes and asynchronous jobs
+│   ├── replay.py                 Real-data browsing, investigations and evidence gates
+│   ├── providers.py              Zetaris, Nebius and Nightshift adapters
+│   ├── memory.py                 Cross-platform Node/H-MEM bridge
+│   ├── receipts.py               Hash-linked query and model receipts
+│   ├── config.py                 Server-side configuration
+│   └── operations*.py            Separately labelled recovery sandbox
+├── static/                       Evidence workspace, sandbox and engineering UI
+├── assets/                       Original UnitShift SVG logo and wordmark
+├── data/
+│   ├── public/                   Attribution manifest, source snapshot and semantic SQL
+│   └── evidence/                 Recorded runs, actual receipts and verification evidence
+├── scripts/
+│   ├── python.mjs                Python launcher for Windows, macOS and Linux
+│   ├── download_public_data.py   Primary-source download and import setup
+│   ├── import_public_retail.py   Source-preserving XLSX/CSV ingestion
+│   ├── register_public_data.py   Own-account S3/Zetaris source registration
+│   ├── memory.ts                 Pinned H-MEM reference-engine calls
+│   ├── check_portability.py      Real memory and read-only source integration checks
+│   └── refresh_source_access.py  Dedicated judge-host source renewal
+├── deploy/                       systemd app and source-renewal units
+├── docs/                         Deployment notes, screenshots and sandbox documentation
+├── tests/                        Reconciliation, recovery and real-data regression tests
+├── .github/workflows/ci.yml       Three-OS verification matrix
+├── .env.example                  Configuration names without secrets
+├── THIRD_PARTY_NOTICES.md         Upstream and dataset attribution
+└── LICENSE                       MIT for original UnitShift code
+```
 
-UnitShift workflow, adapters, simulator, fixtures and interface are new project code. H-MEM is an Apache-2.0 upstream reference engine; commercial model weights and vendor platform code are not bundled. Development used Codex-assisted implementation and testing. Cursor was not used. Licensed public data and generated code usage are declared. See [third-party notices](THIRD_PARTY_NOTICES.md).
+`vendor/hmem/`, `node_modules/`, `.env.local` and `.state/` are generated or private and are excluded from Git. H-MEM is fetched from upstream commit `1742dec56a66e58eef9dda2d2b865823758ca8cd`.
+
+## Evaluation, business model and current boundaries
+
+The recorded real-data examples cover cancellation context, repeated cancellation rows and missing customer identity. The regression suite checks invalid references, source changes, join fan-out, chronology, FX direction, unsupported approval and public call limits. These demonstrate implemented behavior, not independently measured production accuracy.
+
+The proposed first customers are finance operations teams at wholesalers and multichannel retailers. The **£499/workspace/month** offer and review-time calculator are pilot hypotheses. A customer pilot would measure review time, incorrect links, rework and willingness to pay. No paying customers, recovered funds or measured savings are claimed.
+
+The public app runs on **AWS EC2 with encrypted persistent storage behind CloudFront HTTPS**. The primary app, source reads, H-MEM and Nemotron inference run in the cloud. **Nightshift currently runs on the author's Mac through a private loopback SSH bridge**; if that runtime is unavailable, the secondary review is explicitly unavailable while the primary app remains accessible.
+
+The initial judge compute stop is configured for **10 November 2026, 00:00 UTC**. Hosting cost estimates, source renewal and retirement details are in the [deployment notes](docs/judge-deployment.md). Production work includes authorised business connectors, tenant authentication, independent evaluation, private/TLS origin transport and a supported unattended Nightshift host. The prototype creates no external orders, messages, refunds or payments.
+
+## License and provenance
+
+Original UnitShift code and logo are available under the **[MIT license](LICENSE)**, copyright 2026 TusharTechs. That license does not replace the licenses for upstream engines, vendor services, datasets or model weights. H-MEM retains Apache-2.0, UCI data retains CC BY 4.0, and ECB data retains its published reuse terms. See [third-party notices](THIRD_PARTY_NOTICES.md) and [media provenance](https://ds59bjv2cezd6.cloudfront.net/submission/media-provenance.json).
+
+## AI disclosure
+
+| Area | Tools and contribution |
+|---|---|
+| Research and product development | **OpenAI Codex** assisted research, problem selection, architecture, implementation, debugging, test creation, deployment setup and documentation. Source facts were checked against primary data, actual API responses and visible product behavior. |
+| Core product inference | **NVIDIA Nemotron 3 Super through Nebius Token Factory** performs bounded tool selection and cited investigation decisions. **Nightshift** supplies a separate NVIDIA-backed structured review. Application code validates proposals and adds mandatory policy requirements separately. |
+| Pitch deck | **Codex with Artifact Session** assisted narrative, editable slide authoring, evidence tables and visual QA. The product screenshots are actual captures. |
+| Demo narration | **Kokoro-82M**, generic `af_heart` voice, supplied synthetic narration. No real person's voice was cloned or impersonated. |
+| Captions | **Whisper tiny English through faster-whisper** supplied speech timestamps. Caption text was corrected against the authored narration. |
+| Video and audio production | **Codex-assisted Python and FFmpeg editing** combined actual deployed browser captures with editorial motion graphics. The ambient score and chapter sounds were composed procedurally for the film. |
+| Visual identity | The original **SVG logo and wordmark were authored with Codex assistance**, using the project's U/arrow motif. They are vector assets, not a third-party logo or fabricated product screenshot. |
+
+Cursor was not used. AI-generated explanations are not treated as source truth or authorisation. Historical data, model inferences, policy additions, recorded runs and business hypotheses are labelled separately throughout the project.

@@ -54,7 +54,7 @@ def case_data(case_id):
 def source_database():
  path=ROOT/'.state/public/retail.sqlite3'
  if not path.exists():raise ProviderError('The indexed public source is not installed.')
- db=sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True);db.row_factory=sqlite3.Row
+ db=sqlite3.connect(path.resolve().as_uri()+'?mode=ro',uri=True);db.row_factory=sqlite3.Row
  try:yield db
  finally:db.close()
 
