@@ -38,12 +38,12 @@ The dollar figures are results on this disclosed scenario, not customer savings 
 |---|---|---|
 | Zetaris | Seven registered CSV/JSON source exports in private S3; cross-source query; deadline-based semantic view | Query text, result hashes, source tables and readback counts |
 | NVIDIA Nemotron 3 Super via Nebius | Scenario interpretation, typed invoice mappings, independent recovery proposals and feedback-driven repairs | Actual effective model ID, requested thinking controls, token use, proposal and verification receipts |
-| NVIDIA Nemotron through Nightshift | Qualitative operator guidance and the existing provider-backed financial explanation | Nightshift route, receipt ID and effective NVIDIA model |
+| NVIDIA Nemotron through Nightshift | Structured operator follow-up selection and the existing provider-backed financial explanation | Nightshift route, receipt ID and effective NVIDIA model |
 | Meterless H-MEM | Persistent approved supplier preferences and a scoped operational constraint lesson | Real upstream reference-engine add/retrieval calls and ledger entries |
 
 The planner requests a fast structured proposal first. If the proposal violates a constraint or misses a checked target, it requests a bounded reasoning repair with the simulated outcomes and verified alternatives. The code retains a repaired proposal only when it is valid and at least as good under the declared objective. It never silently substitutes a simulator plan while attributing it to Nemotron. An operator can explicitly choose a separately labelled simulator alternative.
 
-Nightshift guidance is qualitative: generated notes containing numbers, currency symbols or an inconsistent risk label are rejected. Displayed costs, quantities, shortfalls and budget gaps come from deterministic calculations. Model narratives are not numerical authorities.
+Nightshift selects a structured operator follow-up; its action and risk label must agree with the verified plan status. Code renders the qualitative guidance from that validated choice. Older free-form briefings are also checked before display. Displayed costs, quantities, shortfalls and budget gaps come from deterministic calculations. Model narratives are not numerical authorities.
 
 ## Data and architecture
 
@@ -124,7 +124,7 @@ node --check static/workspace.js
 npm run evaluate  # earlier invoice component comparison; actual API calls
 ```
 
-Thirty-three automated checks cover source handling, quantity conservation, pack pricing, cash/deadline constraints, source-change rejection, ambiguous/dollars-versus-cents interpretation, idempotent drafts, residual-risk escalation and source-locked copilot answers. A clean credential-free checkout was also installed and smoke-tested; the pinned H-MEM reference engine was exercised separately. Real API runs verified normal and supplier-outage recoveries. See `data/evidence/recovery-verified-runs.json` and the actual run receipts. Earlier development failures are diagnostic evidence, not successful submission metrics.
+Thirty-four automated checks cover source handling, quantity conservation, pack pricing, cash/deadline constraints, source-change rejection, ambiguous/dollars-versus-cents interpretation, idempotent drafts, residual-risk escalation and source-locked copilot answers. A clean credential-free checkout was also installed and smoke-tested; the pinned H-MEM reference engine was exercised separately. Real API runs verified normal and supplier-outage recoveries. See `data/evidence/recovery-verified-runs.json` and the actual run receipts. Earlier development failures are diagnostic evidence, not successful submission metrics.
 
 The earlier invoice mapping comparison tied at 13/13 between two-pass and one-pass mapping using the same model and checks, with no demonstrated accuracy advantage for the extra pass. That small held-out set is hold-heavy (12 held, one supported). It is not a benchmark for the expanded recovery planner or evidence of broad production accuracy.
 

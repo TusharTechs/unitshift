@@ -1,9 +1,9 @@
 {
-  "verified_at": "2026-10-27T09:07:03.488909+00:00",
-  "automated_tests": 33,
+  "verified_at": "2026-10-27T09:12:18.009273+00:00",
+  "automated_tests": 34,
   "python_test_result": "passed",
   "javascript_syntax": "passed",
-  "credential_scan": "No configured credential value or AWS access-key pattern in the 51 candidate source files.",
+  "credential_scan": "No configured credential value or AWS access-key pattern in the 54 tracked source files.",
   "browser_checked": [
     "overview",
     "customer promises",
@@ -25,5 +25,13 @@
     "Bounded scenario and simulator; no production scale claim.",
     "Real purchase and messaging integrations are not implemented.",
     "No public deployment or competition submission has been made."
-  ]
+  ],
+  "final_live_recovery_run": "5c7f6e4e094a4d76b0dd1b2bd0de6257",
+  "final_live_recovery": {
+    "protected_orders": 6,
+    "total_orders": 6,
+    "cost_minor": 21200,
+    "recalled_memory_id": "mem-3",
+    "nightshift_followup": "validated structured workflow choice"
+  }
 }

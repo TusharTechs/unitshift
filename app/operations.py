@@ -215,17 +215,13 @@ def plan_recovery(overrides=None):
     try:
         facts={'status':simulation['status'],'has_unprotected_orders':simulation.get('revenue_at_risk_minor',0)>0,
                'external_actions_sent':False}
-        raw=chat([{'role':'system','content':'Write a qualitative next-step note for an operator. Return only JSON with summary (one concise sentence) and risk_label (exact copy of status). Do not include numbers, monetary values, currency symbols, percentages or arithmetic. If status is partial, ask the operator to review unprotected orders and escalation options; never claim all orders are covered. If ready, ask the operator to review proposed purchase drafts. No actions have been sent or executed. No numbered reasoning.'},
-                  {'role':'user','content':json.dumps({'verified_facts':facts})}],rid,provider='nightshift',max_tokens=2000,model_override='meterless/deep')
+        raw=chat([{'role':'system','content':'Choose the appropriate operator follow-up from verified plan facts. Return ONLY JSON with next_action (review_purchase_drafts, review_residual_risk or review_constraint_failure) and risk_label (ready, partial or blocked). Use review_purchase_drafts for a valid fully covered plan, review_residual_risk for a valid plan with unprotected orders, and review_constraint_failure for a blocked proposal. No prose, numbers or invented actions. No external actions have been sent.'},
+                  {'role':'user','content':json.dumps({'verified_facts':facts,'violations':simulation.get('violations',[])})}],rid,provider='nightshift',max_tokens=1000,thinking=False,model_override='meterless/deep')
         parsed=parse_json(raw)
-        import re
-        summary=parsed.get('summary') if isinstance(parsed,dict) else None
-        banned=not isinstance(summary,str) or bool(re.search(r'[0-9$€£%]',summary or ''))
-        if not re.search(r'\b(review|draft|escalat|unprotected|confirm)\w*',summary or '',re.I): banned=True
-        if simulation['status']!='ready' and re.search(r'\b(all|every|fully)\b',summary or '',re.I): banned=True
-        if isinstance(parsed,dict) and parsed.get('risk_label')==facts['status'] and not banned:
-            brief=summary
-        else: receipt(rid,'operator_brief_rejected',{'reason':'Narrative did not meet the qualitative-only, status-consistent contract.'})
+        brief=operator_workflow_brief(parsed,facts['status'])
+        if brief:
+            receipt(rid,'operator_workflow_choice',{'selection':parsed,'display_rendered_by_code':True})
+        else: receipt(rid,'operator_brief_rejected',{'reason':'Structured follow-up did not agree with the verified plan status.'})
     except ProviderError: pass
     output={'id':rid,'created_at':timestamp(),'context_hash':data['context_hash'],'scenario_overrides':overrides or {},
             'display_headline':(f'{simulation["protected_orders"]} promises protected. A recovery you can inspect.' if simulation['valid'] and simulation['revenue_at_risk_minor']==0 else f'{simulation.get("protected_orders",0)} promises protected. The rest need escalation.' if simulation['valid'] else 'This proposal failed a checked constraint.'),
@@ -234,6 +230,14 @@ def plan_recovery(overrides=None):
             'recalled_memory_id':(memory.get('current') or {}).get('id'),'source_info':data['provenance'],'elapsed_s':round(time.monotonic()-start,2)}
     with database() as db: db.execute('INSERT INTO plans VALUES (?,?,?,?)',(rid,output['created_at'],json.dumps(output),'proposed'))
     return output
+
+def operator_workflow_brief(selection,status):
+    choices={'ready':('review_purchase_drafts','Review the proposed purchase drafts and confirm supplier availability before proceeding.'),
+             'partial':('review_residual_risk','Review the unprotected customer promises and the escalation options before proceeding.'),
+             'blocked':('review_constraint_failure','Review the failed constraints and request a corrected proposal before drafting.')}
+    expected,text=choices[status]
+    if isinstance(selection,dict) and selection.get('risk_label')==status and selection.get('next_action')==expected: return text
+    return None
 
 def checked_operator_brief(summary,status):
     import re

@@ -3,7 +3,7 @@ from copy import deepcopy
 from pathlib import Path
 from unittest.mock import patch
 from app.operations_data import OPERATIONS
-from app.operations import apply_scenario,simulate,frontier,approve_plan,plan_recovery,interpret_disruption,database,history,ask_operations,checked_operator_brief
+from app.operations import apply_scenario,simulate,frontier,approve_plan,plan_recovery,interpret_disruption,database,history,ask_operations,checked_operator_brief,operator_workflow_brief
 
 class OperationsTests(unittest.TestCase):
     def test_baseline_covers_only_three_promises(self):
@@ -129,5 +129,10 @@ class OperationsTests(unittest.TestCase):
         self.assertIsNone(checked_operator_brief('All necessary prerequisites are complete for the next stage.','ready'))
         self.assertIsNone(checked_operator_brief('Review all protected orders.','partial'))
         self.assertEqual(checked_operator_brief('Review the proposed purchase drafts.','ready'),'Review the proposed purchase drafts.')
+
+    def test_nightshift_followup_cannot_contradict_verified_plan_status(self):
+        self.assertIsNone(operator_workflow_brief({'risk_label':'ready','next_action':'review_purchase_drafts'},'partial'))
+        self.assertIsNone(operator_workflow_brief({'risk_label':'ready','next_action':'send_supplier_order'},'ready'))
+        self.assertIn('purchase drafts',operator_workflow_brief({'risk_label':'ready','next_action':'review_purchase_drafts'},'ready'))
 
 if __name__=='__main__': unittest.main()
