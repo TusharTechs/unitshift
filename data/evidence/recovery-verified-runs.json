@@ -1,0 +1,4394 @@
+[
+  {
+    "scenario": "supplier-outage",
+    "result": {
+      "id": "3c028202ab674a77b2e8b714361bdd35",
+      "created_at": "2026-10-27T08:42:49.832611+00:00",
+      "context_hash": "1c5a02c6bb8a8333362e7e9bcba04671581bf60e921a7dad89f0b1b8ee2ed6db",
+      "scenario_overrides": {
+        "budget_minor": 22500,
+        "inbound_units": 80,
+        "disabled_suppliers": [
+          "Harbor Supply"
+        ]
+      },
+      "display_headline": "5 promises protected. The rest need escalation.",
+      "proposal": {
+        "purchases": [
+          {
+            "offer_id": "O-SM-F",
+            "packs": 2
+          },
+          {
+            "offer_id": "O-SM-G",
+            "packs": 3
+          }
+        ],
+        "headline": "Buy Summit FILTER & GLOVE packs to protect five orders",
+        "diagnosis": [
+          "FILTER-01 shortfall of 40 units for SO-2041/2042 covered by 2 Summit packs (arrive 6h).",
+          "GLOVE-02 shortfall of 60 units for SO-2043/2044 covered by 3 Summit packs (arrive 6h)."
+        ],
+        "tradeoffs": [
+          "Uses full recovery budget (22,500 minor) leaving 1,600 minor revenue at risk (SO-2046).",
+          "No purchase for CUP-03; accepts small risk to stay within budget and preserve cash."
+        ],
+        "next_steps": [
+          "Receive verified inbound FILTER-01 (80) and allocate to SO-2041 (80) and SO-2042 (20).",
+          "Receive Summit FILTER packs (40 units) in 6h; allocate remaining SO-2042 need (40).",
+          "Receive Summit GLOVE packs (60 units) in 6h; allocate to SO-2043 (160) and SO-2044 (60)."
+        ]
+      },
+      "simulation": {
+        "valid": true,
+        "violations": [],
+        "purchases": [
+          {
+            "id": "O-SM-F",
+            "supplier": "Summit Industrial",
+            "sku": "FILTER-01",
+            "pack_units": 20,
+            "pack_price_minor": 6300,
+            "available_packs": 2,
+            "lead_hours": 6,
+            "region": "Brooklyn, NY",
+            "terms": "Prepaid",
+            "quote_ref": "Q-403",
+            "on_time_shipments": 19,
+            "total_shipments": 20,
+            "packs": 2,
+            "units": 40,
+            "cost_minor": 12600
+          },
+          {
+            "id": "O-SM-G",
+            "supplier": "Summit Industrial",
+            "sku": "GLOVE-02",
+            "pack_units": 20,
+            "pack_price_minor": 3300,
+            "available_packs": 3,
+            "lead_hours": 6,
+            "region": "Brooklyn, NY",
+            "terms": "Prepaid",
+            "quote_ref": "Q-405",
+            "on_time_shipments": 19,
+            "total_shipments": 20,
+            "packs": 3,
+            "units": 60,
+            "cost_minor": 9900
+          }
+        ],
+        "orders": [
+          {
+            "id": "SO-2041",
+            "customer": "Forma Facilities",
+            "sku": "FILTER-01",
+            "product": "Flow filters",
+            "quantity": 80,
+            "due_hours": 12,
+            "unit_revenue_minor": 480,
+            "priority": "Critical",
+            "destination": "Brooklyn",
+            "fulfilled_units": 80,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 80,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2043",
+            "customer": "Eastline Supply",
+            "sku": "GLOVE-02",
+            "product": "Work gloves",
+            "quantity": 160,
+            "due_hours": 18,
+            "unit_revenue_minor": 210,
+            "priority": "High",
+            "destination": "Jersey City",
+            "fulfilled_units": 160,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 160,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2042",
+            "customer": "Common Ground",
+            "sku": "FILTER-01",
+            "product": "Flow filters",
+            "quantity": 60,
+            "due_hours": 24,
+            "unit_revenue_minor": 480,
+            "priority": "High",
+            "destination": "Queens",
+            "fulfilled_units": 60,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 20,
+                "arrival_hours": 0
+              },
+              {
+                "source": "Summit Industrial",
+                "units": 40,
+                "arrival_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "SO-2045",
+            "customer": "Sunday Coffee",
+            "sku": "CUP-03",
+            "product": "Compostable cups",
+            "quantity": 300,
+            "due_hours": 24,
+            "unit_revenue_minor": 32,
+            "priority": "Standard",
+            "destination": "Brooklyn",
+            "fulfilled_units": 300,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 300,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2044",
+            "customer": "Fieldwork Studio",
+            "sku": "GLOVE-02",
+            "product": "Work gloves",
+            "quantity": 120,
+            "due_hours": 30,
+            "unit_revenue_minor": 210,
+            "priority": "Standard",
+            "destination": "Manhattan",
+            "fulfilled_units": 120,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 60,
+                "arrival_hours": 0
+              },
+              {
+                "source": "Summit Industrial",
+                "units": 60,
+                "arrival_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "SO-2046",
+            "customer": "Gather Collective",
+            "sku": "CUP-03",
+            "product": "Compostable cups",
+            "quantity": 200,
+            "due_hours": 48,
+            "unit_revenue_minor": 32,
+            "priority": "Standard",
+            "destination": "Manhattan",
+            "fulfilled_units": 150,
+            "short_units": 50,
+            "status": "at-risk",
+            "revenue_at_risk_minor": 1600,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 150,
+                "arrival_hours": 0
+              }
+            ]
+          }
+        ],
+        "cost_minor": 22500,
+        "budget_minor": 22500,
+        "cash_after_minor": 387500,
+        "cash_floor_minor": 350000,
+        "protected_orders": 5,
+        "total_orders": 6,
+        "revenue_at_risk_minor": 1600,
+        "protected_revenue_minor": 140400,
+        "weighted_risk_minor": 1600,
+        "status": "partial",
+        "score": [
+          1600,
+          1,
+          22500
+        ]
+      },
+      "frontier": {
+        "baseline": {
+          "valid": true,
+          "violations": [],
+          "purchases": [],
+          "orders": [
+            {
+              "id": "SO-2041",
+              "customer": "Forma Facilities",
+              "sku": "FILTER-01",
+              "product": "Flow filters",
+              "quantity": 80,
+              "due_hours": 12,
+              "unit_revenue_minor": 480,
+              "priority": "Critical",
+              "destination": "Brooklyn",
+              "fulfilled_units": 80,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 80,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2043",
+              "customer": "Eastline Supply",
+              "sku": "GLOVE-02",
+              "product": "Work gloves",
+              "quantity": 160,
+              "due_hours": 18,
+              "unit_revenue_minor": 210,
+              "priority": "High",
+              "destination": "Jersey City",
+              "fulfilled_units": 160,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 160,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2042",
+              "customer": "Common Ground",
+              "sku": "FILTER-01",
+              "product": "Flow filters",
+              "quantity": 60,
+              "due_hours": 24,
+              "unit_revenue_minor": 480,
+              "priority": "High",
+              "destination": "Queens",
+              "fulfilled_units": 20,
+              "short_units": 40,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 19200,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 20,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2045",
+              "customer": "Sunday Coffee",
+              "sku": "CUP-03",
+              "product": "Compostable cups",
+              "quantity": 300,
+              "due_hours": 24,
+              "unit_revenue_minor": 32,
+              "priority": "Standard",
+              "destination": "Brooklyn",
+              "fulfilled_units": 300,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 300,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2044",
+              "customer": "Fieldwork Studio",
+              "sku": "GLOVE-02",
+              "product": "Work gloves",
+              "quantity": 120,
+              "due_hours": 30,
+              "unit_revenue_minor": 210,
+              "priority": "Standard",
+              "destination": "Manhattan",
+              "fulfilled_units": 60,
+              "short_units": 60,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 12600,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 60,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2046",
+              "customer": "Gather Collective",
+              "sku": "CUP-03",
+              "product": "Compostable cups",
+              "quantity": 200,
+              "due_hours": 48,
+              "unit_revenue_minor": 32,
+              "priority": "Standard",
+              "destination": "Manhattan",
+              "fulfilled_units": 150,
+              "short_units": 50,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 1600,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 150,
+                  "arrival_hours": 0
+                }
+              ]
+            }
+          ],
+          "cost_minor": 0,
+          "budget_minor": 22500,
+          "cash_after_minor": 410000,
+          "cash_floor_minor": 350000,
+          "protected_orders": 3,
+          "total_orders": 6,
+          "revenue_at_risk_minor": 33400,
+          "protected_revenue_minor": 108600,
+          "weighted_risk_minor": 52600,
+          "status": "partial",
+          "score": [
+            52600,
+            3,
+            0
+          ]
+        },
+        "choices": [
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 9900
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 60,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 150,
+                "short_units": 50,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 1600,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 22500,
+            "budget_minor": 22500,
+            "cash_after_minor": 387500,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 1600,
+            "protected_revenue_minor": 140400,
+            "weighted_risk_minor": 1600,
+            "status": "partial",
+            "score": [
+              1600,
+              1,
+              22500
+            ],
+            "candidate_id": "option-1",
+            "protected_revenue_delta_minor": 31800
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 6600
+              },
+              {
+                "id": "O-SM-C",
+                "supplier": "Summit Industrial",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 750,
+                "available_packs": 2,
+                "lead_hours": 12,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-408",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 50,
+                "cost_minor": 1500
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 200,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 50,
+                    "arrival_hours": 12
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 20700,
+            "budget_minor": 22500,
+            "cash_after_minor": 389300,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 4200,
+            "protected_revenue_minor": 137800,
+            "weighted_risk_minor": 4200,
+            "status": "partial",
+            "score": [
+              4200,
+              1,
+              20700
+            ],
+            "candidate_id": "option-2",
+            "protected_revenue_delta_minor": 29200
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 6600
+              },
+              {
+                "id": "O-SM-C",
+                "supplier": "Summit Industrial",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 750,
+                "available_packs": 2,
+                "lead_hours": 12,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-408",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 1,
+                "units": 25,
+                "cost_minor": 750
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 175,
+                "short_units": 25,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 800,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 25,
+                    "arrival_hours": 12
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 19950,
+            "budget_minor": 22500,
+            "cash_after_minor": 390050,
+            "cash_floor_minor": 350000,
+            "protected_orders": 4,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 5000,
+            "protected_revenue_minor": 137000,
+            "weighted_risk_minor": 5000,
+            "status": "partial",
+            "score": [
+              5000,
+              2,
+              19950
+            ],
+            "candidate_id": "option-3",
+            "protected_revenue_delta_minor": 28400
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 6600
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 150,
+                "short_units": 50,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 1600,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 19200,
+            "budget_minor": 22500,
+            "cash_after_minor": 390800,
+            "cash_floor_minor": 350000,
+            "protected_orders": 4,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 5800,
+            "protected_revenue_minor": 136200,
+            "weighted_risk_minor": 5800,
+            "status": "partial",
+            "score": [
+              5800,
+              2,
+              19200
+            ],
+            "candidate_id": "option-4",
+            "protected_revenue_delta_minor": 27600
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 1,
+                "units": 20,
+                "cost_minor": 3300
+              },
+              {
+                "id": "O-SM-C",
+                "supplier": "Summit Industrial",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 750,
+                "available_packs": 2,
+                "lead_hours": 12,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-408",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 50,
+                "cost_minor": 1500
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 80,
+                "short_units": 40,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 8400,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 20,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 200,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 50,
+                    "arrival_hours": 12
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 17400,
+            "budget_minor": 22500,
+            "cash_after_minor": 392600,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 8400,
+            "protected_revenue_minor": 133600,
+            "weighted_risk_minor": 8400,
+            "status": "partial",
+            "score": [
+              8400,
+              1,
+              17400
+            ],
+            "candidate_id": "option-5",
+            "protected_revenue_delta_minor": 25000
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 1,
+                "units": 20,
+                "cost_minor": 3300
+              },
+              {
+                "id": "O-SM-C",
+                "supplier": "Summit Industrial",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 750,
+                "available_packs": 2,
+                "lead_hours": 12,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-408",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 1,
+                "units": 25,
+                "cost_minor": 750
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 80,
+                "short_units": 40,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 8400,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 20,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 175,
+                "short_units": 25,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 800,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 25,
+                    "arrival_hours": 12
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 16650,
+            "budget_minor": 22500,
+            "cash_after_minor": 393350,
+            "cash_floor_minor": 350000,
+            "protected_orders": 4,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 9200,
+            "protected_revenue_minor": 132800,
+            "weighted_risk_minor": 9200,
+            "status": "partial",
+            "score": [
+              9200,
+              2,
+              16650
+            ],
+            "candidate_id": "option-6",
+            "protected_revenue_delta_minor": 24200
+          }
+        ],
+        "combinations_tested": 36,
+        "minimum_full_recovery_minor": 24000,
+        "budget_gap_minor": 1500
+      },
+      "operator_brief": "Review unprotected orders and escalation options to ensure complete coverage.",
+      "memory_scope": "a548fbf4c9de8197a3f3be2a14c00436f45df79858462c92e0c3494ed532b02d",
+      "attempts": [
+        {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Summit FILTER packs to meet SO-2041 deadline",
+            "diagnosis": [
+              "SO-2041 needs 80 FILTER-01 units due in 12h; only 20 on hand + 80 verified inbound = 100 available.",
+              "Verified inbound covers SO-2041 fully; no purchase needed for FILTER-01."
+            ],
+            "tradeoffs": [
+              "No purchase required for FILTER-01 as verified inbound satisfies SO-2041.",
+              "Budget preserved for higher-risk SKUs if re-evaluated."
+            ],
+            "next_steps": [
+              "Confirm receipt of verified inbound FILTER-01 units.",
+              "Allocate 80 units to SO-2041, 20 to SO-2042.",
+              "Monitor GLOVE-02 and CUP-03 for future recovery needs."
+            ]
+          },
+          "valid": true,
+          "violations": [],
+          "improvement_requested": true
+        },
+        {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              },
+              {
+                "offer_id": "O-SM-G",
+                "packs": 3
+              }
+            ],
+            "headline": "Buy Summit FILTER & GLOVE packs to protect five orders",
+            "diagnosis": [
+              "FILTER-01 shortfall of 40 units for SO-2041/2042 covered by 2 Summit packs (arrive 6h).",
+              "GLOVE-02 shortfall of 60 units for SO-2043/2044 covered by 3 Summit packs (arrive 6h)."
+            ],
+            "tradeoffs": [
+              "Uses full recovery budget (22,500 minor) leaving 1,600 minor revenue at risk (SO-2046).",
+              "No purchase for CUP-03; accepts small risk to stay within budget and preserve cash."
+            ],
+            "next_steps": [
+              "Receive verified inbound FILTER-01 (80) and allocate to SO-2041 (80) and SO-2042 (20).",
+              "Receive Summit FILTER packs (40 units) in 6h; allocate remaining SO-2042 need (40).",
+              "Receive Summit GLOVE packs (60 units) in 6h; allocate to SO-2043 (160) and SO-2044 (60)."
+            ]
+          },
+          "valid": true,
+          "violations": []
+        }
+      ],
+      "plan_quality": "best_checked",
+      "recalled_memory_id": null,
+      "source_info": {
+        "backend": "zetaris",
+        "synthetic": true,
+        "read_at": "2026-10-27T08:42:39.613351+00:00",
+        "source_run_id": "7acdbb9f0cf543709720cd284dbf89fb",
+        "tables": {
+          "customer_orders": "UNITSHIFT_DEMAND.customer_orders",
+          "inventory": "UNITSHIFT_STOCK.inventory",
+          "supplier_offers": "UNITSHIFT_MARKET.supplier_offers",
+          "operating_policy": "UNITSHIFT_POLICY.operating_policy"
+        },
+        "semantic_view": "unitshift_control.customer_promises"
+      },
+      "elapsed_s": 10.22
+    },
+    "receipts": [
+      {
+        "at": "2026-10-27T08:42:39.790494+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "operations_snapshot",
+        "details": {
+          "context_hash": "1c5a02c6bb8a8333362e7e9bcba04671581bf60e921a7dad89f0b1b8ee2ed6db",
+          "source_run_id": "7acdbb9f0cf543709720cd284dbf89fb",
+          "scenario_overrides": {
+            "budget_minor": 22500,
+            "inbound_units": 80,
+            "disabled_suppliers": [
+              "Harbor Supply"
+            ]
+          }
+        },
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "e10a6e4a268f83ffde8bd204a2b82e80e52a9f3c0d0c438f3b294557a71d7859"
+      },
+      {
+        "at": "2026-10-27T08:42:41.803283+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "model_call",
+        "details": {
+          "provider": "nebius",
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+          "routing": {},
+          "elapsed_s": 2.012,
+          "thinking": false,
+          "usage": {
+            "completion_tokens": 245,
+            "prompt_tokens": 2137,
+            "total_tokens": 2382,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "created_cache_tokens": 0,
+              "multimodal_tokens": null
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 2137
+          },
+          "input_hash": "0a4d94330a4aa3dc8cbf0f49b081b30c2a23fe1eca6f8b570b4418940dfb1486",
+          "output_hash": "5b80bafe2b564990d93715d73a9feac7850a5b44f5367cd2727399f48f933a4d",
+          "response_id": "chatcmpl-3770577dbd4cbce6832de392f6c0b13c"
+        },
+        "previous_hash": "e10a6e4a268f83ffde8bd204a2b82e80e52a9f3c0d0c438f3b294557a71d7859",
+        "hash": "d4c8d5bb4706f6df7e7026888aec64e8293e932c469e91499c646608c2285c6f"
+      },
+      {
+        "at": "2026-10-27T08:42:41.803883+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "planner_verification_feedback",
+        "details": {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Summit FILTER packs to meet SO-2041 deadline",
+            "diagnosis": [
+              "SO-2041 needs 80 FILTER-01 units due in 12h; only 20 on hand + 80 verified inbound = 100 available.",
+              "Verified inbound covers SO-2041 fully; no purchase needed for FILTER-01."
+            ],
+            "tradeoffs": [
+              "No purchase required for FILTER-01 as verified inbound satisfies SO-2041.",
+              "Budget preserved for higher-risk SKUs if re-evaluated."
+            ],
+            "next_steps": [
+              "Confirm receipt of verified inbound FILTER-01 units.",
+              "Allocate 80 units to SO-2041, 20 to SO-2042.",
+              "Monitor GLOVE-02 and CUP-03 for future recovery needs."
+            ]
+          },
+          "valid": true,
+          "violations": [],
+          "improvement_requested": true
+        },
+        "previous_hash": "d4c8d5bb4706f6df7e7026888aec64e8293e932c469e91499c646608c2285c6f",
+        "hash": "7c923579913b58388e4b85dfcb4af252aa2e74aac209a2f4a6736cefb7603127"
+      },
+      {
+        "at": "2026-10-27T08:42:48.903180+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "model_call",
+        "details": {
+          "provider": "nebius",
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+          "routing": {},
+          "elapsed_s": 7.098,
+          "thinking": true,
+          "usage": {
+            "completion_tokens": 988,
+            "prompt_tokens": 3668,
+            "total_tokens": 4656,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 642,
+              "rejected_prediction_tokens": null
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2112,
+              "created_cache_tokens": 0,
+              "multimodal_tokens": null
+            },
+            "prompt_cache_hit_tokens": 2112,
+            "prompt_cache_miss_tokens": 1556
+          },
+          "input_hash": "98153c7ce79dc0693771e6854fe9cd8f459212c338c1e785c0514d0126525bfd",
+          "output_hash": "35f476a8b9c16f1cc7af96107afa5777f66cde31b32926c364678b46d32a4335",
+          "response_id": "chatcmpl-4710a5361b2b783d1ddb4a61b8837a67"
+        },
+        "previous_hash": "7c923579913b58388e4b85dfcb4af252aa2e74aac209a2f4a6736cefb7603127",
+        "hash": "6d302e95e1b195556d0b6d8b118621665690bcfe9ead0fe80c51d8d9f7c8270a"
+      },
+      {
+        "at": "2026-10-27T08:42:48.903999+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "recovery_plan_verified",
+        "details": {
+          "model_proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              },
+              {
+                "offer_id": "O-SM-G",
+                "packs": 3
+              }
+            ],
+            "headline": "Buy Summit FILTER & GLOVE packs to protect five orders",
+            "diagnosis": [
+              "FILTER-01 shortfall of 40 units for SO-2041/2042 covered by 2 Summit packs (arrive 6h).",
+              "GLOVE-02 shortfall of 60 units for SO-2043/2044 covered by 3 Summit packs (arrive 6h)."
+            ],
+            "tradeoffs": [
+              "Uses full recovery budget (22,500 minor) leaving 1,600 minor revenue at risk (SO-2046).",
+              "No purchase for CUP-03; accepts small risk to stay within budget and preserve cash."
+            ],
+            "next_steps": [
+              "Receive verified inbound FILTER-01 (80) and allocate to SO-2041 (80) and SO-2042 (20).",
+              "Receive Summit FILTER packs (40 units) in 6h; allocate remaining SO-2042 need (40).",
+              "Receive Summit GLOVE packs (60 units) in 6h; allocate to SO-2043 (160) and SO-2044 (60)."
+            ]
+          },
+          "simulation": {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-SM-F",
+                "supplier": "Summit Industrial",
+                "sku": "FILTER-01",
+                "pack_units": 20,
+                "pack_price_minor": 6300,
+                "available_packs": 2,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-403",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 12600
+              },
+              {
+                "id": "O-SM-G",
+                "supplier": "Summit Industrial",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 3300,
+                "available_packs": 3,
+                "lead_hours": 6,
+                "region": "Brooklyn, NY",
+                "terms": "Prepaid",
+                "quote_ref": "Q-405",
+                "on_time_shipments": 19,
+                "total_shipments": 20,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 9900
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 40,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Summit Industrial",
+                    "units": 60,
+                    "arrival_hours": 6
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 150,
+                "short_units": 50,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 1600,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 22500,
+            "budget_minor": 22500,
+            "cash_after_minor": 387500,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 1600,
+            "protected_revenue_minor": 140400,
+            "weighted_risk_minor": 1600,
+            "status": "partial",
+            "score": [
+              1600,
+              1,
+              22500
+            ]
+          },
+          "combinations_tested": 36
+        },
+        "previous_hash": "6d302e95e1b195556d0b6d8b118621665690bcfe9ead0fe80c51d8d9f7c8270a",
+        "hash": "7e0b3e08c86e81103488c1b8e8b6debb3e32a229abb484e53f79cc068ef7e404"
+      },
+      {
+        "at": "2026-10-27T08:42:49.831562+00:00",
+        "run_id": "3c028202ab674a77b2e8b714361bdd35",
+        "kind": "model_call",
+        "details": {
+          "provider": "nightshift",
+          "model": "meterless/auto",
+          "effective_model": "nvidia/nemotron-3.5-bolt-e4b",
+          "routing": {
+            "receipt_id": "rcpt_req_x67zvcd4",
+            "decision_id": "req_x67zvcd4",
+            "routed_model": "nvidia/nemotron-3.5-bolt-e4b",
+            "winning_route": {
+              "model": "nvidia/nemotron-3.5-bolt-e4b",
+              "label": "Nemotron 3.5 Bolt E4B",
+              "provider": "nvidia",
+              "kind": "cloud",
+              "tier": "A"
+            }
+          },
+          "elapsed_s": 0.926,
+          "thinking": null,
+          "usage": {
+            "prompt_tokens": 138,
+            "completion_tokens": 29,
+            "total_tokens": 167
+          },
+          "input_hash": "04064c4953ce7542dd6aff52e3853c47f15ec11a5b6b3a94547131c5a3de0501",
+          "output_hash": "c1295510d397aef94dc80b138ff5cc415483788780caac43aecb37206a1d400e",
+          "response_id": "chatcmpl-8080f020-55e9-4bcd-a43a-73f53fc52057"
+        },
+        "previous_hash": "7e0b3e08c86e81103488c1b8e8b6debb3e32a229abb484e53f79cc068ef7e404",
+        "hash": "32f60de593a9645917e0e534893a7f63a25be6a27ce19586d9685af0bf465ff4"
+      }
+    ]
+  },
+  {
+    "scenario": "default",
+    "result": {
+      "id": "d50be3ea245748cfb09e39b54b891fdb",
+      "created_at": "2026-10-27T08:42:52.746506+00:00",
+      "context_hash": "43721baeead36466aac1a22d6056bf67c26fee06bd135a40db14d593532ba07d",
+      "scenario_overrides": {
+        "budget_minor": 22500,
+        "inbound_units": 80,
+        "disabled_suppliers": []
+      },
+      "display_headline": "6 promises protected. A recovery you can inspect.",
+      "proposal": {
+        "purchases": [
+          {
+            "offer_id": "O-HB-F",
+            "packs": 4
+          },
+          {
+            "offer_id": "O-HB-G",
+            "packs": 3
+          },
+          {
+            "offer_id": "O-HB-C",
+            "packs": 2
+          }
+        ],
+        "headline": "Buy Harbor Supply packs to cover all deficits",
+        "diagnosis": [
+          "FILTER-01 short 40 units; GLOVE-02 short 60; CUP-03 short 50.",
+          "All deficits can be met with Harbor Supply offers within lead times."
+        ],
+        "tradeoffs": [
+          "Cost 21200 minor uses most of recovery budget but leaves 1300 minor buffer.",
+          "Choosing Harbor over Summit reduces cost and lead time for FILTER and GLOVE."
+        ],
+        "next_steps": [
+          "Place purchase orders for 4 packs FILTER, 3 packs GLOVE, 2 packs CUPS with Harbor Supply.",
+          "Receive shipments: FILTER in 18h, GLOVE in 12h, CUPS in 24h.",
+          "Allocate stock to meet each order before its deadline and confirm fulfillment."
+        ]
+      },
+      "simulation": {
+        "valid": true,
+        "violations": [],
+        "purchases": [
+          {
+            "id": "O-HB-F",
+            "supplier": "Harbor Supply",
+            "sku": "FILTER-01",
+            "pack_units": 10,
+            "pack_price_minor": 2900,
+            "available_packs": 4,
+            "lead_hours": 18,
+            "region": "Hoboken, NJ",
+            "terms": "Prepaid",
+            "quote_ref": "Q-402",
+            "on_time_shipments": 28,
+            "total_shipments": 30,
+            "packs": 4,
+            "units": 40,
+            "cost_minor": 11600
+          },
+          {
+            "id": "O-HB-G",
+            "supplier": "Harbor Supply",
+            "sku": "GLOVE-02",
+            "pack_units": 20,
+            "pack_price_minor": 2800,
+            "available_packs": 3,
+            "lead_hours": 12,
+            "region": "Hoboken, NJ",
+            "terms": "Prepaid",
+            "quote_ref": "Q-404",
+            "on_time_shipments": 28,
+            "total_shipments": 30,
+            "packs": 3,
+            "units": 60,
+            "cost_minor": 8400
+          },
+          {
+            "id": "O-HB-C",
+            "supplier": "Harbor Supply",
+            "sku": "CUP-03",
+            "pack_units": 25,
+            "pack_price_minor": 600,
+            "available_packs": 2,
+            "lead_hours": 24,
+            "region": "Hoboken, NJ",
+            "terms": "Prepaid",
+            "quote_ref": "Q-407",
+            "on_time_shipments": 28,
+            "total_shipments": 30,
+            "packs": 2,
+            "units": 50,
+            "cost_minor": 1200
+          }
+        ],
+        "orders": [
+          {
+            "id": "SO-2041",
+            "customer": "Forma Facilities",
+            "sku": "FILTER-01",
+            "product": "Flow filters",
+            "quantity": 80,
+            "due_hours": 12,
+            "unit_revenue_minor": 480,
+            "priority": "Critical",
+            "destination": "Brooklyn",
+            "fulfilled_units": 80,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 80,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2043",
+            "customer": "Eastline Supply",
+            "sku": "GLOVE-02",
+            "product": "Work gloves",
+            "quantity": 160,
+            "due_hours": 18,
+            "unit_revenue_minor": 210,
+            "priority": "High",
+            "destination": "Jersey City",
+            "fulfilled_units": 160,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 160,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2042",
+            "customer": "Common Ground",
+            "sku": "FILTER-01",
+            "product": "Flow filters",
+            "quantity": 60,
+            "due_hours": 24,
+            "unit_revenue_minor": 480,
+            "priority": "High",
+            "destination": "Queens",
+            "fulfilled_units": 60,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 20,
+                "arrival_hours": 0
+              },
+              {
+                "source": "Harbor Supply",
+                "units": 40,
+                "arrival_hours": 18
+              }
+            ]
+          },
+          {
+            "id": "SO-2045",
+            "customer": "Sunday Coffee",
+            "sku": "CUP-03",
+            "product": "Compostable cups",
+            "quantity": 300,
+            "due_hours": 24,
+            "unit_revenue_minor": 32,
+            "priority": "Standard",
+            "destination": "Brooklyn",
+            "fulfilled_units": 300,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 300,
+                "arrival_hours": 0
+              }
+            ]
+          },
+          {
+            "id": "SO-2044",
+            "customer": "Fieldwork Studio",
+            "sku": "GLOVE-02",
+            "product": "Work gloves",
+            "quantity": 120,
+            "due_hours": 30,
+            "unit_revenue_minor": 210,
+            "priority": "Standard",
+            "destination": "Manhattan",
+            "fulfilled_units": 120,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 60,
+                "arrival_hours": 0
+              },
+              {
+                "source": "Harbor Supply",
+                "units": 60,
+                "arrival_hours": 12
+              }
+            ]
+          },
+          {
+            "id": "SO-2046",
+            "customer": "Gather Collective",
+            "sku": "CUP-03",
+            "product": "Compostable cups",
+            "quantity": 200,
+            "due_hours": 48,
+            "unit_revenue_minor": 32,
+            "priority": "Standard",
+            "destination": "Manhattan",
+            "fulfilled_units": 200,
+            "short_units": 0,
+            "status": "protected",
+            "revenue_at_risk_minor": 0,
+            "allocations": [
+              {
+                "source": "Verified warehouse stock",
+                "units": 150,
+                "arrival_hours": 0
+              },
+              {
+                "source": "Harbor Supply",
+                "units": 50,
+                "arrival_hours": 24
+              }
+            ]
+          }
+        ],
+        "cost_minor": 21200,
+        "budget_minor": 22500,
+        "cash_after_minor": 388800,
+        "cash_floor_minor": 350000,
+        "protected_orders": 6,
+        "total_orders": 6,
+        "revenue_at_risk_minor": 0,
+        "protected_revenue_minor": 142000,
+        "weighted_risk_minor": 0,
+        "status": "ready",
+        "score": [
+          0,
+          0,
+          21200
+        ]
+      },
+      "frontier": {
+        "baseline": {
+          "valid": true,
+          "violations": [],
+          "purchases": [],
+          "orders": [
+            {
+              "id": "SO-2041",
+              "customer": "Forma Facilities",
+              "sku": "FILTER-01",
+              "product": "Flow filters",
+              "quantity": 80,
+              "due_hours": 12,
+              "unit_revenue_minor": 480,
+              "priority": "Critical",
+              "destination": "Brooklyn",
+              "fulfilled_units": 80,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 80,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2043",
+              "customer": "Eastline Supply",
+              "sku": "GLOVE-02",
+              "product": "Work gloves",
+              "quantity": 160,
+              "due_hours": 18,
+              "unit_revenue_minor": 210,
+              "priority": "High",
+              "destination": "Jersey City",
+              "fulfilled_units": 160,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 160,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2042",
+              "customer": "Common Ground",
+              "sku": "FILTER-01",
+              "product": "Flow filters",
+              "quantity": 60,
+              "due_hours": 24,
+              "unit_revenue_minor": 480,
+              "priority": "High",
+              "destination": "Queens",
+              "fulfilled_units": 20,
+              "short_units": 40,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 19200,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 20,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2045",
+              "customer": "Sunday Coffee",
+              "sku": "CUP-03",
+              "product": "Compostable cups",
+              "quantity": 300,
+              "due_hours": 24,
+              "unit_revenue_minor": 32,
+              "priority": "Standard",
+              "destination": "Brooklyn",
+              "fulfilled_units": 300,
+              "short_units": 0,
+              "status": "protected",
+              "revenue_at_risk_minor": 0,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 300,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2044",
+              "customer": "Fieldwork Studio",
+              "sku": "GLOVE-02",
+              "product": "Work gloves",
+              "quantity": 120,
+              "due_hours": 30,
+              "unit_revenue_minor": 210,
+              "priority": "Standard",
+              "destination": "Manhattan",
+              "fulfilled_units": 60,
+              "short_units": 60,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 12600,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 60,
+                  "arrival_hours": 0
+                }
+              ]
+            },
+            {
+              "id": "SO-2046",
+              "customer": "Gather Collective",
+              "sku": "CUP-03",
+              "product": "Compostable cups",
+              "quantity": 200,
+              "due_hours": 48,
+              "unit_revenue_minor": 32,
+              "priority": "Standard",
+              "destination": "Manhattan",
+              "fulfilled_units": 150,
+              "short_units": 50,
+              "status": "at-risk",
+              "revenue_at_risk_minor": 1600,
+              "allocations": [
+                {
+                  "source": "Verified warehouse stock",
+                  "units": 150,
+                  "arrival_hours": 0
+                }
+              ]
+            }
+          ],
+          "cost_minor": 0,
+          "budget_minor": 22500,
+          "cash_after_minor": 410000,
+          "cash_floor_minor": 350000,
+          "protected_orders": 3,
+          "total_orders": 6,
+          "revenue_at_risk_minor": 33400,
+          "protected_revenue_minor": 108600,
+          "weighted_risk_minor": 52600,
+          "status": "partial",
+          "score": [
+            52600,
+            3,
+            0
+          ]
+        },
+        "choices": [
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 8400
+              },
+              {
+                "id": "O-HB-C",
+                "supplier": "Harbor Supply",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 600,
+                "available_packs": 2,
+                "lead_hours": 24,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-407",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 50,
+                "cost_minor": 1200
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 60,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 200,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 50,
+                    "arrival_hours": 24
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 21200,
+            "budget_minor": 22500,
+            "cash_after_minor": 388800,
+            "cash_floor_minor": 350000,
+            "protected_orders": 6,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 0,
+            "protected_revenue_minor": 142000,
+            "weighted_risk_minor": 0,
+            "status": "ready",
+            "score": [
+              0,
+              0,
+              21200
+            ],
+            "candidate_id": "option-1",
+            "protected_revenue_delta_minor": 33400
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 8400
+              },
+              {
+                "id": "O-HB-C",
+                "supplier": "Harbor Supply",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 600,
+                "available_packs": 2,
+                "lead_hours": 24,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-407",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 1,
+                "units": 25,
+                "cost_minor": 600
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 60,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 175,
+                "short_units": 25,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 800,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 25,
+                    "arrival_hours": 24
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 20600,
+            "budget_minor": 22500,
+            "cash_after_minor": 389400,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 800,
+            "protected_revenue_minor": 141200,
+            "weighted_risk_minor": 800,
+            "status": "partial",
+            "score": [
+              800,
+              1,
+              20600
+            ],
+            "candidate_id": "option-2",
+            "protected_revenue_delta_minor": 32600
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 8400
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 60,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 150,
+                "short_units": 50,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 1600,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 20000,
+            "budget_minor": 22500,
+            "cash_after_minor": 390000,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 1600,
+            "protected_revenue_minor": 140400,
+            "weighted_risk_minor": 1600,
+            "status": "partial",
+            "score": [
+              1600,
+              1,
+              20000
+            ],
+            "candidate_id": "option-3",
+            "protected_revenue_delta_minor": 31800
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 5600
+              },
+              {
+                "id": "O-HB-C",
+                "supplier": "Harbor Supply",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 600,
+                "available_packs": 2,
+                "lead_hours": 24,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-407",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 50,
+                "cost_minor": 1200
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 200,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 50,
+                    "arrival_hours": 24
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 18400,
+            "budget_minor": 22500,
+            "cash_after_minor": 391600,
+            "cash_floor_minor": 350000,
+            "protected_orders": 5,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 4200,
+            "protected_revenue_minor": 137800,
+            "weighted_risk_minor": 4200,
+            "status": "partial",
+            "score": [
+              4200,
+              1,
+              18400
+            ],
+            "candidate_id": "option-4",
+            "protected_revenue_delta_minor": 29200
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 5600
+              },
+              {
+                "id": "O-HB-C",
+                "supplier": "Harbor Supply",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 600,
+                "available_packs": 2,
+                "lead_hours": 24,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-407",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 1,
+                "units": 25,
+                "cost_minor": 600
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 175,
+                "short_units": 25,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 800,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 25,
+                    "arrival_hours": 24
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 17800,
+            "budget_minor": 22500,
+            "cash_after_minor": 392200,
+            "cash_floor_minor": 350000,
+            "protected_orders": 4,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 5000,
+            "protected_revenue_minor": 137000,
+            "weighted_risk_minor": 5000,
+            "status": "partial",
+            "score": [
+              5000,
+              2,
+              17800
+            ],
+            "candidate_id": "option-5",
+            "protected_revenue_delta_minor": 28400
+          },
+          {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 40,
+                "cost_minor": 5600
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 100,
+                "short_units": 20,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 4200,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 150,
+                "short_units": 50,
+                "status": "at-risk",
+                "revenue_at_risk_minor": 1600,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 17200,
+            "budget_minor": 22500,
+            "cash_after_minor": 392800,
+            "cash_floor_minor": 350000,
+            "protected_orders": 4,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 5800,
+            "protected_revenue_minor": 136200,
+            "weighted_risk_minor": 5800,
+            "status": "partial",
+            "score": [
+              5800,
+              2,
+              17200
+            ],
+            "candidate_id": "option-6",
+            "protected_revenue_delta_minor": 27600
+          }
+        ],
+        "combinations_tested": 60,
+        "minimum_full_recovery_minor": 21200,
+        "budget_gap_minor": 0
+      },
+      "operator_brief": "All necessary prerequisites are complete for the next stage.",
+      "memory_scope": "a548fbf4c9de8197a3f3be2a14c00436f45df79858462c92e0c3494ed532b02d",
+      "attempts": [
+        {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Summit FILTER packs to meet SO-2041 deadline",
+            "diagnosis": [
+              "SO-2041 needs 80 FILTER-01 units due in 12h; only 20 on hand + 80 verified inbound = 100 available.",
+              "No other SKU has deficit; all demand covered by on_hand + verified_inbound."
+            ],
+            "tradeoffs": [
+              "Purchasing 2 packs (40 units) from O-SM-F costs 12600 minor and arrives in 6h, covering SO-2041 with buffer.",
+              "Alternative O-HB-F costs more (11600 for 2 packs) but arrives later (18h); O-NL-F too slow (36h lead)."
+            ],
+            "next_steps": [
+              "Confirm receipt of 40 FILTER-01 units from Summit Industrial within 6 hours.",
+              "Allocate 80 units to SO-2041 (Forma Facilities) for Brooklyn delivery by 12h deadline.",
+              "Monitor inventory for GLOVE-02 and CUP-03; no action needed as demand fully covered."
+            ]
+          },
+          "valid": true,
+          "violations": [],
+          "improvement_requested": true
+        },
+        {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-HB-F",
+                "packs": 4
+              },
+              {
+                "offer_id": "O-HB-G",
+                "packs": 3
+              },
+              {
+                "offer_id": "O-HB-C",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Harbor Supply packs to cover all deficits",
+            "diagnosis": [
+              "FILTER-01 short 40 units; GLOVE-02 short 60; CUP-03 short 50.",
+              "All deficits can be met with Harbor Supply offers within lead times."
+            ],
+            "tradeoffs": [
+              "Cost 21200 minor uses most of recovery budget but leaves 1300 minor buffer.",
+              "Choosing Harbor over Summit reduces cost and lead time for FILTER and GLOVE."
+            ],
+            "next_steps": [
+              "Place purchase orders for 4 packs FILTER, 3 packs GLOVE, 2 packs CUPS with Harbor Supply.",
+              "Receive shipments: FILTER in 18h, GLOVE in 12h, CUPS in 24h.",
+              "Allocate stock to meet each order before its deadline and confirm fulfillment."
+            ]
+          },
+          "valid": true,
+          "violations": []
+        }
+      ],
+      "plan_quality": "best_checked",
+      "recalled_memory_id": null,
+      "source_info": {
+        "backend": "zetaris",
+        "synthetic": true,
+        "read_at": "2026-10-27T08:42:39.613351+00:00",
+        "source_run_id": "7acdbb9f0cf543709720cd284dbf89fb",
+        "tables": {
+          "customer_orders": "UNITSHIFT_DEMAND.customer_orders",
+          "inventory": "UNITSHIFT_STOCK.inventory",
+          "supplier_offers": "UNITSHIFT_MARKET.supplier_offers",
+          "operating_policy": "UNITSHIFT_POLICY.operating_policy"
+        },
+        "semantic_view": "unitshift_control.customer_promises"
+      },
+      "elapsed_s": 13.13
+    },
+    "receipts": [
+      {
+        "at": "2026-10-27T08:42:39.908359+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "operations_snapshot",
+        "details": {
+          "context_hash": "43721baeead36466aac1a22d6056bf67c26fee06bd135a40db14d593532ba07d",
+          "source_run_id": "7acdbb9f0cf543709720cd284dbf89fb",
+          "scenario_overrides": {
+            "budget_minor": 22500,
+            "inbound_units": 80,
+            "disabled_suppliers": []
+          }
+        },
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "de365767003b051c5cf6bb738079e69faef88d10bb0350e74744c1542e972521"
+      },
+      {
+        "at": "2026-10-27T08:42:42.075485+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "model_call",
+        "details": {
+          "provider": "nebius",
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+          "routing": {},
+          "elapsed_s": 2.166,
+          "thinking": false,
+          "usage": {
+            "completion_tokens": 305,
+            "prompt_tokens": 2133,
+            "total_tokens": 2438,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "created_cache_tokens": 0,
+              "multimodal_tokens": null
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 2133
+          },
+          "input_hash": "2e4122cd3a4fafa44d35d7824161ac1fb05541c7f56d30a1e9c2ac374f32258c",
+          "output_hash": "a98a1240865b67ed0af08767df1d27ced2f645d3a612b7ae0d9f46784dcb7694",
+          "response_id": "chatcmpl-48ae43cfa4a5efd70976918949ef28ce"
+        },
+        "previous_hash": "de365767003b051c5cf6bb738079e69faef88d10bb0350e74744c1542e972521",
+        "hash": "9139914a7bb8489acffe904187499fe3a5a61b636d3dd05b5b1d064aa6c22ae4"
+      },
+      {
+        "at": "2026-10-27T08:42:42.076185+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "planner_verification_feedback",
+        "details": {
+          "proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-SM-F",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Summit FILTER packs to meet SO-2041 deadline",
+            "diagnosis": [
+              "SO-2041 needs 80 FILTER-01 units due in 12h; only 20 on hand + 80 verified inbound = 100 available.",
+              "No other SKU has deficit; all demand covered by on_hand + verified_inbound."
+            ],
+            "tradeoffs": [
+              "Purchasing 2 packs (40 units) from O-SM-F costs 12600 minor and arrives in 6h, covering SO-2041 with buffer.",
+              "Alternative O-HB-F costs more (11600 for 2 packs) but arrives later (18h); O-NL-F too slow (36h lead)."
+            ],
+            "next_steps": [
+              "Confirm receipt of 40 FILTER-01 units from Summit Industrial within 6 hours.",
+              "Allocate 80 units to SO-2041 (Forma Facilities) for Brooklyn delivery by 12h deadline.",
+              "Monitor inventory for GLOVE-02 and CUP-03; no action needed as demand fully covered."
+            ]
+          },
+          "valid": true,
+          "violations": [],
+          "improvement_requested": true
+        },
+        "previous_hash": "9139914a7bb8489acffe904187499fe3a5a61b636d3dd05b5b1d064aa6c22ae4",
+        "hash": "3772564423802658c5cdee75cfc32c447bab368bd880f49c27f3d21b6ad9fa9b"
+      },
+      {
+        "at": "2026-10-27T08:42:51.333592+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "model_call",
+        "details": {
+          "provider": "nebius",
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+          "routing": {},
+          "elapsed_s": 9.256,
+          "thinking": true,
+          "usage": {
+            "completion_tokens": 1423,
+            "prompt_tokens": 3716,
+            "total_tokens": 5139,
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 1147,
+              "rejected_prediction_tokens": null
+            },
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 2112,
+              "created_cache_tokens": 0,
+              "multimodal_tokens": null
+            },
+            "prompt_cache_hit_tokens": 2112,
+            "prompt_cache_miss_tokens": 1604
+          },
+          "input_hash": "e5e766a8b0940f2914fd46896ddaa61611cada1bcf99c17edb0a2e3a00a9a962",
+          "output_hash": "404b2df1877d566f14eba4b456ac094a3d20f832cda784dc4599b34bc046012c",
+          "response_id": "chatcmpl-aff9402c77d3df23e5ef0820e19e4639"
+        },
+        "previous_hash": "3772564423802658c5cdee75cfc32c447bab368bd880f49c27f3d21b6ad9fa9b",
+        "hash": "d3e5e78465c04eef8eb41a9c4de2f73ca4a13fc1ad3c4de2e5385c5e26033667"
+      },
+      {
+        "at": "2026-10-27T08:42:51.334476+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "recovery_plan_verified",
+        "details": {
+          "model_proposal": {
+            "purchases": [
+              {
+                "offer_id": "O-HB-F",
+                "packs": 4
+              },
+              {
+                "offer_id": "O-HB-G",
+                "packs": 3
+              },
+              {
+                "offer_id": "O-HB-C",
+                "packs": 2
+              }
+            ],
+            "headline": "Buy Harbor Supply packs to cover all deficits",
+            "diagnosis": [
+              "FILTER-01 short 40 units; GLOVE-02 short 60; CUP-03 short 50.",
+              "All deficits can be met with Harbor Supply offers within lead times."
+            ],
+            "tradeoffs": [
+              "Cost 21200 minor uses most of recovery budget but leaves 1300 minor buffer.",
+              "Choosing Harbor over Summit reduces cost and lead time for FILTER and GLOVE."
+            ],
+            "next_steps": [
+              "Place purchase orders for 4 packs FILTER, 3 packs GLOVE, 2 packs CUPS with Harbor Supply.",
+              "Receive shipments: FILTER in 18h, GLOVE in 12h, CUPS in 24h.",
+              "Allocate stock to meet each order before its deadline and confirm fulfillment."
+            ]
+          },
+          "simulation": {
+            "valid": true,
+            "violations": [],
+            "purchases": [
+              {
+                "id": "O-HB-F",
+                "supplier": "Harbor Supply",
+                "sku": "FILTER-01",
+                "pack_units": 10,
+                "pack_price_minor": 2900,
+                "available_packs": 4,
+                "lead_hours": 18,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-402",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 4,
+                "units": 40,
+                "cost_minor": 11600
+              },
+              {
+                "id": "O-HB-G",
+                "supplier": "Harbor Supply",
+                "sku": "GLOVE-02",
+                "pack_units": 20,
+                "pack_price_minor": 2800,
+                "available_packs": 3,
+                "lead_hours": 12,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-404",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 3,
+                "units": 60,
+                "cost_minor": 8400
+              },
+              {
+                "id": "O-HB-C",
+                "supplier": "Harbor Supply",
+                "sku": "CUP-03",
+                "pack_units": 25,
+                "pack_price_minor": 600,
+                "available_packs": 2,
+                "lead_hours": 24,
+                "region": "Hoboken, NJ",
+                "terms": "Prepaid",
+                "quote_ref": "Q-407",
+                "on_time_shipments": 28,
+                "total_shipments": 30,
+                "packs": 2,
+                "units": 50,
+                "cost_minor": 1200
+              }
+            ],
+            "orders": [
+              {
+                "id": "SO-2041",
+                "customer": "Forma Facilities",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 80,
+                "due_hours": 12,
+                "unit_revenue_minor": 480,
+                "priority": "Critical",
+                "destination": "Brooklyn",
+                "fulfilled_units": 80,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 80,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2043",
+                "customer": "Eastline Supply",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 160,
+                "due_hours": 18,
+                "unit_revenue_minor": 210,
+                "priority": "High",
+                "destination": "Jersey City",
+                "fulfilled_units": 160,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 160,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2042",
+                "customer": "Common Ground",
+                "sku": "FILTER-01",
+                "product": "Flow filters",
+                "quantity": 60,
+                "due_hours": 24,
+                "unit_revenue_minor": 480,
+                "priority": "High",
+                "destination": "Queens",
+                "fulfilled_units": 60,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 20,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 40,
+                    "arrival_hours": 18
+                  }
+                ]
+              },
+              {
+                "id": "SO-2045",
+                "customer": "Sunday Coffee",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 300,
+                "due_hours": 24,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Brooklyn",
+                "fulfilled_units": 300,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 300,
+                    "arrival_hours": 0
+                  }
+                ]
+              },
+              {
+                "id": "SO-2044",
+                "customer": "Fieldwork Studio",
+                "sku": "GLOVE-02",
+                "product": "Work gloves",
+                "quantity": 120,
+                "due_hours": 30,
+                "unit_revenue_minor": 210,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 120,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 60,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 60,
+                    "arrival_hours": 12
+                  }
+                ]
+              },
+              {
+                "id": "SO-2046",
+                "customer": "Gather Collective",
+                "sku": "CUP-03",
+                "product": "Compostable cups",
+                "quantity": 200,
+                "due_hours": 48,
+                "unit_revenue_minor": 32,
+                "priority": "Standard",
+                "destination": "Manhattan",
+                "fulfilled_units": 200,
+                "short_units": 0,
+                "status": "protected",
+                "revenue_at_risk_minor": 0,
+                "allocations": [
+                  {
+                    "source": "Verified warehouse stock",
+                    "units": 150,
+                    "arrival_hours": 0
+                  },
+                  {
+                    "source": "Harbor Supply",
+                    "units": 50,
+                    "arrival_hours": 24
+                  }
+                ]
+              }
+            ],
+            "cost_minor": 21200,
+            "budget_minor": 22500,
+            "cash_after_minor": 388800,
+            "cash_floor_minor": 350000,
+            "protected_orders": 6,
+            "total_orders": 6,
+            "revenue_at_risk_minor": 0,
+            "protected_revenue_minor": 142000,
+            "weighted_risk_minor": 0,
+            "status": "ready",
+            "score": [
+              0,
+              0,
+              21200
+            ]
+          },
+          "combinations_tested": 60
+        },
+        "previous_hash": "d3e5e78465c04eef8eb41a9c4de2f73ca4a13fc1ad3c4de2e5385c5e26033667",
+        "hash": "1ae849d8b681e691f9aae5641f125c7a9d56cdf7a755fe943a17d44a0a61e421"
+      },
+      {
+        "at": "2026-10-27T08:42:52.746149+00:00",
+        "run_id": "d50be3ea245748cfb09e39b54b891fdb",
+        "kind": "model_call",
+        "details": {
+          "provider": "nightshift",
+          "model": "meterless/auto",
+          "effective_model": "nvidia/nemotron-3.5-bolt-e4b",
+          "routing": {
+            "receipt_id": "rcpt_req_a8t7g08v",
+            "decision_id": "req_a8t7g08v",
+            "routed_model": "nvidia/nemotron-3.5-bolt-e4b",
+            "winning_route": {
+              "model": "nvidia/nemotron-3.5-bolt-e4b",
+              "label": "Nemotron 3.5 Bolt E4B",
+              "provider": "nvidia",
+              "kind": "cloud",
+              "tier": "A"
+            }
+          },
+          "elapsed_s": 1.41,
+          "thinking": null,
+          "usage": {
+            "prompt_tokens": 138,
+            "completion_tokens": 28,
+            "total_tokens": 166
+          },
+          "input_hash": "9f5cfa0d933d2667c32334f57ca3887d01d27e17540fde44048902285fb2d74c",
+          "output_hash": "c734772451695358a845635b30de0b2b25e9c3ab20a7944329744fc3ac5496d9",
+          "response_id": "chatcmpl-e88260e4-7784-41dd-ba1d-ea14e4427467"
+        },
+        "previous_hash": "1ae849d8b681e691f9aae5641f125c7a9d56cdf7a755fe943a17d44a0a61e421",
+        "hash": "09fa16ddd34bfd08d4a7b2bc5760a77bc8a98e37d24efaca76df5f9c183100a8"
+      }
+    ]
+  }
+]

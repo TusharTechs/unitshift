@@ -1,0 +1,66 @@
+{
+  "bucket": "zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf",
+  "prefix": "unitshift/v1",
+  "sources": {
+    "purchase_orders": {
+      "database": "UNITSHIFT_PURCHASE",
+      "table": "orders",
+      "format": "CSV",
+      "filename": "purchase_orders.csv",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/purchase_orders.csv"
+    },
+    "invoices": {
+      "database": "UNITSHIFT_INVOICE",
+      "table": "invoice_lines",
+      "format": "JSON",
+      "filename": "invoices.json",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/invoices.json"
+    },
+    "receiving": {
+      "database": "UNITSHIFT_RECEIVING",
+      "table": "receipts",
+      "format": "JSON",
+      "filename": "receiving.json",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/receiving.json"
+    },
+    "customer_orders": {
+      "database": "UNITSHIFT_DEMAND",
+      "table": "customer_orders",
+      "format": "CSV",
+      "filename": "customer_orders.csv",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/customer_orders.csv"
+    },
+    "inventory": {
+      "database": "UNITSHIFT_STOCK",
+      "table": "inventory",
+      "format": "JSON",
+      "filename": "inventory.json",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/inventory.json"
+    },
+    "supplier_offers": {
+      "database": "UNITSHIFT_MARKET",
+      "table": "supplier_offers",
+      "format": "JSON",
+      "filename": "supplier_offers.json",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/supplier_offers.json"
+    },
+    "operating_policy": {
+      "database": "UNITSHIFT_POLICY",
+      "table": "operating_policy",
+      "format": "JSON",
+      "filename": "operating_policy.json",
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/operating_policy.json"
+    }
+  },
+  "synthetic": true,
+  "expected_row_counts": {
+    "purchase_orders": 18,
+    "invoices": 19,
+    "receiving": 20,
+    "customer_orders": 6,
+    "inventory": 3,
+    "supplier_offers": 8,
+    "operating_policy": 1
+  },
+  "session_expires_at": "2026-10-28T17:44:50+00:00"
+}

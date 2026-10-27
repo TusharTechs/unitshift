@@ -1,0 +1,7 @@
+case_id,record_json
+operations,"{""id"":""SO-2041"",""customer"":""Forma Facilities"",""sku"":""FILTER-01"",""product"":""Flow filters"",""quantity"":80,""due_hours"":12,""unit_revenue_minor"":480,""priority"":""Critical"",""destination"":""Brooklyn""}"
+operations,"{""id"":""SO-2042"",""customer"":""Common Ground"",""sku"":""FILTER-01"",""product"":""Flow filters"",""quantity"":60,""due_hours"":24,""unit_revenue_minor"":480,""priority"":""High"",""destination"":""Queens""}"
+operations,"{""id"":""SO-2043"",""customer"":""Eastline Supply"",""sku"":""GLOVE-02"",""product"":""Work gloves"",""quantity"":160,""due_hours"":18,""unit_revenue_minor"":210,""priority"":""High"",""destination"":""Jersey City""}"
+operations,"{""id"":""SO-2044"",""customer"":""Fieldwork Studio"",""sku"":""GLOVE-02"",""product"":""Work gloves"",""quantity"":120,""due_hours"":30,""unit_revenue_minor"":210,""priority"":""Standard"",""destination"":""Manhattan""}"
+operations,"{""id"":""SO-2045"",""customer"":""Sunday Coffee"",""sku"":""CUP-03"",""product"":""Compostable cups"",""quantity"":300,""due_hours"":24,""unit_revenue_minor"":32,""priority"":""Standard"",""destination"":""Brooklyn""}"
+operations,"{""id"":""SO-2046"",""customer"":""Gather Collective"",""sku"":""CUP-03"",""product"":""Compostable cups"",""quantity"":200,""due_hours"":48,""unit_revenue_minor"":32,""priority"":""Standard"",""destination"":""Manhattan""}"

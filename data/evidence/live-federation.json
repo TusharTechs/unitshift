@@ -1,0 +1,511 @@
+{
+  "synthetic": true,
+  "run": {
+    "run_id": "2388e91a74354555981d5398a001e679",
+    "case_id": "join-fanout",
+    "title": "The duplicated payable",
+    "mode": "agent",
+    "method": "nemotron-evidence-contract",
+    "data_source": "Zetaris \u00b7 private S3 synthetic exports",
+    "source_info": {
+      "label": "Zetaris \u00b7 private S3 synthetic exports",
+      "backend": "zetaris",
+      "tables": {
+        "purchase_orders": "UNITSHIFT_PURCHASE.orders",
+        "invoices": "UNITSHIFT_INVOICE.invoice_lines",
+        "receiving": "UNITSHIFT_RECEIVING.receipts"
+      },
+      "storage": {
+        "purchase_orders": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/purchase_orders.csv",
+        "invoices": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/invoices.json",
+        "receiving": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/receiving.json"
+      }
+    },
+    "federation": {
+      "query": "SELECT COUNT(*) AS joined_rows,\n       SUM(CAST(get_json_object(i.record_json, '$.billed_qty') AS DECIMAL(18,4)) *\n           CAST(get_json_object(i.record_json, '$.rate_minor_per_billed_uom') AS DECIMAL(18,4))) AS naive_payable_minor\nFROM UNITSHIFT_INVOICE.invoice_lines i\nJOIN UNITSHIFT_RECEIVING.receipts r\n  ON i.case_id = r.case_id\n AND get_json_object(i.record_json, '$.order_ref') = get_json_object(r.record_json, '$.po_number')\nWHERE i.case_id = 'join-fanout'",
+      "rows": [
+        {
+          "joined_rows": "2",
+          "naive_payable_minor": "60000.00000000"
+        }
+      ],
+      "purpose": "Diagnostic of a deliberately unsafe join, not an approved payable."
+    },
+    "supplier": "Northline Supplies",
+    "revision": "catalog-2026-10-v1",
+    "scope": "7802958ccc1aae3a0e8e2b7a83d01de41a62c0c729f1739813baecffc596254b",
+    "contract": {
+      "fields": {
+        "purchase_orders": {
+          "id": "order_line",
+          "po": "purchase_order",
+          "sku": "internal_part",
+          "alias": "vendor_part",
+          "quantity": "ordered_qty",
+          "unit": "order_uom",
+          "pack": "items_per_carton",
+          "price": "cost_minor_per_item",
+          "currency": "iso_currency"
+        },
+        "invoices": {
+          "id": "bill_line",
+          "po": "order_ref",
+          "sku": "supplier_part",
+          "quantity": "billed_qty",
+          "unit": "billed_uom",
+          "price": "rate_minor_per_billed_uom",
+          "currency": "currency_code"
+        },
+        "receiving": {
+          "id": "receipt_line",
+          "po": "po_number",
+          "sku": "warehouse_part",
+          "quantity": "received_qty",
+          "unit": "stock_uom"
+        }
+      },
+      "unit_dictionary": {
+        "CS": "pack",
+        "EA": "each"
+      },
+      "evidence": [
+        "PO row shows order_line='POL-1' as line identifier, purchase_order='PO-2048', internal_part='FILTER-01', vendor_part='NL-FLT-12'.",
+        "Invoice row links to same PO via order_ref='PO-2048' and supplier_part='NL-FLT-12', confirming PO\u2011invoice join on vendor_part \u2194 supplier_part.",
+        "Receiving rows GRN-1 and GRN-2 both reference po_number='PO-2048' and warehouse_part='FILTER-01', showing receipt\u2011to\u2011PO match."
+      ]
+    },
+    "plan": {
+      "hypotheses": [
+        "Purchase order quantity may be expressed in packs (CS) with items_per_carton indicating pack size, or quantity may be in eaches and items_per_carton is redundant.",
+        "Invoice billed quantity in EA could be interpreted as eaches or as packs if the unit dictionary mapping is misapplied.",
+        "Joining purchase orders to invoices depends on matching vendor_part to supplier_part; it is unclear whether these are exact equivalents or require transformation."
+      ],
+      "reads": [
+        "purchase_orders",
+        "invoices",
+        "receiving"
+      ],
+      "summary": "Reading all sources fully is necessary to disambiguate unit/pack semantics and confirm the key mappings needed to join purchase orders, invoices, and receiving records."
+    },
+    "result": {
+      "status": "supported",
+      "payable_minor": "30000",
+      "currency": "USD",
+      "lines": [
+        {
+          "id": "INV-101:L1",
+          "sku": "NL-FLT-12",
+          "status": "supported",
+          "claimed_minor": "30000",
+          "supported_minor": "30000",
+          "issues": [],
+          "checks": [
+            "Unique invoice / order / delivery IDs",
+            "Exact product and order match",
+            "Source-backed unit conversion",
+            "Cumulative quantity within order and deliveries",
+            "Exact currency and minor-unit arithmetic",
+            "Invoice counted once, deliveries aggregated separately"
+          ],
+          "currency": "USD",
+          "normalised_items": "120",
+          "authorised_items": "120",
+          "received_items": "120",
+          "receipt_ids": [
+            "GRN-1",
+            "GRN-2"
+          ],
+          "po_line": "POL-1"
+        }
+      ],
+      "issues": [],
+      "checks": [
+        "Decimal arithmetic",
+        "Read-only review; no payment executed"
+      ],
+      "source_hash": "e58f1035845fbc1cd9b46837741c3fc11b012775f7b6a19cab6ae9e94a4b4d08",
+      "contract_hash": "78a70d7dfcfc9871cce413281b88f1b2b62ff88034185306d5c0c35008eade35"
+    },
+    "baseline": {
+      "payable_minor": "60000",
+      "quantity_ratio": "12",
+      "joined_rows": 2,
+      "warning": "Quantities use different units and joined rows may repeat the invoice. This is a weak baseline, not a production matcher."
+    },
+    "memory": {
+      "stale_count": 0
+    },
+    "reused_memory_id": null,
+    "elapsed_s": 21.63,
+    "source_data": {
+      "supplier": "Northline Supplies",
+      "revision": "catalog-2026-10-v1",
+      "unit_dictionary": {
+        "CS": "pack",
+        "EA": "each"
+      },
+      "sources": {
+        "purchase_orders": [
+          {
+            "order_line": "POL-1",
+            "purchase_order": "PO-2048",
+            "internal_part": "FILTER-01",
+            "vendor_part": "NL-FLT-12",
+            "ordered_qty": "10",
+            "order_uom": "CS",
+            "items_per_carton": "12",
+            "cost_minor_per_item": "250",
+            "iso_currency": "USD"
+          }
+        ],
+        "invoices": [
+          {
+            "bill_line": "INV-101:L1",
+            "order_ref": "PO-2048",
+            "supplier_part": "NL-FLT-12",
+            "billed_qty": "120",
+            "billed_uom": "EA",
+            "rate_minor_per_billed_uom": "250",
+            "currency_code": "USD"
+          }
+        ],
+        "receiving": [
+          {
+            "receipt_line": "GRN-1",
+            "po_number": "PO-2048",
+            "warehouse_part": "FILTER-01",
+            "received_qty": "60",
+            "stock_uom": "EA"
+          },
+          {
+            "receipt_line": "GRN-2",
+            "po_number": "PO-2048",
+            "warehouse_part": "FILTER-01",
+            "received_qty": "60",
+            "stock_uom": "EA"
+          }
+        ]
+      },
+      "source_context": {
+        "backend": "zetaris",
+        "tables": {
+          "purchase_orders": "UNITSHIFT_PURCHASE.orders",
+          "invoices": "UNITSHIFT_INVOICE.invoice_lines",
+          "receiving": "UNITSHIFT_RECEIVING.receipts"
+        },
+        "prefix": "unitshift/v1"
+      }
+    },
+    "operator_brief": {
+      "text": "1. The payment review status is supported.\n2. The main evidence is that all required checks passed with no issues reported.",
+      "provider": "Nightshift",
+      "status": "generated"
+    }
+  },
+  "receipts": [
+    {
+      "at": "2026-10-27T05:48:46.985785+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT record_json FROM UNITSHIFT_PURCHASE.orders WHERE case_id = 'join-fanout' LIMIT 1000",
+        "result_hash": "b6a192c44d33c180264b33b39e76aed63500a4e0b93d46e82717d8f110081ca9"
+      },
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "cd54f067c1855422e035619736b842fd89d51cc76771468fa78dcab52d9de17e"
+    },
+    {
+      "at": "2026-10-27T05:48:48.797163+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT record_json FROM UNITSHIFT_INVOICE.invoice_lines WHERE case_id = 'join-fanout' LIMIT 1000",
+        "result_hash": "fd310cab240f180fab251e6d48dc828b25da26b577c3a4fe0b7ef32fc8d9442c"
+      },
+      "previous_hash": "cd54f067c1855422e035619736b842fd89d51cc76771468fa78dcab52d9de17e",
+      "hash": "eb92406ef755d97a7188de6a3a71056243cbf8c4921ad2b231181e8211543d3a"
+    },
+    {
+      "at": "2026-10-27T05:48:50.998969+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT record_json FROM UNITSHIFT_RECEIVING.receipts WHERE case_id = 'join-fanout' LIMIT 1000",
+        "result_hash": "a6e3f1af25293f3c131a1ce1e841f5a2a30e56a74990bfedfb42b3e8a9de1d24"
+      },
+      "previous_hash": "eb92406ef755d97a7188de6a3a71056243cbf8c4921ad2b231181e8211543d3a",
+      "hash": "0a020929dc0ec87acf8d066a9a8bc43cae655ca10350805388c288a91695edca"
+    },
+    {
+      "at": "2026-10-27T05:48:51.002577+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "run_started",
+      "details": {
+        "case": "join-fanout",
+        "mode": "agent",
+        "data_source": {
+          "label": "Zetaris \u00b7 private S3 synthetic exports",
+          "backend": "zetaris",
+          "tables": {
+            "purchase_orders": "UNITSHIFT_PURCHASE.orders",
+            "invoices": "UNITSHIFT_INVOICE.invoice_lines",
+            "receiving": "UNITSHIFT_RECEIVING.receipts"
+          },
+          "storage": {
+            "purchase_orders": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/purchase_orders.csv",
+            "invoices": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/invoices.json",
+            "receiving": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/receiving.json"
+          }
+        },
+        "data_hash": "e58f1035845fbc1cd9b46837741c3fc11b012775f7b6a19cab6ae9e94a4b4d08"
+      },
+      "previous_hash": "0a020929dc0ec87acf8d066a9a8bc43cae655ca10350805388c288a91695edca",
+      "hash": "986e06416f8e3a07dbac71a0176169107c000c642de9a3a4d13248652602f6ab"
+    },
+    {
+      "at": "2026-10-27T05:48:55.167638+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS joined_rows,\n       SUM(CAST(get_json_object(i.record_json, '$.billed_qty') AS DECIMAL(18,4)) *\n           CAST(get_json_object(i.record_json, '$.rate_minor_per_billed_uom') AS DECIMAL(18,4))) AS naive_payable_minor\nFROM UNITSHIFT_INVOICE.invoice_lines i\nJOIN UNITSHIFT_RECEIVING.receipts r\n  ON i.case_id = r.case_id\n AND get_json_object(i.record_json, '$.order_ref') = get_json_object(r.record_json, '$.po_number')\nWHERE i.case_id = 'join-fanout'",
+        "result_hash": "13ab1247330af6e251f23bfa3d5dc7b5d1ef245c932e5573cff012910fd3316b"
+      },
+      "previous_hash": "986e06416f8e3a07dbac71a0176169107c000c642de9a3a4d13248652602f6ab",
+      "hash": "0c0c22337fa0833ba7ac451e606000fe8d372c70aa649ec65e5b7b74d97716d0"
+    },
+    {
+      "at": "2026-10-27T05:49:01.563498+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "model_call",
+      "details": {
+        "provider": "nebius",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+        "routing": {},
+        "elapsed_s": 6.395,
+        "usage": {
+          "completion_tokens": 1299,
+          "prompt_tokens": 808,
+          "total_tokens": 2107,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1129,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 808
+        },
+        "input_hash": "88e7d0b680cb82b7768b88ceebe94b58c25f9342996bf0ff65f35dee2a78315f",
+        "output_hash": "227a4b75b056c9a23ada36de195dd229c74ee05cc3739579efedea6114829b53",
+        "response_id": "chatcmpl-359c76882e417f87e2a4785591517b0f"
+      },
+      "previous_hash": "0c0c22337fa0833ba7ac451e606000fe8d372c70aa649ec65e5b7b74d97716d0",
+      "hash": "e7e52b1e48291277e797f486baff1eca2abfdd9fe3fb75c630fa057cb204b4b2"
+    },
+    {
+      "at": "2026-10-27T05:49:01.564063+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "evidence_read",
+      "details": {
+        "sources": [
+          "purchase_orders",
+          "invoices",
+          "receiving"
+        ],
+        "row_counts": {
+          "purchase_orders": 1,
+          "invoices": 1,
+          "receiving": 2
+        },
+        "evidence_hash": "c8ba2c24affdd03dcd5d7d94a04a435d17e726fc5dd4404b5b7866805ffc389f"
+      },
+      "previous_hash": "e7e52b1e48291277e797f486baff1eca2abfdd9fe3fb75c630fa057cb204b4b2",
+      "hash": "46bc5f587715c3e4b8f13936a6c73fc778cadb1b66cba4e1a37ad86f978dbbbd"
+    },
+    {
+      "at": "2026-10-27T05:49:06.007445+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "model_call",
+      "details": {
+        "provider": "nebius",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+        "routing": {},
+        "elapsed_s": 4.443,
+        "usage": {
+          "completion_tokens": 852,
+          "prompt_tokens": 1449,
+          "total_tokens": 2301,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 460,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1449
+        },
+        "input_hash": "3e3ca5e933492800ba241824f55a601e562acb4d335085fb6545c287854e8c47",
+        "output_hash": "ff18c52df71400f9f36a81856a8389bff3186b4c54200690335da766b0a8adc8",
+        "response_id": "chatcmpl-82520cf4888f2e3251767d636792f553"
+      },
+      "previous_hash": "46bc5f587715c3e4b8f13936a6c73fc778cadb1b66cba4e1a37ad86f978dbbbd",
+      "hash": "862c901126c5a0ff657e8f62aba405ca5a8d14c70a8e3fc5d2fecc9366bef7fd"
+    },
+    {
+      "at": "2026-10-27T05:49:06.008135+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "semantic_contract",
+      "details": {
+        "contract": {
+          "fields": {
+            "purchase_orders": {
+              "id": "order_line",
+              "po": "purchase_order",
+              "sku": "internal_part",
+              "alias": "vendor_part",
+              "quantity": "ordered_qty",
+              "unit": "order_uom",
+              "pack": "items_per_carton",
+              "price": "cost_minor_per_item",
+              "currency": "iso_currency"
+            },
+            "invoices": {
+              "id": "bill_line",
+              "po": "order_ref",
+              "sku": "supplier_part",
+              "quantity": "billed_qty",
+              "unit": "billed_uom",
+              "price": "rate_minor_per_billed_uom",
+              "currency": "currency_code"
+            },
+            "receiving": {
+              "id": "receipt_line",
+              "po": "po_number",
+              "sku": "warehouse_part",
+              "quantity": "received_qty",
+              "unit": "stock_uom"
+            }
+          },
+          "unit_dictionary": {
+            "CS": "pack",
+            "EA": "each"
+          },
+          "evidence": [
+            "PO row shows order_line='POL-1' as line identifier, purchase_order='PO-2048', internal_part='FILTER-01', vendor_part='NL-FLT-12'.",
+            "Invoice row links to same PO via order_ref='PO-2048' and supplier_part='NL-FLT-12', confirming PO\u2011invoice join on vendor_part \u2194 supplier_part.",
+            "Receiving rows GRN-1 and GRN-2 both reference po_number='PO-2048' and warehouse_part='FILTER-01', showing receipt\u2011to\u2011PO match."
+          ]
+        },
+        "plan": {
+          "hypotheses": [
+            "Purchase order quantity may be expressed in packs (CS) with items_per_carton indicating pack size, or quantity may be in eaches and items_per_carton is redundant.",
+            "Invoice billed quantity in EA could be interpreted as eaches or as packs if the unit dictionary mapping is misapplied.",
+            "Joining purchase orders to invoices depends on matching vendor_part to supplier_part; it is unclear whether these are exact equivalents or require transformation."
+          ],
+          "reads": [
+            "purchase_orders",
+            "invoices",
+            "receiving"
+          ],
+          "summary": "Reading all sources fully is necessary to disambiguate unit/pack semantics and confirm the key mappings needed to join purchase orders, invoices, and receiving records."
+        }
+      },
+      "previous_hash": "862c901126c5a0ff657e8f62aba405ca5a8d14c70a8e3fc5d2fecc9366bef7fd",
+      "hash": "3fc2aac3c32de74122398f551e993ec3688be4fa173a808219f5ed87c883f863"
+    },
+    {
+      "at": "2026-10-27T05:49:06.008811+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "invariant_result",
+      "details": {
+        "status": "supported",
+        "payable_minor": "30000",
+        "currency": "USD",
+        "lines": [
+          {
+            "id": "INV-101:L1",
+            "sku": "NL-FLT-12",
+            "status": "supported",
+            "claimed_minor": "30000",
+            "supported_minor": "30000",
+            "issues": [],
+            "checks": [
+              "Unique invoice / order / delivery IDs",
+              "Exact product and order match",
+              "Source-backed unit conversion",
+              "Cumulative quantity within order and deliveries",
+              "Exact currency and minor-unit arithmetic",
+              "Invoice counted once, deliveries aggregated separately"
+            ],
+            "currency": "USD",
+            "normalised_items": "120",
+            "authorised_items": "120",
+            "received_items": "120",
+            "receipt_ids": [
+              "GRN-1",
+              "GRN-2"
+            ],
+            "po_line": "POL-1"
+          }
+        ],
+        "issues": [],
+        "checks": [
+          "Decimal arithmetic",
+          "Read-only review; no payment executed"
+        ],
+        "source_hash": "e58f1035845fbc1cd9b46837741c3fc11b012775f7b6a19cab6ae9e94a4b4d08",
+        "contract_hash": "78a70d7dfcfc9871cce413281b88f1b2b62ff88034185306d5c0c35008eade35"
+      },
+      "previous_hash": "3fc2aac3c32de74122398f551e993ec3688be4fa173a808219f5ed87c883f863",
+      "hash": "ed1773396f9e3e9a969301e8e0fe4f6c6d7550b8963c3bb5241b66d5fdf00ae5"
+    },
+    {
+      "at": "2026-10-27T05:49:07.052979+00:00",
+      "run_id": "2388e91a74354555981d5398a001e679",
+      "kind": "model_call",
+      "details": {
+        "provider": "nightshift",
+        "model": "meterless/auto",
+        "effective_model": "nvidia/nemotron-3.5-bolt-e4b",
+        "routing": {
+          "receipt_id": "rcpt_req_pttdui9n",
+          "decision_id": "req_pttdui9n",
+          "routed_model": "nvidia/nemotron-3.5-bolt-e4b",
+          "winning_route": {
+            "model": "nvidia/nemotron-3.5-bolt-e4b",
+            "label": "Nemotron 3.5 Bolt E4B",
+            "provider": "nvidia",
+            "kind": "cloud",
+            "tier": "A"
+          }
+        },
+        "elapsed_s": 1.043,
+        "usage": {
+          "prompt_tokens": 453,
+          "completion_tokens": 27,
+          "total_tokens": 480
+        },
+        "input_hash": "48b8bafcc7035917870def423a88840d9c2a5f3209bd77c30272e25aabb364bc",
+        "output_hash": "898ba8aa5b0bf7303e796d026f86219ac3acbbeda50362c9d9da912f731a371f",
+        "response_id": "chatcmpl-a2906e58-a6eb-4b03-95a1-74ac3b58c84a"
+      },
+      "previous_hash": "ed1773396f9e3e9a969301e8e0fe4f6c6d7550b8963c3bb5241b66d5fdf00ae5",
+      "hash": "2f5ac3e9868d3bf6848814d7481f404609f96dfd2f205e39ddbf4f6f5a0c59b5"
+    }
+  ],
+  "note": "Recorded genuine Zetaris, Nebius and Nightshift calls over synthetic source exports. Local hash chain, not an independently signed attestation."
+}

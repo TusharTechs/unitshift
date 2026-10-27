@@ -1,0 +1,14 @@
+[
+  {
+    "case_id": "operations",
+    "record_json": "{\"sku\":\"FILTER-01\",\"product\":\"Flow filters\",\"on_hand_units\":20,\"verified_inbound_units\":80,\"expected_inbound_units\":120,\"source_reference\":\"UNITSHIFT_RECEIVING.receipts / short-delivery\",\"warehouse\":\"Northline \\u00b7 NYC\",\"unit_cost_minor\":250}"
+  },
+  {
+    "case_id": "operations",
+    "record_json": "{\"sku\":\"GLOVE-02\",\"product\":\"Work gloves\",\"on_hand_units\":220,\"verified_inbound_units\":0,\"expected_inbound_units\":60,\"source_reference\":\"Warehouse count / cycle-142\",\"warehouse\":\"Northline \\u00b7 NYC\",\"unit_cost_minor\":120}"
+  },
+  {
+    "case_id": "operations",
+    "record_json": "{\"sku\":\"CUP-03\",\"product\":\"Compostable cups\",\"on_hand_units\":450,\"verified_inbound_units\":0,\"expected_inbound_units\":50,\"source_reference\":\"Warehouse count / cycle-142\",\"warehouse\":\"Northline \\u00b7 NYC\",\"unit_cost_minor\":18}"
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "case_id": "operations",
+    "record_json": "{\"id\":\"POLICY-01\",\"workspace\":\"Northline Supply Co.\",\"currency\":\"USD\",\"recovery_budget_minor\":22500,\"cash_balance_minor\":410000,\"cash_floor_minor\":350000,\"revision\":\"operations-2026-10-27-v1\",\"objective\":\"Protect customer quantities by their deadlines, then minimise incremental purchase cost.\",\"execution\":\"Sandbox only. Purchase drafts and customer notes are not sent to external parties.\"}"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "run_id": "8d860e8bf00e46ffbf6806045fd28538",
+  "receipts": [
+    {
+      "at": "2026-10-27T09:03:50.570479+00:00",
+      "run_id": "8d860e8bf00e46ffbf6806045fd28538",
+      "kind": "model_call",
+      "details": {
+        "provider": "nebius",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+        "routing": {},
+        "elapsed_s": 1.249,
+        "thinking": false,
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 426,
+          "total_tokens": 461,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 426
+        },
+        "input_hash": "3dfd486a23bfe176fed3e38c6ca5809b30caa4fce26c1df41295a54e03b6669d",
+        "output_hash": "cf1472f9e466ae226ce5e40c538b4969b1ca3bc0d699f8d6f1ae97aa721c1c1b",
+        "response_id": "chatcmpl-75cb99b792f2db548ed758a3a67f06cf"
+      },
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "4087f96f70387ba60eed46585f8014a9140341753e0b4379257785f9ca7bfadd"
+    },
+    {
+      "at": "2026-10-27T09:03:50.571505+00:00",
+      "run_id": "8d860e8bf00e46ffbf6806045fd28538",
+      "kind": "operations_copilot_tool",
+      "details": {
+        "selection": {
+          "query_type": "deadline_tradeoff",
+          "sku": null,
+          "supplier": null,
+          "order_id": null
+        },
+        "source_run_id": "0cd7cd3e6cae44158e22e7ee73734a12",
+        "answer_hash": "cbb503c28881873cfa04d53518738b06a9ce39f7859556ff0c8ddfa65c39dea5",
+        "numeric_facts_rendered_by_code": true
+      },
+      "previous_hash": "4087f96f70387ba60eed46585f8014a9140341753e0b4379257785f9ca7bfadd",
+      "hash": "69e77023754c3cdf777ca7e282131dd820749a5609b77444fd63926f0336acfc"
+    }
+  ],
+  "note": "Nemotron selected the analytical tool; displayed numeric facts were rendered by code from the actual operational snapshot."
+}
