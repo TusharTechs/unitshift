@@ -23,6 +23,7 @@ jobs:
           python-version: '3.12'
       - run: npm ci
       - run: npm run setup:memory
+      - run: npm run setup:env
       - run: npm test
       - run: npm run setup:public
       - run: npm run check:platform

@@ -2,7 +2,7 @@
 import { spawnSync } from 'node:child_process';
 const explicit = process.env.UNITSHIFT_PYTHON;
 const candidates = explicit ? [[explicit, []]] : process.platform === 'win32'
-  ? [['py', ['-3']], ['python', []], ['python3', []]]
+  ? [['python', []], ['py', ['-3']], ['python3', []]]
   : [['python3', []], ['python', []]];
 let selected;
 for (const [command, prefix] of candidates) {

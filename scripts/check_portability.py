@@ -8,7 +8,10 @@ from app.memory import memory_call
 from app import replay
 with tempfile.TemporaryDirectory(prefix='unitshift source check ') as folder:
  root=Path(folder);file=root/'.state/public/retail.sqlite3';file.parent.mkdir(parents=True)
- with sqlite3.connect(file) as db:db.execute('CREATE TABLE example(value TEXT)');db.execute('INSERT INTO example VALUES (?)',('source ✓',))
+ db=sqlite3.connect(file)
+ try:
+  db.execute('CREATE TABLE example(value TEXT)');db.execute('INSERT INTO example VALUES (?)',('source ✓',));db.commit()
+ finally:db.close()
  with patch.object(replay,'ROOT',root),replay.source_database() as db:
   assert db.execute('SELECT value FROM example').fetchone()[0]=='source ✓'
   try:db.execute("INSERT INTO example VALUES ('must fail')")
