@@ -291,5 +291,6 @@ Original UnitShift code and logo are available under the **[MIT license](LICENSE
 | Captions | **Whisper tiny English through faster-whisper** supplied speech timestamps. Caption text was corrected against the authored narration. |
 | Video and audio production | **Codex-assisted Python and FFmpeg editing** combined actual deployed browser captures with editorial motion graphics. The ambient score and chapter sounds were composed procedurally for the film. |
 | Visual identity | The original **SVG logo and wordmark were authored with Codex assistance**, using the project's U/arrow motif. They are vector assets, not a third-party logo or fabricated product screenshot. |
+| YouTube thumbnail | **Built-in ImageGen** generated the editorial thumbnail using the actual UnitShift interface as a reference. The demo video itself uses actual product captures. |
 
 Cursor was not used. AI-generated explanations are not treated as source truth or authorisation. Historical data, model inferences, policy additions, recorded runs and business hypotheses are labelled separately throughout the project.
