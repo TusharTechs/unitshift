@@ -17,8 +17,8 @@ Built for **Open Agent Hackathon 2026**, Track 1: **Solving Fragmented Intellige
 | What it is for | Link |
 |---|---|
 | Use the deployed product | [Live UnitShift workspace](https://ds59bjv2cezd6.cloudfront.net/) |
-| Watch the narrated demo, 3 minutes 46 seconds | [Play the demo and view the pitch materials](https://ds59bjv2cezd6.cloudfront.net/submission/) |
-| Direct demo video file | [1080p MP4](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-demo.mp4) |
+| Watch the narrated demo, 3 minutes 46 seconds | [Watch on YouTube](https://youtu.be/8uJpq6tlIoI) |
+| View the pitch materials | [Presentation, deck and captions](https://ds59bjv2cezd6.cloudfront.net/submission/) |
 | Read the eight-slide pitch | [PDF deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pdf) |
 | Edit or download the presentation | [PowerPoint deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pptx) |
 | Demo accessibility | [English captions](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-captions.srt) |

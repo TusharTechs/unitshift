@@ -41,5 +41,6 @@
     "configured_secret_matches": 0,
     "scope": "tracked and non-ignored candidate source files"
   },
-  "no_claimed_business_savings": true
+  "no_claimed_business_savings": true,
+  "demo_video_url": "https://youtu.be/8uJpq6tlIoI"
 }
