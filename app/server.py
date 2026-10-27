@@ -1,18 +1,22 @@
 import json
 import re
 import uuid
+import os
+import ipaddress
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse
+from urllib.parse import urlparse,parse_qs
 from .config import ROOT, status
 from .fixtures import cases, get_case
 from .agent import run_review, approve_run
 from .providers import ProviderError, chat, zetaris_query
 from .receipts import load_receipts
 from .sources import load_case_data
+from . import replay
+from .config import config
 from .operations import workspace,plan_recovery,get_plan,approve_plan,toggle_action,ask_operations,interpret_disruption
 
-HOST='127.0.0.1'
-PORT=8787
+HOST=os.environ.get('UNITSHIFT_HOST','127.0.0.1')
+PORT=int(os.environ.get('PORT','8787'))
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
@@ -30,18 +34,36 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('X-Content-Type-Options','nosniff')
         self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'")
         self.end_headers()
-        self.wfile.write(body)
+        if self.command != 'HEAD': self.wfile.write(body)
 
     def local_request(self):
         host=self.headers.get('Host','')
         origin=self.headers.get('Origin')
         allowed={f'127.0.0.1:{PORT}',f'localhost:{PORT}'}
-        return host in allowed and (not origin or origin in {f'http://{h}' for h in allowed})
+        origins={f'http://{h}' for h in allowed}
+        public=config().get('UNITSHIFT_PUBLIC_ORIGIN')
+        if public: origins.add(public.rstrip('/'))
+        return host in allowed and (not origin or origin in origins)
+
+    def do_HEAD(self):
+        self.do_GET()
 
     def do_GET(self):
         if not self.local_request(): return self.send_json({'error':'Local access only.'},403)
         path=urlparse(self.path).path
-        if path=='/api/status': return self.send_json(status())
+        if path=='/healthz': return self.send_json({'status':'ok','product':'UnitShift'})
+        if path.startswith('/api/replay'):
+            try:
+                if path=='/api/replay': return self.send_json(replay.snapshot())
+                if path=='/api/replay/customers': return self.send_json(replay.customer_summary())
+                if path=='/api/replay/ledger':
+                    args=parse_qs(urlparse(self.path).query)
+                    return self.send_json(replay.ledger(args.get('q',[''])[0],args.get('kind',['all'])[0],int(args.get('page',['0'])[0])))
+                if path.startswith('/api/replay/jobs/'): return self.send_json(replay.job_result(path.rsplit('/',1)[-1]))
+                if path.startswith('/api/replay/cases/'): return self.send_json(replay.case_data(path.rsplit('/',1)[-1]))
+                return self.send_json({'error':'Unknown public-data endpoint.'},404)
+            except (ValueError,ProviderError) as error:return self.send_json({'error':str(error)},400)
+        if path=='/api/status' : return self.send_json(status())
         if path=='/api/workspace':
             try: return self.send_json(workspace())
             except (ProviderError,ValueError) as error: return self.send_json({'error':str(error)},400)
@@ -65,7 +87,7 @@ class Handler(BaseHTTPRequestHandler):
             run_id=path.rsplit('/',1)[-1]
             if not re.fullmatch('[a-f0-9]{32}',run_id): return self.send_json({'error':'Invalid run ID.'},400)
             return self.send_json(load_receipts(run_id))
-        files={'/':('index.html','text/html'),'/review':('review.html','text/html'),
+        files={'/':('replay.html','text/html'),'/sandbox':('index.html','text/html'),'/replay.js':('replay.js','text/javascript'),'/replay.css':('replay.css','text/css'),'/review':('review.html','text/html'),
                '/workspace.js':('workspace.js','text/javascript'),'/workspace.css':('workspace.css','text/css'),
                '/app.js':('app.js','text/javascript'),'/style.css':('style.css','text/css')}
         if path in files:
@@ -81,7 +103,18 @@ class Handler(BaseHTTPRequestHandler):
             payload=json.loads(self.rfile.read(length))
             if not isinstance(payload,dict): raise ValueError('Expected an object.')
             path=urlparse(self.path).path
-            if path=='/api/workspace/sync': return self.send_json(workspace(refresh=True))
+            if path.startswith('/api/replay/'):
+                address=(self.headers.get('X-Forwarded-For') or self.client_address[0]).split(',')[-1].strip()
+                try:client=str(ipaddress.ip_address(address))
+                except ValueError:client='unknown'
+                if path=='/api/replay/investigate':return self.send_json(replay.start_job(payload.get('case_id'),client),202)
+                if path=='/api/replay/remember':
+                    replay.public_rate_limit(client)
+                    return self.send_json(replay.remember_check(payload.get('case_id'),payload.get('lesson')))
+                return self.send_json({'error':'Unknown evidence action.'},404)
+            if config().get('UNITSHIFT_PUBLIC_DEMO')=='1':
+                return self.send_json({'error':'The public recovery sandbox is read-only. Run real-data investigations in the Evidence workspace.'},403)
+            if path=='/api/workspace/sync' : return self.send_json(workspace(refresh=True))
             if path=='/api/operations/ask': return self.send_json(ask_operations(payload.get('question'),payload.get('overrides')))
             if path=='/api/operations/interpret': return self.send_json(interpret_disruption(payload.get('text'),payload.get('overrides')))
             if path=='/api/plans': return self.send_json(plan_recovery(payload.get('overrides',{})))
@@ -124,8 +157,9 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json({'error':'Unexpected application error. Check local setup; no fallback result was generated.'},500)
 
 def main():
+    replay.recover_interrupted_jobs()
     server=ThreadingHTTPServer((HOST,PORT),Handler)
-    print(f'UnitShift: http://{HOST}:{PORT} — synthetic data, backend: {status()["data_backend"]}.',flush=True)
+    print(f'UnitShift: http://{HOST}:{PORT} — public historical replay + labelled recovery sandbox, backend: {status()["data_backend"]}.',flush=True)
     server.serve_forever()
 
 if __name__=='__main__': main()

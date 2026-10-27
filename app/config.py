@@ -11,7 +11,7 @@ def config():
             if line.strip() and not line.lstrip().startswith('#') and '=' in line:
                 key, value = line.split('=', 1)
                 values[key.strip()] = value.strip().strip('\"\'')
-    values.update({k: v for k, v in os.environ.items() if k in values})
+    values.update({k: v for k, v in os.environ.items() if k in values or k.startswith(('UNITSHIFT_','ZETARIS_','NEBIUS_','NIGHTSHIFT_')) or k in ('DATA_BACKEND','NEMOTRON_MODEL')})
     return values
 
 def status():

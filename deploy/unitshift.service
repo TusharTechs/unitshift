@@ -1,0 +1,20 @@
+[Unit]
+Description=UnitShift evidence workspace
+After=network-online.target
+Wants=network-online.target
+[Service]
+User=ubuntu
+WorkingDirectory=/opt/unitshift
+Environment=UNITSHIFT_HOST=127.0.0.1
+Environment=PORT=8787
+ExecStart=/usr/bin/python3 -m app.server
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/unitshift/.state
+ProtectHome=true
+[Install]
+WantedBy=multi-user.target

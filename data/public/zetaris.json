@@ -1,0 +1,178 @@
+{
+  "run_id": "30015b8354a246e2b0568e3ead912eb5",
+  "sources": {
+    "lines": {
+      "database": "UNITSHIFT_RETAIL",
+      "table": "lines",
+      "filename": "retail_lines.csv",
+      "count": 541909,
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/public/retail_lines.csv"
+    },
+    "invoices": {
+      "database": "UNITSHIFT_RETAIL",
+      "table": "invoice_summary",
+      "filename": "invoice_summary.csv",
+      "count": 25900,
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/public/invoice_summary.csv"
+    },
+    "products": {
+      "database": "UNITSHIFT_RETAIL",
+      "table": "product_catalog",
+      "filename": "product_catalog.csv",
+      "count": 4070,
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/public/product_catalog.csv"
+    },
+    "fx": {
+      "database": "UNITSHIFT_ECB",
+      "table": "gbp_eur",
+      "filename": "ecb_gbp_eur.csv",
+      "count": 272,
+      "path": "s3a://zetaris-unitshift-hackathon-aws--workspaces3bucket-j7n3qhpnvcrf/unitshift/v1/public/ecb_gbp_eur.csv"
+    }
+  },
+  "semantic_view": "unitshift_control.retail_evidence",
+  "verified_join_rows": 541909,
+  "sample": {
+    "headers": [
+      "source_row",
+      "invoice_no",
+      "stock_code",
+      "description",
+      "quantity",
+      "invoice_date",
+      "unit_price",
+      "customer_id",
+      "country",
+      "line_amount",
+      "credit_flag",
+      "exact_duplicate_of",
+      "fx_date",
+      "gbp_per_eur",
+      "calculated_eur",
+      "description_variants",
+      "invoice_line_count"
+    ],
+    "data": [
+      [
+        "540423",
+        "581483",
+        "23843",
+        "PAPER CRAFT , LITTLE BIRDIE",
+        "80995",
+        "2011-12-09T09:15:00",
+        "2.08",
+        "16446",
+        "United Kingdom",
+        "168469.60",
+        "0",
+        "0",
+        "2011-12-09",
+        "0.85315",
+        "197467.73720917",
+        "1",
+        "1"
+      ],
+      [
+        "540424",
+        "C581484",
+        "23843",
+        "PAPER CRAFT , LITTLE BIRDIE",
+        "-80995",
+        "2011-12-09T09:27:00",
+        "2.08",
+        "16446",
+        "United Kingdom",
+        "-168469.60",
+        "1",
+        "0",
+        "2011-12-09",
+        "0.85315",
+        "-197467.73720917",
+        "1",
+        "1"
+      ]
+    ],
+    "total": 2,
+    "timeUsed": 6540
+  },
+  "receipts": [
+    {
+      "at": "2026-10-27T09:33:01.759775+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS row_count FROM UNITSHIFT_RETAIL.lines",
+        "result_hash": "152e5e97a9c6dd4c2e2765f510597d0c175451d7e26dacc08d51889da09ed04d"
+      },
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "bc10632252d549a194ce35426ba581a8be2c37b98995a76e40f148b83b55b6f0"
+    },
+    {
+      "at": "2026-10-27T09:33:11.739333+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS row_count FROM UNITSHIFT_RETAIL.invoice_summary",
+        "result_hash": "064839208ca844557936392226e2b12b945eea27115333abd3f325a38647bc08"
+      },
+      "previous_hash": "bc10632252d549a194ce35426ba581a8be2c37b98995a76e40f148b83b55b6f0",
+      "hash": "0e754d8a1432e04d9280fbbd8656d35160a107d5333f9e6d4a167e10755b5d4c"
+    },
+    {
+      "at": "2026-10-27T09:33:19.913032+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS row_count FROM UNITSHIFT_RETAIL.product_catalog",
+        "result_hash": "31374a65bfb083cf444e42e95970bc3a73b6907d792b989d9aec4c2b46e64927"
+      },
+      "previous_hash": "0e754d8a1432e04d9280fbbd8656d35160a107d5333f9e6d4a167e10755b5d4c",
+      "hash": "31d79142ac10b3b03c11588a82ae24cfd7e25710507724ae04fa8cad6982ee1f"
+    },
+    {
+      "at": "2026-10-27T09:33:28.905752+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS row_count FROM UNITSHIFT_ECB.gbp_eur",
+        "result_hash": "f405e092f1662c56733812d7a52bd77e6ec5b13ba8a0a087395d1158126a7063"
+      },
+      "previous_hash": "31d79142ac10b3b03c11588a82ae24cfd7e25710507724ae04fa8cad6982ee1f",
+      "hash": "e1051a080305bd06966f6ebe3adf11250cc8bbe0e7da63c120bcbf6a197e1182"
+    },
+    {
+      "at": "2026-10-27T09:33:30.700335+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "CREATE OR REPLACE SCHEMASTORE VIEW retail_evidence WITH CONTAINER unitshift_control AS\nSELECT CAST(l.source_row AS BIGINT) AS source_row,l.invoice_no,l.stock_code,l.description,\n CAST(l.quantity AS BIGINT) AS quantity,l.invoice_date,l.unit_price,l.customer_id,l.country,l.line_amount,\n CAST(l.credit_flag AS INT) AS credit_flag,CAST(l.exact_duplicate_of AS BIGINT) AS exact_duplicate_of,\n l.fx_date,f.gbp_per_eur,CAST(CAST(l.line_amount AS DECIMAL(24,8))/CAST(f.gbp_per_eur AS DECIMAL(18,8)) AS DECIMAL(24,8)) AS calculated_eur,\n CAST(p.description_variants AS INT) AS description_variants,CAST(i.line_count AS INT) AS invoice_line_count\nFROM UNITSHIFT_RETAIL.lines l\nLEFT JOIN UNITSHIFT_RETAIL.product_catalog p ON l.stock_code=p.stock_code\nLEFT JOIN UNITSHIFT_RETAIL.invoice_summary i ON l.invoice_no=i.invoice_no\nLEFT JOIN UNITSHIFT_ECB.gbp_eur f ON l.fx_date=f.rate_date",
+        "result_hash": "4d12f770d534da72f0535a4b6b32ffb2865c7993ac8e78f67c96e8ae6c4fe244"
+      },
+      "previous_hash": "e1051a080305bd06966f6ebe3adf11250cc8bbe0e7da63c120bcbf6a197e1182",
+      "hash": "772e555a0a479536b1b2608f55c96d0438e208798677b065bd244e0515b0c678"
+    },
+    {
+      "at": "2026-10-27T09:33:38.895534+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT * FROM unitshift_control.retail_evidence WHERE source_row IN (540423,540424) ORDER BY source_row",
+        "result_hash": "14c080a38d3e150358bcb69e89062a9f0e75df93534414cd4bd0b46a545a761f"
+      },
+      "previous_hash": "772e555a0a479536b1b2608f55c96d0438e208798677b065bd244e0515b0c678",
+      "hash": "fefed86b21bd402964396d83b221c3b3d51731d6cce1b14740f3b36687bb1466"
+    },
+    {
+      "at": "2026-10-27T09:34:18.793957+00:00",
+      "run_id": "30015b8354a246e2b0568e3ead912eb5",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT COUNT(*) AS row_count FROM unitshift_control.retail_evidence",
+        "result_hash": "30ec38bcc047fd025bdd136e01be007d02d8436351af196b4cdcca38656febdb"
+      },
+      "previous_hash": "fefed86b21bd402964396d83b221c3b3d51731d6cce1b14740f3b36687bb1466",
+      "hash": "76376e9eb8a7928422bf5e8234e30e3351ae98ee0be0f9b11eaf17729c8d53e9"
+    }
+  ],
+  "source_session_expires_at": "2026-10-28T17:44:50+00:00"
+}

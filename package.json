@@ -1,6 +1,6 @@
 {
   "name": "unitshift",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,9 @@
     "evaluate": "python3 scripts/evaluate.py --backend zetaris",
     "setup:memory": "npx --yes degit Meterless/Meterless/engines/hmem/reference#1742dec56a66e58eef9dda2d2b865823758ca8cd vendor/hmem",
     "memory": "tsx scripts/memory.ts",
-    "setup:semantic-view": "python3 scripts/register_ops_view.py --apply"
+    "setup:semantic-view": "python3 scripts/register_ops_view.py --apply",
+    "import:public": "python3 scripts/import_public_retail.py",
+    "register:public": "python3 scripts/register_public_data.py --apply"
   },
   "devDependencies": {
     "tsx": "^4.19.0",

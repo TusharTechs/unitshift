@@ -1,137 +1,87 @@
-# UnitShift — protect every promise
+# UnitShift — evidence before action
 
-An operations workspace that connects fragmented stock, supplier quotes, customer commitments and financial evidence, then tests a recovery before an operator creates action drafts.
+A finance operations workspace that investigates invoice and cancellation signals across source records, product context and independent currency reference data. NVIDIA Nemotron chooses bounded source tools and proposes cited decisions; code checks the references, accounting arithmetic, quote direction and missing authorisations before a result is shown.
 
-**Track:** Solving Fragmented Intelligence. **Primary sponsor objective:** meaningful, inspectable NVIDIA Nemotron use. Prize eligibility and results are not guaranteed.
+**Track:** Solving Fragmented Intelligence. **Live judge deployment:** https://ds59bjv2cezd6.cloudfront.net (public release is verified separately in deployment evidence). No prize outcome, customer savings or production accuracy is guaranteed.
 
-## What the product does
+## Real data, explicitly attributed
 
-- **Consequence map:** inspect supplier → stock → customer dependencies and trace a shortage to its evidence.
-- **Customer promises:** search and filter commitments; inspect quantity allocation and deadline exposure; compare a proposed recovery.
-- **Supplier network:** inspect pack prices, unit equivalents, available stock and quoted lead times; compare suppliers side by side.
-- **Recovery lab:** adjust budget, supplier availability and verified receipts. Alternatively, describe a disruption in natural language and review the extracted controls.
-- **Nemotron planning:** generate a typed purchase proposal from records, run it through a constraint simulator, and provide verified feedback when it is invalid or misses a better checked outcome.
-- **Action center:** create persistent purchase-order drafts, customer-update drafts and residual-risk escalation tasks. Repeated drafting is idempotent.
-- **Financial controls:** retain the original semantic invoice-review workflow, including pack/item conversion, duplicate-join checks and missing-evidence clarification.
-- **Evidence and memory:** inspect actual query/model receipts, the semantic contract and operational memory; export decision JSON.
-- **Operations copilot:** Nemotron selects a bounded analytical tool; code renders source-backed facts for risk, deadlines, pack units, suppliers, orders and recovery options. Unknown references are rejected. Inspect the associated model receipt.
+The default workspace uses **all 541,909 original lines** from [Online Retail](https://archive.ics.uci.edu/dataset/352/online+retail), Daqing Chen, UCI Machine Learning Repository (2015), DOI [10.24432/C5BW33](https://doi.org/10.24432/C5BW33), under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). It contains 25,900 invoice identifiers, 4,372 non-empty anonymised customer IDs and 4,070 stock codes. Observed missing fields and duplicate-looking rows remain intact.
 
-There is no external order placement, payment execution, customer messaging, live supplier marketplace or multi-tenant account service. All commercial records are disclosed synthetic data. This is a tested hackathon prototype, not a validated production operations system.
+The independent reference source is [ECB statistics](https://data-api.ecb.europa.eu/service/data/EXR/D.GBP.EUR.SP00.A?startPeriod=2010-11-25&endPeriod=2011-12-09&format=csvdata): 272 dated observations of GBP per EUR, used under the [ECB statistics reuse policy](https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html). Raw observations are unchanged; transaction EUR equivalents are separately labelled UnitShift calculations. They are retrospective reporting values, not settlement or point-in-time trading quotes.
 
-## A complete demonstration
+These are **historical 2010–2011 records**, not live customer operations. No retailer or customer is re-identified. Retail entity tables are derived from one UCI export; they are not described as independent commercial systems. UCI and the ECB do not endorse UnitShift. See [data provenance](data/public/manifest.json) for source hashes, transformations, row counts and limitations.
 
-The scenario begins with six customer orders across three SKUs. Opening stock and verified, unposted receiving records support three promises. The other promises are short of stock. Unverified expected inbound is never counted as available.
+## What works
 
-1. Inspect the shortage in the consequence map.
-2. Compare quoted pack units, lead times and prices.
-3. Run recovery planning at a $225 purchase budget. A verified plan supports all six promises for $212.
-4. Mark Harbor Supply unavailable. At the same budget, the best checked result supports five promises for $225; the simulator finds that $15 more budget permits full recovery.
-5. Inspect Nemotron's proposal, the simulator feedback, the actual repair call and the alternatives. A model's assertion does not establish feasibility or optimality.
-6. Draft an action packet. Source facts are re-read and the context hash must match. Drafts remain local and unexecuted.
-7. Review the resulting tasks and the stored H-MEM preference/constraint lesson.
+- A complete searchable source ledger, preserving original workbook row numbers.
+- A review queue with cancellation context, duplicate-looking lines, missing customer IDs and zero-price signals.
+- Customer summaries using original anonymised IDs, without invented business names or credit scores.
+- Product-description variants, without inferring unsupported stock or pack-size facts.
+- An asynchronous investigation lab with actual Zetaris reads, Nemotron tool selection, typed conclusions and verification feedback. Its animated progress steps are driven by actual source, memory, model and policy receipts.
+- A separate Nightshift-backed review contract and scoped Meterless H-MEM approved-check storage and recall.
+- Readable review-packet and JSON exports, actual call receipts and source SQL.
+- An editable business-value calculator whose inputs and outputs are explicitly hypotheses, not measured ROI.
 
-The dollar figures are results on this disclosed scenario, not customer savings or measured real-world ROI. Supplier history and all quotes are synthetic scenario records.
+The main demonstration traces source rows 540423 and 540424: invoice 581483 records GBP 168,469.60; cancellation C581484 records the opposite quantity and amount twelve minutes later. A matching customer, SKU, price and quantity make the former an **attribute-match candidate**, not a source-proven original invoice or authorised refund. The two rows sum to zero, but no commercial reason, settlement, refund authorisation or business saving is claimed.
 
-## Sponsor responsibilities
+## Sponsor contributions
 
-| Technology | Working role | Inspectable evidence |
+| Technology | Actual responsibility | Evidence |
 |---|---|---|
-| Zetaris | Seven registered CSV/JSON source exports in private S3; cross-source query; deadline-based semantic view | Query text, result hashes, source tables and readback counts |
-| NVIDIA Nemotron 3 Super via Nebius | Scenario interpretation, typed invoice mappings, independent recovery proposals and feedback-driven repairs | Actual effective model ID, requested thinking controls, token use, proposal and verification receipts |
-| NVIDIA Nemotron through Nightshift | Structured operator follow-up selection and the existing provider-backed financial explanation | Nightshift route, receipt ID and effective NVIDIA model |
-| Meterless H-MEM | Persistent approved supplier preferences and a scoped operational constraint lesson | Real upstream reference-engine add/retrieval calls and ledger entries |
+| Zetaris | Four registered source tables and a cross-publisher semantic view joining transaction, invoice grain, product variants and dated ECB observations | Source registrations, readback counts, query hashes and complete 541,909-row join-grain check |
+| NVIDIA Nemotron 3 Super on Nebius | Bounded source-tool selection, evidence interpretation and source-cited typed decisions; reasoning repair when a constraint fails | Actual effective model IDs, token usage, selected tools, attempts and verification receipts |
+| Meterless Nightshift | A real NVIDIA-backed provider reviews the structured request-for-evidence disposition | Routing mode, effective model, receipt and accepted structured review |
+| Meterless H-MEM | Stores operator-approved evidence checks and recalls them only for the matching dataset/contract scope | Pinned upstream engine add/query calls, ledger IDs and recalled memory references |
 
-The planner requests a fast structured proposal first. If the proposal violates a constraint or misses a checked target, it requests a bounded reasoning repair with the simulated outcomes and verified alternatives. The code retains a repaired proposal only when it is valid and at least as good under the declared objective. It never silently substitutes a simulator plan while attributing it to Nemotron. An operator can explicitly choose a separately labelled simulator alternative.
+The code does not render private model reasoning. Generated text cannot authorise a refund, delete a row, invent a customer ID, reverse the FX quote or cite an unknown source row. Unknown references, wrong relationship fields or FX direction fail verification; no fixture answer replaces a failed live read. Mandatory missing-evidence requirements are imposed by application policy even when the model omits them. The accepted decision records policy-added checks separately from the raw model proposal, and the interface discloses that addition.
 
-Nightshift selects a structured operator follow-up; its action and risk label must agree with the verified plan status. Code renders the qualitative guidance from that validated choice. Older free-form briefings are also checked before display. Displayed costs, quantities, shortfalls and budget gaps come from deterministic calculations. Model narratives are not numerical authorities.
+## Reproduce locally
 
-## Data and architecture
-
-The records represent separate operational datasets but are all hosted in the same AWS account and workspace bucket. The prototype does not have live connectors to seven commercial applications.
-
-| Active source | Records | Format |
-|---|---:|---|
-| Purchase orders | 18 | CSV |
-| Invoice lines | 19 | JSON array |
-| Receiving records | 20 | JSON array |
-| Customer orders | 6 | CSV |
-| Opening inventory / verified receipts | 3 | JSON array |
-| Supplier offers | 8 | JSON array |
-| Operating policy | 1 | JSON array |
-
-`unitshift_control.customer_promises` is a real Zetaris schemastore view joining demand and stock, preserving one row per customer order and allocating available stock in deadline order. The workspace checks that its baseline allocations agree with the simulator before presenting the snapshot. The SQL lives in `data/operational-semantic-view.sql`.
-
-```mermaid
-flowchart LR
-  S[Private synthetic source exports] --> Z[Zetaris queries + semantic view]
-  Z --> N[Nemotron interpretation + proposal]
-  N --> V[Pack, stock, deadline, cash simulator]
-  V -->|feedback + checked alternatives| N
-  V --> U[Operator review]
-  U --> D[Local drafts + escalation tasks]
-  U --> M[Meterless H-MEM]
-  M --> N
-  V --> B[Nightshift qualitative guidance]
-```
-
-The bounded simulator enumerates pack combinations and prunes only plans with identical per-order coverage and higher cost. Its best checked outcome is for this small source snapshot and objective, not a general large-scale supply-chain optimality claim. Priorities weight revenue exposure, then the objective prefers fewer at-risk orders and lower incremental spend. No supplier reliability score is used as a fabricated probability.
-
-## Run locally
-
-Requirements: Python 3.11+, Node.js and npm. The Python service uses the standard library. H-MEM is an upstream TypeScript reference engine pinned to commit `1742dec56a66e58eef9dda2d2b865823758ca8cd`.
+Python 3.11+, Node.js 18+ and npm are required. Python uses its standard library. H-MEM is pinned to upstream commit `1742dec56a66e58eef9dda2d2b865823758ca8cd`.
 
 ```sh
 npm ci
 npm run setup:memory
-cp .env.example .env.local  # new checkout only; never overwrite configured credentials
+cp .env.example .env.local  # new checkout only; never overwrite configured secrets
+```
+
+Download the two primary source files from the links above. Then:
+
+```sh
+python3 scripts/import_public_retail.py --retail-zip /path/to/online-retail.zip --ecb-csv /path/to/ecb-gbp-eur.csv
+python3 scripts/register_public_data.py --apply
 npm start
 ```
 
-Open http://127.0.0.1:8787. The original technical invoice workbench remains at `/review`.
+The importer preserves every source line, writes an ignored read-only SQLite navigation index and CSV exports, and records hashes and the selection method. Registering sources requires the configured AWS account, the existing scoped S3 session and Zetaris access. On a new environment, configure the bucket, source session and semantic container explicitly; these setup scripts currently reference the original user's hackathon infrastructure.
 
-Set these values privately in `.env.local`:
+Set `ZETARIS_BASE_URL`, `ZETARIS_API_KEY`, numeric `ZETARIS_ORG_ID`, `NEBIUS_BASE_URL`, `NEBIUS_API_KEY`, `NEMOTRON_MODEL`, and the discovered Nightshift endpoint, runtime key and route in `.env.local`. Use `DATA_BACKEND=zetaris` for live investigations. Browsing an indexed public source is labelled as such and does not imply a fresh live query.
 
-- `ZETARIS_BASE_URL`: the origin of the working AI Data Gateway, which can differ from the cluster hostname.
-- `ZETARIS_API_KEY` and numeric `ZETARIS_ORG_ID`.
-- `NEBIUS_BASE_URL`, `NEBIUS_API_KEY` and an account-available `NEMOTRON_MODEL`.
-- `NIGHTSHIFT_BASE_URL`, runtime access token as `NIGHTSHIFT_API_KEY`, and a discovered routing mode such as `meterless/auto`.
-- `DATA_BACKEND=zetaris` for actual source reads; `local` is explicitly labelled fixture mode.
+Open http://127.0.0.1:8787. The earlier synthetic stock-recovery scenario remains separately labelled at `/sandbox`; the original invoice engineering workbench remains at `/review`. Its architecture, synthetic recovery outcomes and earlier small evaluation are documented in [the sandbox notes](docs/recovery-sandbox.md), not represented as real customer impact.
 
-Nightshift must have a working upstream provider or local model. An NVIDIA provider needs an NVIDIA-issued key; a Nebius key authenticates to Nebius, not NVIDIA Build. Keys remain server-side and are never sent to the browser. Keep `.env.local`, `.state`, `node_modules` and `vendor` out of Git.
+## Deployment and operating boundaries
 
-## Provision and renew sources
+The judge deployment uses one AWS EC2 `t3.small` instance, encrypted persistent storage, a CloudFront HTTPS endpoint and an origin restriction. No workstation AWS user key is installed. A dedicated instance role can read only the project's S3 source prefix; source access renews from that role without storing temporary keys in the repository. The Linux service runs as an unprivileged user with a read-only application tree and a writable state directory.
 
-With AWS CLI authenticated to the intended account and Zetaris admin settings configured:
+The initial compute window ends **November 10, 2026 at 00:00 UTC**, when the instance is configured to stop. Normal base infrastructure for that initial period is estimated below the user's USD 20 allowance; API usage and exceptional traffic are separate. Stopped-instance storage and distribution resources still exist and should be reviewed after judging. No costly autoscaling fleet or GPU is provisioned.
 
-```sh
-python3 scripts/seed_zetaris.py               # prepare exports and reviewable SQL only
-npm run seed:zetaris                         # upload the project prefix and register/update sources
-python3 scripts/register_ops_view.py --apply --create-container  # first installation
-npm run setup:semantic-view                  # subsequent semantic-view updates
-```
+**Nightshift boundary:** the main app, source reads, H-MEM and primary Nemotron inference run in the cloud. The installed Nightshift desktop runtime is on the user's Mac, connected by a loopback-only encrypted SSH channel. If that machine or channel is unavailable, the site and primary investigation remain available and the secondary review is explicitly marked unavailable. A fully autonomous production install needs an authorised supported Nightshift host/endpoint. This is not disguised as a cloud-native Nightshift installation.
 
-The setup currently references the user's hackathon CloudFormation stack in `us-west-1`; configure the stack name for another account. It reuses the workspace bucket, creates no IAM user or public ACL, and mints a temporary read-only federation session limited to `unitshift/v1/`. The connector stores that temporary credential in the user's Zetaris configuration. Its private local cache is `.state/zetaris-s3-session.json` with mode `0600`.
+Public model calls are queued and rate-limited. The public recovery sandbox is read-only. Historical investigation and reusable-check controls create no external orders, messages, refunds or payments. Public source data is intentionally readable; this release is not a multi-tenant service for private customer data. Production requires tenant authentication, restricted runtime source credentials, fully private/TLS origin transport, external transaction controls, independent evaluation and authorised business integrations.
 
-The expiration is recorded in `data/zetaris-manifest.json`. Within an hour before expiry, or after expiry, rerun source setup to obtain a new session and update source credentials. Keep the cluster, source session and Nightshift available if live judging is needed. A recorded demonstration must be identified as a recording.
-
-Source failures, unexpected row grain and empty required datasets do not fall back to local fixture data. Scenario controls are virtual assumptions and never rewrite raw source exports. Opening stock excludes the unposted receiving quantity so that they can be added without double-counting.
-
-## Verification and limitations
+## Verification
 
 ```sh
 npm test
+node --check static/replay.js
 node --check static/workspace.js
-npm run evaluate  # earlier invoice component comparison; actual API calls
 ```
 
-Thirty-four automated checks cover source handling, quantity conservation, pack pricing, cash/deadline constraints, source-change rejection, ambiguous/dollars-versus-cents interpretation, idempotent drafts, residual-risk escalation and source-locked copilot answers. A clean credential-free checkout was also installed and smoke-tested; the pinned H-MEM reference engine was exercised separately. Real API runs verified normal and supplier-outage recoveries. See `data/evidence/recovery-verified-runs.json` and the actual run receipts. Earlier development failures are diagnostic evidence, not successful submission metrics.
+48 regression checks cover legacy reconciliation and recovery plus real-data evidence references, source changes, join fan-out, chronology, missing identity, unsupported refund approvals, quote direction and public model allowances. They also pass on the Linux deployment runtime. Actual public-data investigations and their receipts are saved under `data/evidence/`; these are recorded checks, not a balanced accuracy benchmark.
 
-The earlier invoice mapping comparison tied at 13/13 between two-pass and one-pass mapping using the same model and checks, with no demonstrated accuracy advantage for the extra pass. That small held-out set is hold-heavy (12 held, one supported). It is not a benchmark for the expanded recovery planner or evidence of broad production accuracy.
+Source signals are **not confirmed errors, fraud, losses or savings**. The 40 review examples are a disclosed value-ranked selection. Customer validation, paid usage, measured review-time savings and production ROI have not been established. The business calculator is a pilot hypothesis that a real customer study must test.
 
-Approval revalidates the latest source snapshot. It does not provide atomic execution against external commercial systems; only local drafts are created. Source templates, schemas and the solver are deliberately bounded to the disclosed scenario. Production use would require real integrations, balanced independent evaluation, authentication, per-tenant access controls, transaction-safe external actions and customer validation.
+## Provenance
 
-The receipt log is a local hash chain, not an independently signed attestation. Only concise business proposals and metadata are displayed; private model reasoning is not rendered or stored by this application. Generated code is used in this build. No prior product code is being represented as newly authored sponsor technology.
-
-## Third-party provenance
-
-H-MEM is the Apache-2.0 upstream implementation from [Meterless/Meterless](https://github.com/Meterless/Meterless/tree/1742dec56a66e58eef9dda2d2b865823758ca8cd/engines/hmem/reference). UnitShift's workflow, fixtures, simulator, adapters and UI are new project code. Model weights are not bundled. See `THIRD_PARTY_NOTICES.md`.
+UnitShift workflow, adapters, simulator, fixtures and interface are new project code. H-MEM is an Apache-2.0 upstream reference engine; commercial model weights and vendor platform code are not bundled. Development used Codex-assisted implementation and testing. Cursor was not used. Licensed public data and generated code usage are declared. See [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,1980 @@
+{
+  "manifest": {
+    "version": "uci-352-ecb-v1",
+    "historical": true,
+    "synthetic": false,
+    "currency": "GBP",
+    "source_timezone": "Unspecified by source; source calendar dates preserved.",
+    "downloaded_at": "2026-10-27T09:47:56.666130+00:00",
+    "publishers": [
+      {
+        "id": "uci",
+        "name": "UCI Machine Learning Repository",
+        "title": "Online Retail",
+        "creator": "Daqing Chen",
+        "citation": "Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.",
+        "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+        "download_url": "https://archive.ics.uci.edu/static/public/352/online%2Bretail.zip",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "archive_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+        "rows": 541909
+      },
+      {
+        "id": "ecb",
+        "name": "European Central Bank",
+        "title": "GBP per EUR daily reference observations",
+        "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.GBP.EUR.SP00.A?startPeriod=2010-11-25&endPeriod=2011-12-09&format=csvdata",
+        "license": "ECB statistics reuse policy; source acknowledged, observations unchanged.",
+        "license_url": "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html",
+        "download_sha256": "e0e1d0722305c2295161200560a308a765cb631fcaf8e358c3b0ea17eefa75f7",
+        "rows": 272
+      }
+    ],
+    "transformations": [
+      "All 541909 published transaction lines retained, including missing values and duplicate-looking lines.",
+      "Excel dates converted to source calendar timestamps; no timezone assumption.",
+      "Line amount is Quantity \u00d7 UnitPrice using decimal arithmetic. Summary display rounded to GBP pennies; exact source price and calculated decimal amount retained.",
+      "Invoice and product tables are derived views of the same UCI export, not independent business systems.",
+      "Cancellation candidates match customer, stock code, opposite quantity, price and a non-future timestamp; no original-reference link is asserted.",
+      "FX reporting uses the same-or-prior calendar-date ECB observation, retaining its date and rate; this is retrospective reporting, not a point-in-time trading or settlement quote. EUR values are UnitShift calculations, not ECB-published transaction values."
+    ],
+    "exports": {
+      "product_catalog.csv": {
+        "bytes": 159978,
+        "sha256": "6f6ead18e6cf616cad7f2179e99a0e58cf0dda3f650dcade7bfc79f7df606d15"
+      },
+      "invoice_summary.csv": {
+        "bytes": 1416375,
+        "sha256": "8ceaf302328e8036ea45597eb4531d3caccae414f0434d29768ed47ca707a016"
+      },
+      "ecb_gbp_eur.csv": {
+        "bytes": 5247,
+        "sha256": "9feeda47fd4e8d254335a9d13eb3790fb027d9ff0fb38c4460ccdfc0ce2a48bb"
+      },
+      "retail_lines.csv": {
+        "bytes": 64008191,
+        "sha256": "91191a9f07fbe10ccddb067096087912ab645036046cc34a81857c6595bbaff7"
+      }
+    },
+    "counts": {
+      "invoices": 25900,
+      "customers": 4372,
+      "products": 4070,
+      "countries": 38,
+      "missing_customer_lines": 135080,
+      "duplicate_looking_lines": 5268,
+      "cancellation_lines": 9288,
+      "first_recorded_at": "2010-12-01T08:26:00",
+      "last_recorded_at": "2011-12-09T12:50:00"
+    },
+    "source_limits": [
+      "Historical records, not live business operations.",
+      "No supplier quotes, inventory balances, fulfillment promises, refund authorisations or measured customer savings are present.",
+      "No attempt to re-identify the anonymised customers or retailer."
+    ]
+  },
+  "stats": {
+    "invoices": 25900,
+    "customers": 4372,
+    "products": 4070,
+    "countries": [
+      {
+        "country": "United Kingdom",
+        "lines": 495478,
+        "signed_amount_minor": 818780636
+      },
+      {
+        "country": "Germany",
+        "lines": 9495,
+        "signed_amount_minor": 22169821
+      },
+      {
+        "country": "France",
+        "lines": 8557,
+        "signed_amount_minor": 19740390
+      },
+      {
+        "country": "EIRE",
+        "lines": 8196,
+        "signed_amount_minor": 26327682
+      },
+      {
+        "country": "Spain",
+        "lines": 2533,
+        "signed_amount_minor": 5477458
+      },
+      {
+        "country": "Netherlands",
+        "lines": 2371,
+        "signed_amount_minor": 28466154
+      },
+      {
+        "country": "Belgium",
+        "lines": 2069,
+        "signed_amount_minor": 4091096
+      },
+      {
+        "country": "Switzerland",
+        "lines": 2002,
+        "signed_amount_minor": 5638535
+      },
+      {
+        "country": "Portugal",
+        "lines": 1519,
+        "signed_amount_minor": 2936702
+      },
+      {
+        "country": "Australia",
+        "lines": 1259,
+        "signed_amount_minor": 13707727
+      },
+      {
+        "country": "Norway",
+        "lines": 1086,
+        "signed_amount_minor": 3516346
+      },
+      {
+        "country": "Italy",
+        "lines": 803,
+        "signed_amount_minor": 1689051
+      },
+      {
+        "country": "Channel Islands",
+        "lines": 758,
+        "signed_amount_minor": 2008629
+      },
+      {
+        "country": "Finland",
+        "lines": 695,
+        "signed_amount_minor": 2232674
+      },
+      {
+        "country": "Cyprus",
+        "lines": 622,
+        "signed_amount_minor": 1294629
+      },
+      {
+        "country": "Sweden",
+        "lines": 462,
+        "signed_amount_minor": 3659591
+      },
+      {
+        "country": "Unspecified",
+        "lines": 446,
+        "signed_amount_minor": 474979
+      },
+      {
+        "country": "Austria",
+        "lines": 401,
+        "signed_amount_minor": 1015432
+      },
+      {
+        "country": "Denmark",
+        "lines": 389,
+        "signed_amount_minor": 1876814
+      },
+      {
+        "country": "Japan",
+        "lines": 358,
+        "signed_amount_minor": 3534062
+      },
+      {
+        "country": "Poland",
+        "lines": 341,
+        "signed_amount_minor": 721314
+      },
+      {
+        "country": "Israel",
+        "lines": 297,
+        "signed_amount_minor": 790782
+      },
+      {
+        "country": "USA",
+        "lines": 291,
+        "signed_amount_minor": 173092
+      },
+      {
+        "country": "Hong Kong",
+        "lines": 288,
+        "signed_amount_minor": 1011704
+      },
+      {
+        "country": "Singapore",
+        "lines": 229,
+        "signed_amount_minor": 912039
+      },
+      {
+        "country": "Iceland",
+        "lines": 182,
+        "signed_amount_minor": 431000
+      },
+      {
+        "country": "Canada",
+        "lines": 151,
+        "signed_amount_minor": 366638
+      },
+      {
+        "country": "Greece",
+        "lines": 146,
+        "signed_amount_minor": 471052
+      },
+      {
+        "country": "Malta",
+        "lines": 127,
+        "signed_amount_minor": 250547
+      },
+      {
+        "country": "United Arab Emirates",
+        "lines": 68,
+        "signed_amount_minor": 190228
+      },
+      {
+        "country": "European Community",
+        "lines": 61,
+        "signed_amount_minor": 129175
+      },
+      {
+        "country": "RSA",
+        "lines": 58,
+        "signed_amount_minor": 100231
+      },
+      {
+        "country": "Lebanon",
+        "lines": 45,
+        "signed_amount_minor": 169388
+      },
+      {
+        "country": "Lithuania",
+        "lines": 35,
+        "signed_amount_minor": 166106
+      },
+      {
+        "country": "Brazil",
+        "lines": 32,
+        "signed_amount_minor": 114360
+      },
+      {
+        "country": "Czech Republic",
+        "lines": 30,
+        "signed_amount_minor": 70772
+      },
+      {
+        "country": "Bahrain",
+        "lines": 19,
+        "signed_amount_minor": 54840
+      },
+      {
+        "country": "Saudi Arabia",
+        "lines": 10,
+        "signed_amount_minor": 13117
+      }
+    ],
+    "missing_customer_lines": 135080,
+    "duplicate_looking_lines": 5268,
+    "cancellation_lines": 9288,
+    "first_recorded_at": "2010-12-01T08:26:00",
+    "last_recorded_at": "2011-12-09T12:50:00",
+    "lines": 541909,
+    "gross_positive_minor": 1066668454,
+    "negative_lines_value_minor": -91893661,
+    "signed_total_minor": 974774793,
+    "monthly": [
+      {
+        "month": "2010-12",
+        "lines": 42481,
+        "signed_amount_minor": 74895702
+      },
+      {
+        "month": "2011-01",
+        "lines": 35147,
+        "signed_amount_minor": 56000026
+      },
+      {
+        "month": "2011-02",
+        "lines": 27707,
+        "signed_amount_minor": 49806265
+      },
+      {
+        "month": "2011-03",
+        "lines": 36748,
+        "signed_amount_minor": 68326708
+      },
+      {
+        "month": "2011-04",
+        "lines": 29916,
+        "signed_amount_minor": 49320712
+      },
+      {
+        "month": "2011-05",
+        "lines": 37030,
+        "signed_amount_minor": 72333351
+      },
+      {
+        "month": "2011-06",
+        "lines": 36874,
+        "signed_amount_minor": 69112312
+      },
+      {
+        "month": "2011-07",
+        "lines": 39518,
+        "signed_amount_minor": 68130011
+      },
+      {
+        "month": "2011-08",
+        "lines": 35284,
+        "signed_amount_minor": 68268051
+      },
+      {
+        "month": "2011-09",
+        "lines": 50226,
+        "signed_amount_minor": 101968762
+      },
+      {
+        "month": "2011-10",
+        "lines": 60742,
+        "signed_amount_minor": 107070467
+      },
+      {
+        "month": "2011-11",
+        "lines": 84711,
+        "signed_amount_minor": 146175625
+      },
+      {
+        "month": "2011-12",
+        "lines": 25525,
+        "signed_amount_minor": 43366801
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "uci-540424",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 540424,
+      "invoice_no": "C581484",
+      "stock_code": "23843",
+      "customer_id": "16446",
+      "description": "PAPER CRAFT , LITTLE BIRDIE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-12-09T09:27:00",
+      "amount_minor": -16846960,
+      "evidence": [
+        {
+          "source_row": 540424,
+          "invoice_no": "C581484",
+          "stock_code": "23843",
+          "description": "PAPER CRAFT , LITTLE BIRDIE",
+          "quantity": -80995,
+          "invoice_date": "2011-12-09T09:27:00",
+          "unit_price": "2.08",
+          "customer_id": "16446",
+          "country": "United Kingdom",
+          "line_amount": "-168469.60",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-09"
+        },
+        {
+          "source_row": 540423,
+          "invoice_no": "581483",
+          "stock_code": "23843",
+          "description": "PAPER CRAFT , LITTLE BIRDIE",
+          "quantity": 80995,
+          "invoice_date": "2011-12-09T09:15:00",
+          "unit_price": "2.08",
+          "customer_id": "16446",
+          "country": "United Kingdom",
+          "line_amount": "168469.60",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-09"
+        }
+      ],
+      "candidate_count": 1,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-61626",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 61626,
+      "invoice_no": "C541433",
+      "stock_code": "23166",
+      "customer_id": "12346",
+      "description": "MEDIUM CERAMIC TOP STORAGE JAR",
+      "country": "United Kingdom",
+      "recorded_at": "2011-01-18T10:17:00",
+      "amount_minor": -7718360,
+      "evidence": [
+        {
+          "source_row": 61626,
+          "invoice_no": "C541433",
+          "stock_code": "23166",
+          "description": "MEDIUM CERAMIC TOP STORAGE JAR",
+          "quantity": -74215,
+          "invoice_date": "2011-01-18T10:17:00",
+          "unit_price": "1.04",
+          "customer_id": "12346",
+          "country": "United Kingdom",
+          "line_amount": "-77183.60",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-18"
+        },
+        {
+          "source_row": 61621,
+          "invoice_no": "541431",
+          "stock_code": "23166",
+          "description": "MEDIUM CERAMIC TOP STORAGE JAR",
+          "quantity": 74215,
+          "invoice_date": "2011-01-18T10:01:00",
+          "unit_price": "1.04",
+          "customer_id": "12346",
+          "country": "United Kingdom",
+          "line_amount": "77183.60",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-18"
+        }
+      ],
+      "candidate_count": 1,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-222683",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 222683,
+      "invoice_no": "C556445",
+      "stock_code": "M",
+      "customer_id": "15098",
+      "description": "Manual",
+      "country": "United Kingdom",
+      "recorded_at": "2011-06-10T15:31:00",
+      "amount_minor": -3897000,
+      "evidence": [
+        {
+          "source_row": 222683,
+          "invoice_no": "C556445",
+          "stock_code": "M",
+          "description": "Manual",
+          "quantity": -1,
+          "invoice_date": "2011-06-10T15:31:00",
+          "unit_price": "38970",
+          "customer_id": "15098",
+          "country": "United Kingdom",
+          "line_amount": "-38970",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-06-10"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-524604",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 524604,
+      "invoice_no": "C580605",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-12-05T11:36:00",
+      "amount_minor": -1783646,
+      "evidence": [
+        {
+          "source_row": 524604,
+          "invoice_no": "C580605",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-12-05T11:36:00",
+          "unit_price": "17836.46",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-17836.46",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-05"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-43704",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 43704,
+      "invoice_no": "C540117",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-01-05T09:55:00",
+      "amount_minor": -1688802,
+      "evidence": [
+        {
+          "source_row": 43704,
+          "invoice_no": "C540117",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-01-05T09:55:00",
+          "unit_price": "16888.02",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-16888.02",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-05"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-43705",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 43705,
+      "invoice_no": "C540118",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-01-05T09:57:00",
+      "amount_minor": -1645371,
+      "evidence": [
+        {
+          "source_row": 43705,
+          "invoice_no": "C540118",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-01-05T09:57:00",
+          "unit_price": "16453.71",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-16453.71",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-05"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-15018",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 15018,
+      "invoice_no": "C537630",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-07T15:04:00",
+      "amount_minor": -1354133,
+      "evidence": [
+        {
+          "source_row": 15018,
+          "invoice_no": "C537630",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2010-12-07T15:04:00",
+          "unit_price": "13541.33",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-13541.33",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-16358",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 16358,
+      "invoice_no": "C537651",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-07T15:49:00",
+      "amount_minor": -1354133,
+      "evidence": [
+        {
+          "source_row": 16358,
+          "invoice_no": "C537651",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2010-12-07T15:49:00",
+          "unit_price": "13541.33",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-13541.33",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-16234",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 16234,
+      "invoice_no": "C537644",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-07T15:34:00",
+      "amount_minor": -1347479,
+      "evidence": [
+        {
+          "source_row": 16234,
+          "invoice_no": "C537644",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2010-12-07T15:34:00",
+          "unit_price": "13474.79",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-13474.79",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-524603",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 524603,
+      "invoice_no": "C580604",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-12-05T11:35:00",
+      "amount_minor": -1158650,
+      "evidence": [
+        {
+          "source_row": 524603,
+          "invoice_no": "C580604",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-12-05T11:35:00",
+          "unit_price": "11586.5",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-11586.5",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-05"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-422377",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 422377,
+      "invoice_no": "C573079",
+      "stock_code": "M",
+      "customer_id": "12536",
+      "description": "Manual",
+      "country": "France",
+      "recorded_at": "2011-10-27T14:15:00",
+      "amount_minor": -832212,
+      "evidence": [
+        {
+          "source_row": 422377,
+          "invoice_no": "C573079",
+          "stock_code": "M",
+          "description": "Manual",
+          "quantity": -2,
+          "invoice_date": "2011-10-27T14:15:00",
+          "unit_price": "4161.0600000000004",
+          "customer_id": "12536",
+          "country": "France",
+          "line_amount": "-8322.1200000000008",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-27"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-446535",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 446535,
+      "invoice_no": "C574902",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-11-07T15:21:00",
+      "amount_minor": -828622,
+      "evidence": [
+        {
+          "source_row": 446535,
+          "invoice_no": "C574902",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-11-07T15:21:00",
+          "unit_price": "8286.2199999999993",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-8286.2199999999993",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-11-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-173279",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 173279,
+      "invoice_no": "C551685",
+      "stock_code": "POST",
+      "customer_id": "16029",
+      "description": "POSTAGE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-05-03T12:51:00",
+      "amount_minor": -814275,
+      "evidence": [
+        {
+          "source_row": 173279,
+          "invoice_no": "C551685",
+          "stock_code": "POST",
+          "description": "POSTAGE",
+          "quantity": -1,
+          "invoice_date": "2011-05-03T12:51:00",
+          "unit_price": "8142.75",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-8142.75",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-05-03"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-342637",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 342637,
+      "invoice_no": "C566899",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-09-15T13:53:00",
+      "amount_minor": -742797,
+      "evidence": [
+        {
+          "source_row": 342637,
+          "invoice_no": "C566899",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-09-15T13:53:00",
+          "unit_price": "7427.97",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-7427.97",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-09-15"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-191388",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 191388,
+      "invoice_no": "C553355",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-05-16T13:58:00",
+      "amount_minor": -700683,
+      "evidence": [
+        {
+          "source_row": 191388,
+          "invoice_no": "C553355",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-05-16T13:58:00",
+          "unit_price": "7006.83",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-7006.83",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-05-16"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-173393",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 173393,
+      "invoice_no": "C551699",
+      "stock_code": "M",
+      "customer_id": "16029",
+      "description": "Manual",
+      "country": "United Kingdom",
+      "recorded_at": "2011-05-03T14:12:00",
+      "amount_minor": -693000,
+      "evidence": [
+        {
+          "source_row": 173393,
+          "invoice_no": "C551699",
+          "stock_code": "M",
+          "description": "Manual",
+          "quantity": -1,
+          "invoice_date": "2011-05-03T14:12:00",
+          "unit_price": "6930",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-6930",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-05-03"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-287152",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 287152,
+      "invoice_no": "C562086",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-02T12:27:00",
+      "amount_minor": -672137,
+      "evidence": [
+        {
+          "source_row": 287152,
+          "invoice_no": "C562086",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-08-02T12:27:00",
+          "unit_price": "6721.37",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-6721.37",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-02"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-16359",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 16359,
+      "invoice_no": "C537652",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-07T15:51:00",
+      "amount_minor": -670671,
+      "evidence": [
+        {
+          "source_row": 16359,
+          "invoice_no": "C537652",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2010-12-07T15:51:00",
+          "unit_price": "6706.71",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-6706.71",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-312248",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 312248,
+      "invoice_no": "C564341",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-24T14:53:00",
+      "amount_minor": -666251,
+      "evidence": [
+        {
+          "source_row": 312248,
+          "invoice_no": "C564341",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-08-24T14:53:00",
+          "unit_price": "6662.51",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-6662.51",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-24"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-160147",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 160147,
+      "invoice_no": "C550456",
+      "stock_code": "21108",
+      "customer_id": "15749",
+      "description": "FAIRY CAKE FLANNEL ASSORTED COLOUR",
+      "country": "United Kingdom",
+      "recorded_at": "2011-04-18T13:08:00",
+      "amount_minor": -653940,
+      "evidence": [
+        {
+          "source_row": 160147,
+          "invoice_no": "C550456",
+          "stock_code": "21108",
+          "description": "FAIRY CAKE FLANNEL ASSORTED COLOUR",
+          "quantity": -3114,
+          "invoice_date": "2011-04-18T13:08:00",
+          "unit_price": "2.1",
+          "customer_id": "15749",
+          "country": "United Kingdom",
+          "line_amount": "-6539.4",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-04-18"
+        },
+        {
+          "source_row": 52713,
+          "invoice_no": "540815",
+          "stock_code": "21108",
+          "description": "FAIRY CAKE FLANNEL ASSORTED COLOUR",
+          "quantity": 3114,
+          "invoice_date": "2011-01-11T12:55:00",
+          "unit_price": "2.1",
+          "customer_id": "15749",
+          "country": "United Kingdom",
+          "line_amount": "6539.4",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-11"
+        }
+      ],
+      "candidate_count": 1,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-262416",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 262416,
+      "invoice_no": "C559917",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-07-13T15:21:00",
+      "amount_minor": -649747,
+      "evidence": [
+        {
+          "source_row": 262416,
+          "invoice_no": "C559917",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-07-13T15:21:00",
+          "unit_price": "6497.47",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-6497.47",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-07-13"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-383497",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 383497,
+      "invoice_no": "C570025",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-07T10:29:00",
+      "amount_minor": -594257,
+      "evidence": [
+        {
+          "source_row": 383497,
+          "invoice_no": "C570025",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-10-07T10:29:00",
+          "unit_price": "5942.57",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-5942.57",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-429250",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 429250,
+      "invoice_no": "C573549",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-31T13:23:00",
+      "amount_minor": -594257,
+      "evidence": [
+        {
+          "source_row": 429250,
+          "invoice_no": "C573549",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-10-31T13:23:00",
+          "unit_price": "5942.57",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-5942.57",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-31"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-446436",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 446436,
+      "invoice_no": "C574897",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-11-07T15:03:00",
+      "amount_minor": -587718,
+      "evidence": [
+        {
+          "source_row": 446436,
+          "invoice_no": "C574897",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": -1,
+          "invoice_date": "2011-11-07T15:03:00",
+          "unit_price": "5877.18",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "-5877.18",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-11-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    {
+      "id": "uci-390550",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 390550,
+      "invoice_no": "C570556",
+      "stock_code": "20971",
+      "customer_id": "16029",
+      "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-11T11:10:00",
+      "amount_minor": -137376,
+      "evidence": [
+        {
+          "source_row": 390550,
+          "invoice_no": "C570556",
+          "stock_code": "20971",
+          "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+          "quantity": -1296,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "1.06",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-1373.76",
+          "credit_flag": 1,
+          "exact_duplicate_of": 390546,
+          "fx_date": "2011-10-11"
+        },
+        {
+          "source_row": 390546,
+          "invoice_no": "C570556",
+          "stock_code": "20971",
+          "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+          "quantity": -1296,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "1.06",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-1373.76",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-11"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-390548",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 390548,
+      "invoice_no": "C570556",
+      "stock_code": "22568",
+      "customer_id": "16029",
+      "description": "FELTCRAFT CUSHION OWL",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-11T11:10:00",
+      "amount_minor": -48816,
+      "evidence": [
+        {
+          "source_row": 390548,
+          "invoice_no": "C570556",
+          "stock_code": "22568",
+          "description": "FELTCRAFT CUSHION OWL",
+          "quantity": -144,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "3.39",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-488.16",
+          "credit_flag": 1,
+          "exact_duplicate_of": 390542,
+          "fx_date": "2011-10-11"
+        },
+        {
+          "source_row": 390542,
+          "invoice_no": "C570556",
+          "stock_code": "22568",
+          "description": "FELTCRAFT CUSHION OWL",
+          "quantity": -144,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "3.39",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-488.16",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-11"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-390551",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 390551,
+      "invoice_no": "C570556",
+      "stock_code": "20969",
+      "customer_id": "16029",
+      "description": "RED FLORAL FELTCRAFT SHOULDER BAG",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-11T11:10:00",
+      "amount_minor": -48816,
+      "evidence": [
+        {
+          "source_row": 390551,
+          "invoice_no": "C570556",
+          "stock_code": "20969",
+          "description": "RED FLORAL FELTCRAFT SHOULDER BAG",
+          "quantity": -144,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "3.39",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-488.16",
+          "credit_flag": 1,
+          "exact_duplicate_of": 390547,
+          "fx_date": "2011-10-11"
+        },
+        {
+          "source_row": 390547,
+          "invoice_no": "C570556",
+          "stock_code": "20969",
+          "description": "RED FLORAL FELTCRAFT SHOULDER BAG",
+          "quantity": -144,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "3.39",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-488.16",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-11"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-284454",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 284454,
+      "invoice_no": "561873",
+      "stock_code": "84568",
+      "customer_id": "13316",
+      "description": "GIRLS ALPHABET IRON ON PATCHES ",
+      "country": "United Kingdom",
+      "recorded_at": "2011-07-31T11:48:00",
+      "amount_minor": 24480,
+      "evidence": [
+        {
+          "source_row": 284454,
+          "invoice_no": "561873",
+          "stock_code": "84568",
+          "description": "GIRLS ALPHABET IRON ON PATCHES ",
+          "quantity": 1440,
+          "invoice_date": "2011-07-31T11:48:00",
+          "unit_price": "0.17",
+          "customer_id": "13316",
+          "country": "United Kingdom",
+          "line_amount": "244.80",
+          "credit_flag": 0,
+          "exact_duplicate_of": 284439,
+          "fx_date": "2011-07-29"
+        },
+        {
+          "source_row": 284439,
+          "invoice_no": "561873",
+          "stock_code": "84568",
+          "description": "GIRLS ALPHABET IRON ON PATCHES ",
+          "quantity": 1440,
+          "invoice_date": "2011-07-31T11:48:00",
+          "unit_price": "0.17",
+          "customer_id": "13316",
+          "country": "United Kingdom",
+          "line_amount": "244.80",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-07-29"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-32587",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 32587,
+      "invoice_no": "539092",
+      "stock_code": "22423",
+      "customer_id": "15482",
+      "description": "REGENCY CAKESTAND 3 TIER",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-16T10:08:00",
+      "amount_minor": 17520,
+      "evidence": [
+        {
+          "source_row": 32587,
+          "invoice_no": "539092",
+          "stock_code": "22423",
+          "description": "REGENCY CAKESTAND 3 TIER",
+          "quantity": 16,
+          "invoice_date": "2010-12-16T10:08:00",
+          "unit_price": "10.95",
+          "customer_id": "15482",
+          "country": "United Kingdom",
+          "line_amount": "175.20",
+          "credit_flag": 0,
+          "exact_duplicate_of": 32584,
+          "fx_date": "2010-12-16"
+        },
+        {
+          "source_row": 32584,
+          "invoice_no": "539092",
+          "stock_code": "22423",
+          "description": "REGENCY CAKESTAND 3 TIER",
+          "quantity": 16,
+          "invoice_date": "2010-12-16T10:08:00",
+          "unit_price": "10.95",
+          "customer_id": "15482",
+          "country": "United Kingdom",
+          "line_amount": "175.20",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-16"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-311892",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 311892,
+      "invoice_no": "564327",
+      "stock_code": "85099B",
+      "customer_id": "16029",
+      "description": "JUMBO BAG RED RETROSPOT",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-24T13:33:00",
+      "amount_minor": 17400,
+      "evidence": [
+        {
+          "source_row": 311892,
+          "invoice_no": "564327",
+          "stock_code": "85099B",
+          "description": "JUMBO BAG RED RETROSPOT",
+          "quantity": 100,
+          "invoice_date": "2011-08-24T13:33:00",
+          "unit_price": "1.74",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "174.00",
+          "credit_flag": 0,
+          "exact_duplicate_of": 311888,
+          "fx_date": "2011-08-24"
+        },
+        {
+          "source_row": 311888,
+          "invoice_no": "564327",
+          "stock_code": "85099B",
+          "description": "JUMBO BAG RED RETROSPOT",
+          "quantity": 100,
+          "invoice_date": "2011-08-24T13:33:00",
+          "unit_price": "1.74",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "174.00",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-24"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-304633",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 304633,
+      "invoice_no": "563589",
+      "stock_code": "48187",
+      "customer_id": "17450",
+      "description": "DOORMAT NEW ENGLAND",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-17T19:40:00",
+      "amount_minor": 16000,
+      "evidence": [
+        {
+          "source_row": 304633,
+          "invoice_no": "563589",
+          "stock_code": "48187",
+          "description": "DOORMAT NEW ENGLAND",
+          "quantity": 20,
+          "invoice_date": "2011-08-17T19:40:00",
+          "unit_price": "8",
+          "customer_id": "17450",
+          "country": "United Kingdom",
+          "line_amount": "160",
+          "credit_flag": 0,
+          "exact_duplicate_of": 304632,
+          "fx_date": "2011-08-17"
+        },
+        {
+          "source_row": 304632,
+          "invoice_no": "563589",
+          "stock_code": "48187",
+          "description": "DOORMAT NEW ENGLAND",
+          "quantity": 20,
+          "invoice_date": "2011-08-17T19:40:00",
+          "unit_price": "8",
+          "customer_id": "17450",
+          "country": "United Kingdom",
+          "line_amount": "160",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-17"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-326165",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 326165,
+      "invoice_no": "565475",
+      "stock_code": "20725",
+      "customer_id": "14156",
+      "description": "LUNCH BAG RED RETROSPOT",
+      "country": "EIRE",
+      "recorded_at": "2011-09-05T10:47:00",
+      "amount_minor": 14500,
+      "evidence": [
+        {
+          "source_row": 326165,
+          "invoice_no": "565475",
+          "stock_code": "20725",
+          "description": "LUNCH BAG RED RETROSPOT",
+          "quantity": 100,
+          "invoice_date": "2011-09-05T10:47:00",
+          "unit_price": "1.45",
+          "customer_id": "14156",
+          "country": "EIRE",
+          "line_amount": "145.00",
+          "credit_flag": 0,
+          "exact_duplicate_of": 326140,
+          "fx_date": "2011-09-05"
+        },
+        {
+          "source_row": 326140,
+          "invoice_no": "565475",
+          "stock_code": "20725",
+          "description": "LUNCH BAG RED RETROSPOT",
+          "quantity": 100,
+          "invoice_date": "2011-09-05T10:47:00",
+          "unit_price": "1.45",
+          "customer_id": "14156",
+          "country": "EIRE",
+          "line_amount": "145.00",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-09-05"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-15019",
+      "kind": "missing_identity",
+      "title": "Resolve missing customer identity",
+      "source_row": 15019,
+      "invoice_no": "537632",
+      "stock_code": "AMAZONFEE",
+      "customer_id": "",
+      "description": "AMAZON FEE",
+      "country": "United Kingdom",
+      "recorded_at": "2010-12-07T15:08:00",
+      "amount_minor": 1354133,
+      "evidence": [
+        {
+          "source_row": 15019,
+          "invoice_no": "537632",
+          "stock_code": "AMAZONFEE",
+          "description": "AMAZON FEE",
+          "quantity": 1,
+          "invoice_date": "2010-12-07T15:08:00",
+          "unit_price": "13541.33",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "13541.33",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2010-12-07"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-299984",
+      "kind": "missing_identity",
+      "title": "Resolve missing customer identity",
+      "source_row": 299984,
+      "invoice_no": "A563185",
+      "stock_code": "B",
+      "customer_id": "",
+      "description": "Adjust bad debt",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-12T14:50:00",
+      "amount_minor": 1106206,
+      "evidence": [
+        {
+          "source_row": 299984,
+          "invoice_no": "A563185",
+          "stock_code": "B",
+          "description": "Adjust bad debt",
+          "quantity": 1,
+          "invoice_date": "2011-08-12T14:50:00",
+          "unit_price": "11062.06",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "11062.06",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-12"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-467806",
+      "kind": "missing_identity",
+      "title": "Resolve missing customer identity",
+      "source_row": 467806,
+      "invoice_no": "576365",
+      "stock_code": "22086",
+      "customer_id": "",
+      "description": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+      "country": "United Kingdom",
+      "recorded_at": "2011-11-14T17:55:00",
+      "amount_minor": 478160,
+      "evidence": [
+        {
+          "source_row": 467806,
+          "invoice_no": "576365",
+          "stock_code": "22086",
+          "description": "PAPER CHAIN KIT 50'S CHRISTMAS ",
+          "quantity": 688,
+          "invoice_date": "2011-11-14T17:55:00",
+          "unit_price": "6.95",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "4781.60",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-11-14"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-297725",
+      "kind": "missing_identity",
+      "title": "Resolve missing customer identity",
+      "source_row": 297725,
+      "invoice_no": "562955",
+      "stock_code": "DOT",
+      "customer_id": "",
+      "description": "DOTCOM POSTAGE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-08-11T10:14:00",
+      "amount_minor": 450517,
+      "evidence": [
+        {
+          "source_row": 297725,
+          "invoice_no": "562955",
+          "stock_code": "DOT",
+          "description": "DOTCOM POSTAGE",
+          "quantity": 1,
+          "invoice_date": "2011-08-11T10:14:00",
+          "unit_price": "4505.17",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "4505.17",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-08-11"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-268030",
+      "kind": "missing_identity",
+      "title": "Resolve missing customer identity",
+      "source_row": 268030,
+      "invoice_no": "560373",
+      "stock_code": "M",
+      "customer_id": "",
+      "description": "Manual",
+      "country": "United Kingdom",
+      "recorded_at": "2011-07-18T12:30:00",
+      "amount_minor": 428763,
+      "evidence": [
+        {
+          "source_row": 268030,
+          "invoice_no": "560373",
+          "stock_code": "M",
+          "description": "Manual",
+          "quantity": 1,
+          "invoice_date": "2011-07-18T12:30:00",
+          "unit_price": "4287.63",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "4287.63",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-07-18"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-502124",
+      "kind": "zero_price",
+      "title": "Inspect a zero-price transaction",
+      "source_row": 502124,
+      "invoice_no": "578841",
+      "stock_code": "84826",
+      "customer_id": "13256",
+      "description": "ASSTD DESIGN 3D PAPER STICKERS",
+      "country": "United Kingdom",
+      "recorded_at": "2011-11-25T15:57:00",
+      "amount_minor": 0,
+      "evidence": [
+        {
+          "source_row": 502124,
+          "invoice_no": "578841",
+          "stock_code": "84826",
+          "description": "ASSTD DESIGN 3D PAPER STICKERS",
+          "quantity": 12540,
+          "invoice_date": "2011-11-25T15:57:00",
+          "unit_price": "0",
+          "customer_id": "13256",
+          "country": "United Kingdom",
+          "line_amount": "0",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-11-25"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-74616",
+      "kind": "zero_price",
+      "title": "Inspect a zero-price transaction",
+      "source_row": 74616,
+      "invoice_no": "542504",
+      "stock_code": "37413",
+      "customer_id": "",
+      "description": "",
+      "country": "United Kingdom",
+      "recorded_at": "2011-01-28T12:03:00",
+      "amount_minor": 0,
+      "evidence": [
+        {
+          "source_row": 74616,
+          "invoice_no": "542504",
+          "stock_code": "37413",
+          "description": "",
+          "quantity": 5568,
+          "invoice_date": "2011-01-28T12:03:00",
+          "unit_price": "0",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "0",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-01-28"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    {
+      "id": "uci-220845",
+      "kind": "zero_price",
+      "title": "Inspect a zero-price transaction",
+      "source_row": 220845,
+      "invoice_no": "556231",
+      "stock_code": "85123A",
+      "customer_id": "",
+      "description": "?",
+      "country": "United Kingdom",
+      "recorded_at": "2011-06-09T15:04:00",
+      "amount_minor": 0,
+      "evidence": [
+        {
+          "source_row": 220845,
+          "invoice_no": "556231",
+          "stock_code": "85123A",
+          "description": "?",
+          "quantity": 4000,
+          "invoice_date": "2011-06-09T15:04:00",
+          "unit_price": "0",
+          "customer_id": "",
+          "country": "United Kingdom",
+          "line_amount": "0",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-06-09"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    }
+  ],
+  "products": [
+    {
+      "stock_code": "85123A",
+      "line_count": 2313,
+      "description_variants": 4,
+      "sample_description": "?"
+    },
+    {
+      "stock_code": "22423",
+      "line_count": 2203,
+      "description_variants": 3,
+      "sample_description": "REGENCY CAKESTAND 3 TIER"
+    },
+    {
+      "stock_code": "85099B",
+      "line_count": 2159,
+      "description_variants": 1,
+      "sample_description": "JUMBO BAG RED RETROSPOT"
+    },
+    {
+      "stock_code": "47566",
+      "line_count": 1727,
+      "description_variants": 1,
+      "sample_description": "PARTY BUNTING"
+    },
+    {
+      "stock_code": "20725",
+      "line_count": 1639,
+      "description_variants": 2,
+      "sample_description": "LUNCH BAG RED RETROSPOT"
+    },
+    {
+      "stock_code": "84879",
+      "line_count": 1502,
+      "description_variants": 2,
+      "sample_description": "ASSORTED COLOUR BIRD ORNAMENT"
+    },
+    {
+      "stock_code": "22720",
+      "line_count": 1477,
+      "description_variants": 1,
+      "sample_description": "SET OF 3 CAKE TINS PANTRY DESIGN "
+    },
+    {
+      "stock_code": "22197",
+      "line_count": 1476,
+      "description_variants": 2,
+      "sample_description": "POPCORN HOLDER"
+    },
+    {
+      "stock_code": "21212",
+      "line_count": 1385,
+      "description_variants": 1,
+      "sample_description": "PACK OF 72 RETROSPOT CAKE CASES"
+    },
+    {
+      "stock_code": "20727",
+      "line_count": 1350,
+      "description_variants": 1,
+      "sample_description": "LUNCH BAG  BLACK SKULL."
+    },
+    {
+      "stock_code": "22383",
+      "line_count": 1348,
+      "description_variants": 2,
+      "sample_description": "LUNCH BAG SUKI  DESIGN "
+    },
+    {
+      "stock_code": "22457",
+      "line_count": 1280,
+      "description_variants": 1,
+      "sample_description": "NATURAL SLATE HEART CHALKBOARD "
+    },
+    {
+      "stock_code": "23203",
+      "line_count": 1267,
+      "description_variants": 4,
+      "sample_description": "JUMBO BAG DOILEY PATTERNS"
+    },
+    {
+      "stock_code": "POST",
+      "line_count": 1256,
+      "description_variants": 1,
+      "sample_description": "POSTAGE"
+    },
+    {
+      "stock_code": "22386",
+      "line_count": 1251,
+      "description_variants": 1,
+      "sample_description": "JUMBO BAG PINK POLKADOT"
+    },
+    {
+      "stock_code": "22469",
+      "line_count": 1239,
+      "description_variants": 1,
+      "sample_description": "HEART OF WICKER SMALL"
+    },
+    {
+      "stock_code": "22960",
+      "line_count": 1229,
+      "description_variants": 1,
+      "sample_description": "JAM MAKING SET WITH JARS"
+    },
+    {
+      "stock_code": "21931",
+      "line_count": 1214,
+      "description_variants": 1,
+      "sample_description": "JUMBO STORAGE BAG SUKI"
+    },
+    {
+      "stock_code": "22086",
+      "line_count": 1210,
+      "description_variants": 1,
+      "sample_description": "PAPER CHAIN KIT 50'S CHRISTMAS "
+    },
+    {
+      "stock_code": "22411",
+      "line_count": 1202,
+      "description_variants": 1,
+      "sample_description": "JUMBO SHOPPER VINTAGE RED PAISLEY"
+    },
+    {
+      "stock_code": "20728",
+      "line_count": 1197,
+      "description_variants": 1,
+      "sample_description": "LUNCH BAG CARS BLUE"
+    },
+    {
+      "stock_code": "22382",
+      "line_count": 1192,
+      "description_variants": 1,
+      "sample_description": "LUNCH BAG SPACEBOY DESIGN "
+    },
+    {
+      "stock_code": "22961",
+      "line_count": 1182,
+      "description_variants": 1,
+      "sample_description": "JAM MAKING SET PRINTED"
+    },
+    {
+      "stock_code": "22666",
+      "line_count": 1180,
+      "description_variants": 1,
+      "sample_description": "RECIPE BOX PANTRY YELLOW DESIGN"
+    },
+    {
+      "stock_code": "23298",
+      "line_count": 1179,
+      "description_variants": 2,
+      "sample_description": "BUNTING , SPOTTY "
+    },
+    {
+      "stock_code": "22699",
+      "line_count": 1138,
+      "description_variants": 1,
+      "sample_description": "ROSES REGENCY TEACUP AND SAUCER "
+    },
+    {
+      "stock_code": "22384",
+      "line_count": 1137,
+      "description_variants": 1,
+      "sample_description": "LUNCH BAG PINK POLKADOT"
+    },
+    {
+      "stock_code": "23209",
+      "line_count": 1135,
+      "description_variants": 4,
+      "sample_description": "LUNCH BAG DOILEY PATTERN "
+    },
+    {
+      "stock_code": "82482",
+      "line_count": 1129,
+      "description_variants": 1,
+      "sample_description": "WOODEN PICTURE FRAME WHITE FINISH"
+    },
+    {
+      "stock_code": "22993",
+      "line_count": 1111,
+      "description_variants": 1,
+      "sample_description": "SET OF 4 PANTRY JELLY MOULDS"
+    }
+  ],
+  "generated_at": "2026-10-27T09:47:56.666130+00:00"
+}

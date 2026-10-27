@@ -1,0 +1,10 @@
+[Unit]
+Description=Renew UnitShift scoped source reads
+After=network-online.target
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/opt/unitshift
+ExecStart=/usr/bin/python3 scripts/refresh_source_access.py
+UMask=0077
+NoNewPrivileges=true

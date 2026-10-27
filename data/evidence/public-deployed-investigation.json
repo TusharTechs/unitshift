@@ -1,0 +1,175 @@
+{
+  "id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+  "case_id": "uci-540424",
+  "status": "complete",
+  "created_at": "2026-10-27T13:42:51.431410+00:00",
+  "result": {
+    "id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "case_id": "uci-540424",
+    "created_at": "2026-10-27T13:43:02.326439+00:00",
+    "source_type": "real historical public data",
+    "decision": {
+      "disposition": "review_required",
+      "case_kind": "cancellation",
+      "candidate_source_row": 540423,
+      "evidence_source_rows": [
+        540424,
+        540423
+      ],
+      "fx_operation": "gbp_divided_by_gbp_per_eur",
+      "missing_evidence": [
+        "original_invoice_reference",
+        "payment_settlement",
+        "refund_authorisation"
+      ],
+      "policy_added_missing_evidence": []
+    },
+    "case": {
+      "id": "uci-540424",
+      "kind": "cancellation",
+      "title": "Trace a recorded cancellation",
+      "source_row": 540424,
+      "invoice_no": "C581484",
+      "stock_code": "23843",
+      "customer_id": "16446",
+      "description": "PAPER CRAFT , LITTLE BIRDIE",
+      "country": "United Kingdom",
+      "recorded_at": "2011-12-09T09:27:00",
+      "amount_minor": -16846960,
+      "evidence": [
+        {
+          "source_row": 540424,
+          "invoice_no": "C581484",
+          "stock_code": "23843",
+          "description": "PAPER CRAFT , LITTLE BIRDIE",
+          "quantity": -80995,
+          "invoice_date": "2011-12-09T09:27:00",
+          "unit_price": "2.08",
+          "customer_id": "16446",
+          "country": "United Kingdom",
+          "line_amount": "-168469.60",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-09",
+          "gbp_per_eur": "0.85315",
+          "calculated_eur": "-197467.7372091660317646369337"
+        },
+        {
+          "source_row": 540423,
+          "invoice_no": "581483",
+          "stock_code": "23843",
+          "description": "PAPER CRAFT , LITTLE BIRDIE",
+          "quantity": 80995,
+          "invoice_date": "2011-12-09T09:15:00",
+          "unit_price": "2.08",
+          "customer_id": "16446",
+          "country": "United Kingdom",
+          "line_amount": "168469.60",
+          "credit_flag": 0,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-12-09",
+          "gbp_per_eur": "0.85315",
+          "calculated_eur": "197467.7372091660317646369337"
+        }
+      ],
+      "candidate_count": 1,
+      "warning": "Candidate matches are inferred from attributes. The source does not include an explicit original-invoice reference, refund approval, or payment settlement."
+    },
+    "verified_rows": [
+      {
+        "source_row": "540423",
+        "invoice_no": "581483",
+        "stock_code": "23843",
+        "description": "PAPER CRAFT , LITTLE BIRDIE",
+        "quantity": "80995",
+        "invoice_date": "2011-12-09T09:15:00",
+        "unit_price": "2.08",
+        "customer_id": "16446",
+        "country": "United Kingdom",
+        "line_amount": "168469.60",
+        "credit_flag": "0",
+        "exact_duplicate_of": "0",
+        "fx_date": "2011-12-09",
+        "gbp_per_eur": "0.85315",
+        "calculated_eur": "197467.73720917",
+        "description_variants": "1",
+        "invoice_line_count": "1"
+      },
+      {
+        "source_row": "540424",
+        "invoice_no": "C581484",
+        "stock_code": "23843",
+        "description": "PAPER CRAFT , LITTLE BIRDIE",
+        "quantity": "-80995",
+        "invoice_date": "2011-12-09T09:27:00",
+        "unit_price": "2.08",
+        "customer_id": "16446",
+        "country": "United Kingdom",
+        "line_amount": "-168469.60",
+        "credit_flag": "1",
+        "exact_duplicate_of": "0",
+        "fx_date": "2011-12-09",
+        "gbp_per_eur": "0.85315",
+        "calculated_eur": "-197467.73720917",
+        "description_variants": "1",
+        "invoice_line_count": "1"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "cancellation_candidates",
+        "rows": [
+          {
+            "source_row": "540423",
+            "invoice_no": "581483",
+            "quantity": "80995",
+            "unit_price": "2.08",
+            "invoice_date": "2011-12-09T09:15:00",
+            "customer_id": "16446",
+            "stock_code": "23843"
+          }
+        ],
+        "bounded_result": true,
+        "limit_note": "A bounded source context; not proof that no other records exist."
+      }
+    ],
+    "attempts": [
+      {
+        "proposal": {
+          "disposition": "review_required",
+          "case_kind": "cancellation",
+          "candidate_source_row": 540423,
+          "evidence_source_rows": [
+            540424,
+            540423
+          ],
+          "missing_evidence": [
+            "original_invoice_reference",
+            "payment_settlement",
+            "refund_authorisation"
+          ],
+          "fx_operation": "gbp_divided_by_gbp_per_eur"
+        },
+        "valid": true,
+        "policy_added_missing_evidence": []
+      }
+    ],
+    "nightshift_review": {
+      "next_action": "request_missing_evidence",
+      "disposition": "review_required"
+    },
+    "memory_recalled_id": "mem-1",
+    "elapsed_s": 10.89,
+    "evidence_hash": "3839ee45b050f619d7cf02717d8f50c1572e44ce5696a39421042e2e0bd3a362",
+    "verified_arithmetic": {
+      "recorded_amount_minor": -16846960,
+      "candidate_amount_minor": 16846960,
+      "two_record_sum_minor": 0,
+      "reported_eur_minor": -19746774,
+      "gbp_per_eur": "0.85315",
+      "rate_date": "2011-12-09"
+    },
+    "no_external_actions": true,
+    "no_claimed_savings": true
+  }
+}

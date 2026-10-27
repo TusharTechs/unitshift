@@ -1,0 +1,250 @@
+[
+  {
+    "at": "2026-10-27T13:42:55.148825+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "zetaris_query",
+    "details": {
+      "sql": "SELECT * FROM unitshift_control.retail_evidence WHERE source_row IN (540423,540424) ORDER BY source_row",
+      "result_hash": "fb0c45fe79faa5c7dc2afb143f196fdd2ba486efeebbc8f27db9e1b543746876"
+    },
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "3912a596ef02439e8ed255a12398fe1f3a8d54c2d6ee72dae309a74d34137683"
+  },
+  {
+    "at": "2026-10-27T13:42:55.149286+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_evidence_verified",
+    "details": {
+      "case_id": "uci-540424",
+      "source_rows": [
+        540423,
+        540424
+      ],
+      "semantic_view": "unitshift_control.retail_evidence",
+      "source_publishers": [
+        "UCI",
+        "ECB"
+      ],
+      "record_hash": "3839ee45b050f619d7cf02717d8f50c1572e44ce5696a39421042e2e0bd3a362"
+    },
+    "previous_hash": "3912a596ef02439e8ed255a12398fe1f3a8d54c2d6ee72dae309a74d34137683",
+    "hash": "8a0714c36d74ba72527fa1c0383af5164bb5ff379971eee3e0c94dfdf7debe35"
+  },
+  {
+    "at": "2026-10-27T13:42:55.848177+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_memory_context",
+    "details": {
+      "memory_id": "mem-1",
+      "stale_count": 0,
+      "scope": "de0b86a835aa38ea009f51df12e722c5fb22c841d861a53cc614a211f570c0f7"
+    },
+    "previous_hash": "8a0714c36d74ba72527fa1c0383af5164bb5ff379971eee3e0c94dfdf7debe35",
+    "hash": "8676ae52bef2aa4cf900d7a1f2b5d5be6479b507dc3e702f7e407dc980b7e9ef"
+  },
+  {
+    "at": "2026-10-27T13:42:57.019288+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "model_call",
+    "details": {
+      "provider": "nebius",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+      "routing": {},
+      "elapsed_s": 1.171,
+      "thinking": false,
+      "usage": {
+        "completion_tokens": 14,
+        "prompt_tokens": 383,
+        "total_tokens": 397,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 383
+      },
+      "input_hash": "0d109220575b9433b4c3caa8da17e0a5b8206a8d1abb0aab2c0bfd2899639c32",
+      "output_hash": "729772475c4190f8ded3c5e95d29fd2e3cd635e102bfe578aa3052228b37ec1c",
+      "response_id": "chatcmpl-7c2674bc7daeb72879e592fdde08067c"
+    },
+    "previous_hash": "8676ae52bef2aa4cf900d7a1f2b5d5be6479b507dc3e702f7e407dc980b7e9ef",
+    "hash": "49be36c5c0cc97879a27f21d9ac5b0c92876385038f80666259577fc18aac3de"
+  },
+  {
+    "at": "2026-10-27T13:42:58.160025+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "zetaris_query",
+    "details": {
+      "sql": "SELECT source_row,invoice_no,quantity,unit_price,invoice_date,customer_id,stock_code FROM UNITSHIFT_RETAIL.lines WHERE customer_id='16446' AND stock_code='23843' AND CAST(quantity AS BIGINT)=80995 AND CAST(unit_price AS DECIMAL(24,8))=2.08 AND invoice_date<='2011-12-09T09:27:00' AND CAST(credit_flag AS INT)=0 ORDER BY invoice_date DESC LIMIT 20",
+      "result_hash": "a1d0df572d48fa0abbf8e047b0fa27b3a5734fd5c1a49c478ef3d050ca5d7267"
+    },
+    "previous_hash": "49be36c5c0cc97879a27f21d9ac5b0c92876385038f80666259577fc18aac3de",
+    "hash": "26199c83d6f1ca3771747968b146dc5c59882eecb4667793354f6a0b1ad9d136"
+  },
+  {
+    "at": "2026-10-27T13:42:58.160270+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_read_tool",
+    "details": {
+      "tool": "cancellation_candidates",
+      "rows": 1,
+      "result_hash": "b44bf1cb5448c1394fc2868a82ee0168f2f63c8886ca12189e843591c9d28119"
+    },
+    "previous_hash": "26199c83d6f1ca3771747968b146dc5c59882eecb4667793354f6a0b1ad9d136",
+    "hash": "7ff4e73d12482b214ff4d46e2f2b952b3402aee46c42dc35a9c8ed8415eac951"
+  },
+  {
+    "at": "2026-10-27T13:42:59.701683+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "model_call",
+    "details": {
+      "provider": "nebius",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+      "routing": {},
+      "elapsed_s": 1.541,
+      "thinking": false,
+      "usage": {
+        "completion_tokens": 104,
+        "prompt_tokens": 1666,
+        "total_tokens": 1770,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1666
+      },
+      "input_hash": "6110dd36215b91f8089025d7b587b8243985da827fbc46ccc36b5d5b66a7d491",
+      "output_hash": "989f4c6630b2a94e1b7165cb76e8898eff28bdb1352a16c1026be4c2e0053393",
+      "response_id": "chatcmpl-e2eb73f8efad9e972f70f07790c1ae53"
+    },
+    "previous_hash": "7ff4e73d12482b214ff4d46e2f2b952b3402aee46c42dc35a9c8ed8415eac951",
+    "hash": "7af9581c5b1ced35b136c195a9b4e14ac2e7f86868be61b64fdb9fc3a5055e3d"
+  },
+  {
+    "at": "2026-10-27T13:42:59.702060+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_decision_checked",
+    "details": {
+      "decision": {
+        "disposition": "review_required",
+        "case_kind": "cancellation",
+        "candidate_source_row": 540423,
+        "evidence_source_rows": [
+          540424,
+          540423
+        ],
+        "fx_operation": "gbp_divided_by_gbp_per_eur",
+        "missing_evidence": [
+          "original_invoice_reference",
+          "payment_settlement",
+          "refund_authorisation"
+        ],
+        "policy_added_missing_evidence": []
+      },
+      "known_source_rows": [
+        540424,
+        540423
+      ]
+    },
+    "previous_hash": "7af9581c5b1ced35b136c195a9b4e14ac2e7f86868be61b64fdb9fc3a5055e3d",
+    "hash": "87c83e34b57705d841dab26513ee94b3590958f63db5084e422f0f9d89d2cc6c"
+  },
+  {
+    "at": "2026-10-27T13:43:02.326080+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "model_call",
+    "details": {
+      "provider": "nightshift",
+      "model": "meterless/deep",
+      "effective_model": "nvidia/nemotron-3.5-bolt-e4b",
+      "routing": {
+        "receipt_id": "rcpt_req_l2q9hn74",
+        "decision_id": "req_l2q9hn74",
+        "routed_model": "nvidia/nemotron-3.5-bolt-e4b",
+        "winning_route": {
+          "model": "nvidia/nemotron-3.5-bolt-e4b",
+          "label": "Nemotron 3.5 Bolt E4B",
+          "provider": "nvidia",
+          "kind": "cloud",
+          "tier": "A"
+        }
+      },
+      "elapsed_s": 2.623,
+      "thinking": false,
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 22,
+        "total_tokens": 196
+      },
+      "input_hash": "7e8a46aa28dfc6bbc0da61fbfb4fa09eb4046509eb62ee63bb3fa8d705cf4caf",
+      "output_hash": "6a4427e10d5e8203d5021e0c1b7ffe9ed58d0d4bb0f9e132648c1117cd8b02fd",
+      "response_id": "chatcmpl-f187fe1c-c756-48e0-800e-987566dcd0c8"
+    },
+    "previous_hash": "87c83e34b57705d841dab26513ee94b3590958f63db5084e422f0f9d89d2cc6c",
+    "hash": "64153f68aa22b6a304ef7405a643c5b3b3e955fba2e5066d0b4815e163f4aab9"
+  },
+  {
+    "at": "2026-10-27T13:43:02.326364+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_nightshift_review",
+    "details": {
+      "accepted": true,
+      "review": {
+        "next_action": "request_missing_evidence",
+        "disposition": "review_required"
+      }
+    },
+    "previous_hash": "64153f68aa22b6a304ef7405a643c5b3b3e955fba2e5066d0b4815e163f4aab9",
+    "hash": "9e7ea58dff387f18bc5ff52375bf050597c51e66eabdf8c9c60e00e501047a7f"
+  },
+  {
+    "at": "2026-10-27T13:43:02.326636+00:00",
+    "run_id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "kind": "public_investigation_accepted",
+    "details": {
+      "decision": {
+        "disposition": "review_required",
+        "case_kind": "cancellation",
+        "candidate_source_row": 540423,
+        "evidence_source_rows": [
+          540424,
+          540423
+        ],
+        "fx_operation": "gbp_divided_by_gbp_per_eur",
+        "missing_evidence": [
+          "original_invoice_reference",
+          "payment_settlement",
+          "refund_authorisation"
+        ],
+        "policy_added_missing_evidence": []
+      },
+      "evidence_hash": "3839ee45b050f619d7cf02717d8f50c1572e44ce5696a39421042e2e0bd3a362",
+      "nightshift_review": {
+        "next_action": "request_missing_evidence",
+        "disposition": "review_required"
+      },
+      "external_actions": 0
+    },
+    "previous_hash": "9e7ea58dff387f18bc5ff52375bf050597c51e66eabdf8c9c60e00e501047a7f",
+    "hash": "5bfcdfec43e458e32c3639118e63673873ab4c5d24e58dc49cd09a009feb66d1"
+  }
+]

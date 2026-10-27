@@ -1,0 +1,75 @@
+{
+  "version": "uci-352-ecb-v1",
+  "historical": true,
+  "synthetic": false,
+  "currency": "GBP",
+  "source_timezone": "Unspecified by source; source calendar dates preserved.",
+  "downloaded_at": "2026-10-27T09:47:56.666130+00:00",
+  "publishers": [
+    {
+      "id": "uci",
+      "name": "UCI Machine Learning Repository",
+      "title": "Online Retail",
+      "creator": "Daqing Chen",
+      "citation": "Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.",
+      "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+      "download_url": "https://archive.ics.uci.edu/static/public/352/online%2Bretail.zip",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "archive_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+      "rows": 541909
+    },
+    {
+      "id": "ecb",
+      "name": "European Central Bank",
+      "title": "GBP per EUR daily reference observations",
+      "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.GBP.EUR.SP00.A?startPeriod=2010-11-25&endPeriod=2011-12-09&format=csvdata",
+      "license": "ECB statistics reuse policy; source acknowledged, observations unchanged.",
+      "license_url": "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html",
+      "download_sha256": "e0e1d0722305c2295161200560a308a765cb631fcaf8e358c3b0ea17eefa75f7",
+      "rows": 272
+    }
+  ],
+  "transformations": [
+    "All 541909 published transaction lines retained, including missing values and duplicate-looking lines.",
+    "Excel dates converted to source calendar timestamps; no timezone assumption.",
+    "Line amount is Quantity \u00d7 UnitPrice using decimal arithmetic. Summary display rounded to GBP pennies; exact source price and calculated decimal amount retained.",
+    "Invoice and product tables are derived views of the same UCI export, not independent business systems.",
+    "Cancellation candidates match customer, stock code, opposite quantity, price and a non-future timestamp; no original-reference link is asserted.",
+    "FX reporting uses the same-or-prior calendar-date ECB observation, retaining its date and rate; this is retrospective reporting, not a point-in-time trading or settlement quote. EUR values are UnitShift calculations, not ECB-published transaction values."
+  ],
+  "exports": {
+    "product_catalog.csv": {
+      "bytes": 159978,
+      "sha256": "6f6ead18e6cf616cad7f2179e99a0e58cf0dda3f650dcade7bfc79f7df606d15"
+    },
+    "invoice_summary.csv": {
+      "bytes": 1416375,
+      "sha256": "8ceaf302328e8036ea45597eb4531d3caccae414f0434d29768ed47ca707a016"
+    },
+    "ecb_gbp_eur.csv": {
+      "bytes": 5247,
+      "sha256": "9feeda47fd4e8d254335a9d13eb3790fb027d9ff0fb38c4460ccdfc0ce2a48bb"
+    },
+    "retail_lines.csv": {
+      "bytes": 64008191,
+      "sha256": "91191a9f07fbe10ccddb067096087912ab645036046cc34a81857c6595bbaff7"
+    }
+  },
+  "counts": {
+    "invoices": 25900,
+    "customers": 4372,
+    "products": 4070,
+    "countries": 38,
+    "missing_customer_lines": 135080,
+    "duplicate_looking_lines": 5268,
+    "cancellation_lines": 9288,
+    "first_recorded_at": "2010-12-01T08:26:00",
+    "last_recorded_at": "2011-12-09T12:50:00"
+  },
+  "source_limits": [
+    "Historical records, not live business operations.",
+    "No supplier quotes, inventory balances, fulfillment promises, refund authorisations or measured customer savings are present.",
+    "No attempt to re-identify the anonymised customers or retailer."
+  ]
+}

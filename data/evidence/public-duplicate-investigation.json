@@ -1,0 +1,363 @@
+{
+  "result": {
+    "id": "340e5a57b3124f9ea7397253a40d2260",
+    "case_id": "uci-390550",
+    "created_at": "2026-10-27T10:13:47.686148+00:00",
+    "source_type": "real historical public data",
+    "decision": {
+      "disposition": "review_required",
+      "case_kind": "duplicate",
+      "candidate_source_row": 390546,
+      "evidence_source_rows": [
+        390550,
+        390546
+      ],
+      "fx_operation": "gbp_divided_by_gbp_per_eur",
+      "missing_evidence": [
+        "invoice_confirmation"
+      ],
+      "policy_added_missing_evidence": [
+        "invoice_confirmation"
+      ]
+    },
+    "case": {
+      "id": "uci-390550",
+      "kind": "duplicate",
+      "title": "Inspect duplicate-looking rows",
+      "source_row": 390550,
+      "invoice_no": "C570556",
+      "stock_code": "20971",
+      "customer_id": "16029",
+      "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+      "country": "United Kingdom",
+      "recorded_at": "2011-10-11T11:10:00",
+      "amount_minor": -137376,
+      "evidence": [
+        {
+          "source_row": 390550,
+          "invoice_no": "C570556",
+          "stock_code": "20971",
+          "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+          "quantity": -1296,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "1.06",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-1373.76",
+          "credit_flag": 1,
+          "exact_duplicate_of": 390546,
+          "fx_date": "2011-10-11",
+          "gbp_per_eur": "0.8702",
+          "calculated_eur": "-1578.671569754079521948977247"
+        },
+        {
+          "source_row": 390546,
+          "invoice_no": "C570556",
+          "stock_code": "20971",
+          "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+          "quantity": -1296,
+          "invoice_date": "2011-10-11T11:10:00",
+          "unit_price": "1.06",
+          "customer_id": "16029",
+          "country": "United Kingdom",
+          "line_amount": "-1373.76",
+          "credit_flag": 1,
+          "exact_duplicate_of": 0,
+          "fx_date": "2011-10-11",
+          "gbp_per_eur": "0.8702",
+          "calculated_eur": "-1578.671569754079521948977247"
+        }
+      ],
+      "candidate_count": 0,
+      "warning": "A review signal is not proof of an error, fraud or financial loss."
+    },
+    "verified_rows": [
+      {
+        "source_row": "390546",
+        "invoice_no": "C570556",
+        "stock_code": "20971",
+        "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+        "quantity": "-1296",
+        "invoice_date": "2011-10-11T11:10:00",
+        "unit_price": "1.06",
+        "customer_id": "16029",
+        "country": "United Kingdom",
+        "line_amount": "-1373.76",
+        "credit_flag": "1",
+        "exact_duplicate_of": "0",
+        "fx_date": "2011-10-11",
+        "gbp_per_eur": "0.8702",
+        "calculated_eur": "-1578.67156975",
+        "description_variants": "1",
+        "invoice_line_count": "12"
+      },
+      {
+        "source_row": "390550",
+        "invoice_no": "C570556",
+        "stock_code": "20971",
+        "description": "PINK BLUE FELT CRAFT TRINKET BOX",
+        "quantity": "-1296",
+        "invoice_date": "2011-10-11T11:10:00",
+        "unit_price": "1.06",
+        "customer_id": "16029",
+        "country": "United Kingdom",
+        "line_amount": "-1373.76",
+        "credit_flag": "1",
+        "exact_duplicate_of": "390546",
+        "fx_date": "2011-10-11",
+        "gbp_per_eur": "0.8702",
+        "calculated_eur": "-1578.67156975",
+        "description_variants": "1",
+        "invoice_line_count": "12"
+      }
+    ],
+    "tool_results": [
+      {
+        "tool": "invoice_context",
+        "rows": [
+          {
+            "invoice_no": "C570556",
+            "first_recorded_at": "2011-10-11T11:10:00",
+            "last_recorded_at": "2011-10-11T11:10:00",
+            "line_count": "12",
+            "customer_count": "1",
+            "cancellation_flag": "1"
+          }
+        ],
+        "bounded_result": true,
+        "limit_note": "A bounded source context; not proof that no other records exist."
+      }
+    ],
+    "attempts": [
+      {
+        "proposal": {
+          "disposition": "review_required",
+          "case_kind": "duplicate",
+          "candidate_source_row": 390546,
+          "evidence_source_rows": [
+            390550,
+            390546
+          ],
+          "missing_evidence": [],
+          "fx_operation": "gbp_divided_by_gbp_per_eur"
+        },
+        "valid": true,
+        "policy_added_missing_evidence": [
+          "invoice_confirmation"
+        ]
+      }
+    ],
+    "nightshift_review": {
+      "next_action": "request_missing_evidence",
+      "disposition": "review_required"
+    },
+    "memory_recalled_id": "mem-4",
+    "elapsed_s": 10.39,
+    "evidence_hash": "1a88a4a3031ebcfd74d70051240058781e393343d722ad5574b65f65810d1342",
+    "verified_arithmetic": {
+      "recorded_amount_minor": -137376,
+      "candidate_amount_minor": -137376,
+      "two_record_sum_minor": null,
+      "reported_eur_minor": -157867,
+      "gbp_per_eur": "0.8702",
+      "rate_date": "2011-10-11"
+    },
+    "no_external_actions": true,
+    "no_claimed_savings": true
+  },
+  "receipts": [
+    {
+      "at": "2026-10-27T10:13:42.478627+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT * FROM unitshift_control.retail_evidence WHERE source_row IN (390546,390550) ORDER BY source_row",
+        "result_hash": "e2275fc944d42415d79ebffdfed7461a7571fa548cb041e323372c0d71418543"
+      },
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "6098cd5d408cad7f211a63de84ccd49d84548369d2eee3225c647571e719b090"
+    },
+    {
+      "at": "2026-10-27T10:13:42.480040+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "public_evidence_verified",
+      "details": {
+        "case_id": "uci-390550",
+        "source_rows": [
+          390546,
+          390550
+        ],
+        "semantic_view": "unitshift_control.retail_evidence",
+        "source_publishers": [
+          "UCI",
+          "ECB"
+        ],
+        "record_hash": "1a88a4a3031ebcfd74d70051240058781e393343d722ad5574b65f65810d1342"
+      },
+      "previous_hash": "6098cd5d408cad7f211a63de84ccd49d84548369d2eee3225c647571e719b090",
+      "hash": "78ff7321433ca229234664203d1efdb487e14b65023cf43c4b0632f2170d00b2"
+    },
+    {
+      "at": "2026-10-27T10:13:43.541858+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "model_call",
+      "details": {
+        "provider": "nebius",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+        "routing": {},
+        "elapsed_s": 0.906,
+        "thinking": false,
+        "usage": {
+          "completion_tokens": 11,
+          "prompt_tokens": 381,
+          "total_tokens": 392,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 352,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "prompt_cache_hit_tokens": 352,
+          "prompt_cache_miss_tokens": 29
+        },
+        "input_hash": "d6b7389990a3b14672766c9f25ebf1e194d2d890b7cabac6e03a287ab6c035c1",
+        "output_hash": "9d67e706159fb93b8d03b8477b706dcd5681ca5984e3ac7412f2a5be4b4093f3",
+        "response_id": "chatcmpl-9b573e3066bd443d76ca29ba458986ec"
+      },
+      "previous_hash": "78ff7321433ca229234664203d1efdb487e14b65023cf43c4b0632f2170d00b2",
+      "hash": "0160510ed50be57fa02edfd84dd85c3d1b72c52b0a02862102eca035348eff56"
+    },
+    {
+      "at": "2026-10-27T10:13:45.194827+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "zetaris_query",
+      "details": {
+        "sql": "SELECT * FROM UNITSHIFT_RETAIL.invoice_summary WHERE invoice_no='C570556'",
+        "result_hash": "6f81c4f37b66037c954f910c2c29070037c468adcfc679615330494213b13c4e"
+      },
+      "previous_hash": "0160510ed50be57fa02edfd84dd85c3d1b72c52b0a02862102eca035348eff56",
+      "hash": "47483dfaf77b15566526fed6df2bfb76b0c46d48dcda4d8e635bea38c515e3cf"
+    },
+    {
+      "at": "2026-10-27T10:13:45.195602+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "public_read_tool",
+      "details": {
+        "tool": "invoice_context",
+        "rows": 1,
+        "result_hash": "bc2d7738bb35ecfd0d7090d3c3d4e71f8f9ba2a561de3cd8d9800036fa01874d"
+      },
+      "previous_hash": "47483dfaf77b15566526fed6df2bfb76b0c46d48dcda4d8e635bea38c515e3cf",
+      "hash": "5673bfadc1f415faf9f6efdca1dfc0aa90473097e15064975d5a3d92241931ba"
+    },
+    {
+      "at": "2026-10-27T10:13:46.595734+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "model_call",
+      "details": {
+        "provider": "nebius",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "effective_model": "nvidia/nemotron-3-super-120b-a12b",
+        "routing": {},
+        "elapsed_s": 1.399,
+        "thinking": false,
+        "usage": {
+          "completion_tokens": 85,
+          "prompt_tokens": 1636,
+          "total_tokens": 1721,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 1616,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "prompt_cache_hit_tokens": 1616,
+          "prompt_cache_miss_tokens": 20
+        },
+        "input_hash": "a86113ee021278937f2db496a5e5d203ad07c66c5d4f2bb5e7a699bf0f060b55",
+        "output_hash": "359003eee2dc7cb68d8170b26ead3a3491dd677746cecd5119336b86d03c43fd",
+        "response_id": "chatcmpl-b5c3d9991122ee27cd7fb0c014c3d573"
+      },
+      "previous_hash": "5673bfadc1f415faf9f6efdca1dfc0aa90473097e15064975d5a3d92241931ba",
+      "hash": "9de4bc44d748d7a9ac6a9dddf0f5eb7c24612f8d50adffb6dac6d775445bf8b8"
+    },
+    {
+      "at": "2026-10-27T10:13:47.685856+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "model_call",
+      "details": {
+        "provider": "nightshift",
+        "model": "meterless/deep",
+        "effective_model": "nvidia/nemotron-3.5-bolt-e4b",
+        "routing": {
+          "receipt_id": "rcpt_req_151nc5qo",
+          "decision_id": "req_151nc5qo",
+          "routed_model": "nvidia/nemotron-3.5-bolt-e4b",
+          "winning_route": {
+            "model": "nvidia/nemotron-3.5-bolt-e4b",
+            "label": "Nemotron 3.5 Bolt E4B",
+            "provider": "nvidia",
+            "kind": "cloud",
+            "tier": "A"
+          }
+        },
+        "elapsed_s": 1.089,
+        "thinking": false,
+        "usage": {
+          "prompt_tokens": 162,
+          "completion_tokens": 22,
+          "total_tokens": 184
+        },
+        "input_hash": "ab82e4dc4c7536b52d1235ca8511c3fe06229982d6e64e1fd6edccca63cb1fa1",
+        "output_hash": "6a4427e10d5e8203d5021e0c1b7ffe9ed58d0d4bb0f9e132648c1117cd8b02fd",
+        "response_id": "chatcmpl-5cca0245-8eab-4d7d-bd4f-1c8f6ed8ec32"
+      },
+      "previous_hash": "9de4bc44d748d7a9ac6a9dddf0f5eb7c24612f8d50adffb6dac6d775445bf8b8",
+      "hash": "3ef6603d2f38dbf5287aadd015c0a56f7d7f4106d3be70272471353daae0ae0d"
+    },
+    {
+      "at": "2026-10-27T10:13:47.686334+00:00",
+      "run_id": "340e5a57b3124f9ea7397253a40d2260",
+      "kind": "public_investigation_accepted",
+      "details": {
+        "decision": {
+          "disposition": "review_required",
+          "case_kind": "duplicate",
+          "candidate_source_row": 390546,
+          "evidence_source_rows": [
+            390550,
+            390546
+          ],
+          "fx_operation": "gbp_divided_by_gbp_per_eur",
+          "missing_evidence": [
+            "invoice_confirmation"
+          ],
+          "policy_added_missing_evidence": [
+            "invoice_confirmation"
+          ]
+        },
+        "evidence_hash": "1a88a4a3031ebcfd74d70051240058781e393343d722ad5574b65f65810d1342",
+        "nightshift_review": {
+          "next_action": "request_missing_evidence",
+          "disposition": "review_required"
+        },
+        "external_actions": 0
+      },
+      "previous_hash": "3ef6603d2f38dbf5287aadd015c0a56f7d7f4106d3be70272471353daae0ae0d",
+      "hash": "0400daa85199a3b75bb7d720e5df622e47d296c90fdc289fd45a5c6674676186"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "verified_at": "2026-10-27T14:08:10.142520+00:00",
+  "release": "0.3.0",
+  "public_url": "https://ds59bjv2cezd6.cloudfront.net",
+  "health_status": "ok",
+  "regression_checks": {
+    "macos": 48,
+    "aws_linux": 48,
+    "broad_accuracy_benchmark": false
+  },
+  "source_counts": {
+    "uci_transaction_lines": 541909,
+    "ecb_observations": 272,
+    "zetaris_semantic_join_lines": 541909
+  },
+  "actual_public_run": {
+    "id": "97957f4eee7540d2b6bd03b1f3b2e3a7",
+    "status": "complete",
+    "elapsed_s": 10.89,
+    "memory_recalled": "mem-1",
+    "nightshift_review": "matching request for evidence",
+    "receipt_count": 11,
+    "hash_chain_valid": true,
+    "terminal_receipt_hash": "5bfcdfec43e458e32c3639118e63673873ab4c5d24e58dc49cd09a009feb66d1"
+  },
+  "actual_model_ids": [
+    "nvidia/nemotron-3-super-120b-a12b",
+    "nvidia/nemotron-3.5-bolt-e4b"
+  ],
+  "public_origin": "CloudFront HTTPS",
+  "compute": "AWS EC2 t3.small, Ubuntu 24.04, encrypted persistent disk",
+  "automatic_compute_stop": "2026-11-10T00:00:00Z",
+  "public_demo_boundaries": [
+    "historical licensed data only",
+    "no external orders, payments or messages",
+    "public model calls rate limited",
+    "Nightshift runtime requires the user Mac and private SSH bridge",
+    "production tenant authentication and independent evaluation remain future work"
+  ],
+  "secret_scan": {
+    "configured_secret_matches": 0,
+    "scope": "tracked and non-ignored candidate source files"
+  },
+  "no_claimed_business_savings": true
+}
