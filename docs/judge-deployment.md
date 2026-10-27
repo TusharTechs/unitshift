@@ -18,6 +18,6 @@ A systemd timer stops this instance on November 10, 2026 at 00:00 UTC. Stopped d
 
 ## Verification evidence
 
-`data/evidence/deployment-verification.json` records the observed source counts, test results and accepted live run. `public-deployed-investigation.json` and `public-deployed-receipts.json` contain the filmed public investigation, including actual effective model IDs and the hash-linked receipt chain. The chain detects changes within a supplied transcript; it is not an externally notarized proof.
+`data/evidence/deployment-verification.json` records the observed source counts, test results and accepted live run. `public-deployed-investigation.json` and `public-deployed-receipts.json` contain a recorded public investigation, including actual effective model IDs and the hash-linked receipt chain. The chain detects changes within a supplied transcript; it is not an externally notarized proof.
 
 The source release passes 48 regression checks on macOS and Ubuntu. Three real-source examples demonstrate cancellation context, duplicate-looking cancellation rows and missing customer identity. This is not an independent accuracy benchmark or evidence of measured customer savings.

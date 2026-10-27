@@ -14,22 +14,20 @@ Built for **Open Agent Hackathon 2026**, Track 1: **Solving Fragmented Intellige
 
 ## Links for judges
 
-| What it is for | Link |
+| Resource | What it shows |
 |---|---|
-| Use the deployed product | [Live UnitShift workspace](https://ds59bjv2cezd6.cloudfront.net/) |
-| Watch the narrated demo, 3 minutes 7 seconds | [Watch on YouTube](https://youtu.be/Hg4j1Xeox9w) |
-| View the pitch materials | [Presentation, deck and captions](https://ds59bjv2cezd6.cloudfront.net/submission/) |
-| Read the eight-slide pitch | [PDF deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pdf) |
-| Edit or download the presentation | [PowerPoint deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pptx) |
-| Demo accessibility | [English captions](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-captions.srt) |
-| Inspect the exact filmed investigation | [Recorded result](data/evidence/public-deployed-investigation.json) |
-| Inspect actual source and model calls | [Eleven linked receipts](data/evidence/public-deployed-receipts.json) |
-| Reproduce source registration and join | [Semantic SQL](data/public/semantic-view.sql) and [registration script](scripts/register_public_data.py) |
-| Check data attribution, source hashes and transformations | [Data manifest](data/public/manifest.json) |
-| Review test and deployment evidence | [Verification record](data/evidence/deployment-verification.json) and [cross-platform CI](https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml) |
-| See the current hosting boundaries | [Judge deployment notes](docs/judge-deployment.md) |
-| Review media generation and licenses | [Media provenance](https://ds59bjv2cezd6.cloudfront.net/submission/media-provenance.json) |
-| Check project and upstream licensing | [MIT license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md) |
+| [Live app](https://ds59bjv2cezd6.cloudfront.net/) | The deployed UnitShift workspace, where you can run a real investigation |
+| [Demo video (3:07)](https://youtu.be/Hg4j1Xeox9w) | A narrated walkthrough, including a live investigation at 1× speed |
+| [Pitch deck](https://ds59bjv2cezd6.cloudfront.net/submission/unitshift-deck.pdf) | The problem, agent workflow, verification, sponsor technology and impact |
+| [Submission page](https://ds59bjv2cezd6.cloudfront.net/submission/) | The video, pitch deck and captions in one place |
+| [Recorded investigation](data/evidence/public-deployed-investigation.json) | A recorded live run of the featured cancellation case |
+| [Call receipts](data/evidence/public-deployed-receipts.json) | Eleven hash-linked records of every source query and model call |
+| [Semantic SQL](data/public/semantic-view.sql) · [Registration script](scripts/register_public_data.py) | How the Zetaris source tables and join are registered |
+| [Data manifest](data/public/manifest.json) | Data attribution, source hashes and transformations |
+| [Verification record](data/evidence/deployment-verification.json) · [CI](https://github.com/TusharTechs/unitshift/actions/workflows/ci.yml) | Test and deployment evidence on Windows, macOS and Linux |
+| [Deployment notes](docs/judge-deployment.md) | How the judge deployment is hosted and its current limits |
+| [Media provenance](https://ds59bjv2cezd6.cloudfront.net/submission/media-provenance.json) | How the video, voice, music and thumbnail were made, with licenses |
+| [License](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) | MIT for UnitShift code, plus upstream and dataset licenses |
 
 ## The problem
 
@@ -70,41 +68,28 @@ The earlier stock-recovery experiment remains separately labelled at [`/sandbox`
 ## Architecture
 
 ```mermaid
-flowchart TB
-    subgraph Sources["Attributed historical sources"]
-        UCI["UCI Online Retail • 541,909 original lines"]
-        ECB["ECB statistics • 272 dated observations"]
+flowchart LR
+    subgraph Data["1 · Attributed sources"]
+        direction TB
+        UCI["UCI Online Retail<br/>541,909 original lines"] --> Z["Zetaris semantic view<br/>4 tables · no fan-out"]
+        ECB["ECB GBP/EUR rates<br/>272 observations"] --> Z
     end
-    UCI --> Import["Python source-preserving importer"]
-    ECB --> Import
-    Import --> Index["Read-only SQLite navigation index"]
-    Import --> CSV["CSV source exports"]
-    CSV --> S3["Project-owned S3 prefix"]
-    S3 --> Zetaris["Zetaris • four registered tables"]
-    Zetaris --> View["Semantic view • retailer context + dated ECB reference"]
-
-    Browser["Browser • unified evidence workspace"] --> API["Python HTTP API • asynchronous investigation jobs"]
-    Index --> API
-    API --> Tools["Allowlisted read tools and source verification"]
-    View --> Tools
-    Tools <--> Nemotron["NVIDIA Nemotron 3 Super • Nebius Token Factory"]
-    API <--> Memory["Meterless H-MEM • approved checks scoped to dataset and contract"]
-    Nemotron --> Gate["Code checks • references, relationship, chronology, FX direction"]
-    Tools --> Gate
-    Gate --> Requirements["Policy adds mandatory missing-evidence requirements"]
-    Requirements --> Nightshift["Nightshift • structured secondary NVIDIA review"]
-    Requirements --> Packet["Cited review packet • no financial execution"]
-    Nightshift --> Packet
-    Packet --> API
-    API --> Browser
-    Browser -->|"Operator-approved reusable check"| Memory
-
-    subgraph Hosting["Judge hosting"]
-        CF["CloudFront HTTPS"] --> Host["AWS EC2 • persistent state • systemd"]
-        Host --> API
-        Mac["Mac Nightshift runtime"] -->|"Private loopback SSH bridge"| Nightshift
+    subgraph Agent["2 · Bounded investigation"]
+        direction TB
+        M["H-MEM<br/>approved checks"] --> N["NVIDIA Nemotron 3 Super<br/>on Nebius"]
+        N <--> T["Allow-listed read tools"]
+        N --> C["Code checks<br/>rows · time · sum · FX"]
+        C --> G["Policy evidence gate"]
+        G --> NS["Nightshift<br/>second NVIDIA review"]
     end
+    subgraph Out["3 · Human decision"]
+        direction TB
+        P["Cited review packet<br/>no money moved"] --> R["Reviewer approves<br/>or requests evidence"]
+    end
+    Data --> Agent --> Out
 ```
+
+**Hosting:** CloudFront HTTPS in front of an AWS EC2 host that runs the app, source reads, H-MEM and Nemotron calls. Nightshift runs on a Mac through a private loopback SSH bridge. A reviewer-approved check is saved back to H-MEM for later recall.
 
 ### Technical implementation
 
@@ -122,10 +107,10 @@ flowchart TB
 |---|---|---|
 | **NVIDIA Nemotron 3 Super** on **Nebius Token Factory** | Source-tool selection and cited investigation decisions | Effective model `nvidia/nemotron-3-super-120b-a12b`, actual call usage and verified proposals |
 | **Zetaris** | Source verification and the semantic join across retailer context and independent currency reference | Registered source counts, [SQL](data/public/semantic-view.sql), full-grain readback and query receipts |
-| **Meterless Nightshift** | A separate structured request-for-evidence review through a working NVIDIA provider | Filmed effective model `nvidia/nemotron-3.5-bolt-e4b`, route evidence and accepted review |
-| **Meterless H-MEM** | Approved evidence-check storage and scope-bound recall | Pinned upstream reference engine, ledger IDs, `mem-1` recall in the filmed run and portability integration checks |
+| **Meterless Nightshift** | A separate structured request-for-evidence review through a working NVIDIA provider | Recorded effective model `nvidia/nemotron-3.5-bolt-e4b`, route evidence and accepted review |
+| **Meterless H-MEM** | Approved evidence-check storage and scope-bound recall | Pinned upstream reference engine, ledger IDs, `mem-1` recall in the recorded run and portability integration checks |
 
-The filmed public run completed in **10.89 seconds** and includes all four integrations. That is one observed run, not a latency guarantee or broad accuracy result. Model names are recorded effective identities; availability depends on the provider account.
+The recorded public run completed in **10.89 seconds** and includes all four integrations; the live run captured in the demo video took 11.99 seconds. That is one observed run, not a latency guarantee or broad accuracy result. Model names are recorded effective identities; availability depends on the provider account.
 
 ## Real data and permitted reuse
 
